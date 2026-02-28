@@ -2,6 +2,8 @@ import requests
 import json
 import os
 from datetime import datetime
+from dotenv import load_dotenv
+
 
 
 def format_message(projects_data):
@@ -13,7 +15,7 @@ def format_message(projects_data):
 
     # 1. 标题头
     date_str = datetime.now().strftime("%Y-%m-%d")
-    msg = [f"## 🚀 GitHub 每日情报 ({date_str})", "---"]
+    msg = [f"## 🚀 GitHub 每日情报 ({date_str}) 关键词:Github自动发送助手 ", "---"]
 
     # 2. 遍历项目
     for idx, p in enumerate(projects_data, 1):
@@ -88,3 +90,39 @@ def send_notification(content):
             print(f"❌ 推送失败: {result}")
     except Exception as e:
         print(f"❌ 推送异常: {e}")
+if __name__ == "__main__":
+    # 加载 .env 文件
+    load_dotenv('.env') 
+    # 测试用的 projects_data 示例
+    projects_data = [
+        {
+            "project_name": "whz39coding/GithubCollectAgent",
+            "url": "https://github.com/whz39coding/GithubCollectAgent",
+            "score": 5,
+            "summary": "一个自动化收集和分析GitHub热门项目的AI代理工具",
+            "desc_detailed": "该项目使用Python开发，结合网络爬虫和AI模型，自动抓取GitHub Trending页面上的热门项目，并对项目README进行智能分析，生成结构化报告。",
+            "category": "AI工具",
+            "dev_ideas": [
+                "增加对多个编程语言的支持",
+                "集成更多社交平台的数据",
+                "添加项目趋势预测功能"
+            ]
+        },
+        {
+            "project_name": "microsoft/TypeScript",
+            "url": "https://github.com/microsoft/TypeScript",
+            "score": 4,
+            "summary": "JavaScript的超集，添加了静态类型检查",
+            "desc_detailed": "TypeScript是微软开发的开源编程语言，扩展了JavaScript，增加了可选的静态类型和基于类的面向对象编程。",
+            "category": "编程语言",
+            "dev_ideas": [
+                "构建TypeScript代码质量分析工具",
+                "开发TypeScript性能优化插件",
+                "创建TS/JS迁移辅助工具"
+            ]
+        }
+    ]
+
+    print("\n📦 正在生成报告并推送...")
+    markdown_content = format_message(projects_data)
+    send_notification(markdown_content)

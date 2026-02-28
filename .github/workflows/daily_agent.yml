@@ -1,0 +1,34 @@
+name: Daily GitHub Agent
+
+on:
+  schedule:
+    # 每天北京时间早上 9:00 运行 (UTC 1:00)
+    - cron: '0 1 * * *'
+  workflow_dispatch: # 允许你手动点击按钮触发测试
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 openai python-dotenv
+
+      - name: Run Agent
+        env:
+          # 将 GitHub Secrets 注入到环境变量中
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          NOTIFIER_WEBHOOK: ${{ secrets.NOTIFIER_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        run: python main.py

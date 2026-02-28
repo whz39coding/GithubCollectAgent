@@ -1,18 +1,17 @@
-import time
 from collect import get_trending_projects
 from fetch_readme import get_readme
 from analysis_readme import analyze_project
+import datetime
 import time
-import json
 from parse_result import format_message, send_notification
 
 MAX_LENGTH = 10000
 SAVE_FLAG = False
 def main(language="python", since="daily", max_length=MAX_LENGTH,save_flag=SAVE_FLAG):
-    print(f"🚀{time.time()}的任务开始 ...\n")
+    print(f"🚀 {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} 的任务开始 ...\n")
 
     # 1. 获取榜单
-    print(f"🚀{time.time()}开始获取榜单 ...\n")
+    print(f"🚀 {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} 的任务开始 ...\n")
     projects = get_trending_projects(language, since)
     target_projects = projects[:3]  # 测试时只跑 2 个，省钱省时间
 
