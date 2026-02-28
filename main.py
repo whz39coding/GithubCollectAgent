@@ -5,15 +5,16 @@ import datetime
 import time
 from parse_result import format_message, send_notification
 
-MAX_LENGTH = 10000
+MAX_LENGTH = 20000
 SAVE_FLAG = False
+ANALYSIS_NUM = 5
 def main(language="python", since="daily", max_length=MAX_LENGTH,save_flag=SAVE_FLAG):
     print(f"🚀 {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} 的任务开始 ...\n")
 
     # 1. 获取榜单
     print(f"🚀 {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} 的任务开始 ...\n")
     projects = get_trending_projects(language, since)
-    target_projects = projects[:3]  # 测试时只跑 2 个，省钱省时间
+    target_projects = projects[:ANALYSIS_NUM]  # 测试时只跑 ANALYSIS_NUM 个，省钱省时间
 
     final_report = []
 
@@ -64,7 +65,7 @@ def main(language="python", since="daily", max_length=MAX_LENGTH,save_flag=SAVE_
 
 
 if __name__ == "__main__":
-    main()
+    main(language="c",since='weekly')
 
 
 

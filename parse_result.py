@@ -5,87 +5,94 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 
-
 def format_message(projects_data):
     """
-    将项目列表格式化为 Markdown 文本
+    将项目列表格式化为飞书友好的 Markdown 文本
     """
     if not projects_data:
-        return "今日暂无热门项目分析。"
+        return "🤷 今日暂无热门项目分析。"
 
-    # 1. 标题头
     date_str = datetime.now().strftime("%Y-%m-%d")
-    msg = [f"## 🚀 GitHub 每日情报 ({date_str}) 关键词:Github自动发送助手 ", "---"]
 
-    # 2. 遍历项目
+    msg = [
+        f"🚀 **GitHub 每日情报 · {date_str}**",
+        "关键词：**Github自动发送助手**",
+        ""
+    ]
+
     for idx, p in enumerate(projects_data, 1):
-        # 提取数据，防止 key 不存在报错
         name = p.get('project_name', '未知项目')
-        url = p.get('url', '#')
-        score = p.get('score', 0)
+        url = p.get('url', '解析错误')
+        score = int(float(p.get('score', 3)))
         summary = p.get('summary', '暂无总结')
-        desc = p.get('desc_detailed', '暂无详细介绍')
+        desc = p.get('details', '暂无详细介绍')
 
-        # 拼接卡片内容
-        msg.append(f"### {idx}. [{name}]({url})  {'⭐' * int(str(score))}")
-        msg.append(f"**🏷 领域**: {p.get('category', '未分类')}")
-        msg.append(f"**💡 一句话**: {summary}")
-        msg.append(f"**📝 深度解析**: \n> {desc}")
+        msg.extend([
+            f"🔥 **TOP {idx}｜[{name}]({url})**",
+            f"⭐ **推荐指数**：{'⭐' * score}",
+            f"🏷 **领域**：{p.get('category', '未分类')}  \n💻 **技术**：{"   •  ".join(p.get('tech_stack', '无'))}",
+            f"✨ **亮点**：{"   •  ".join(p.get('highlights', '无'))}",
+            f"💡 **一句话总结**：{summary}",
+            f"📝 **详细解读**：{desc}",
+        ])
 
-        # 处理举一反三的灵感
         ideas = p.get('dev_ideas', [])
         if ideas:
-            msg.append("**🧠 开发灵感 (举一反三)**:")
+            msg.append("🧠 **可延伸方向：**")
             for idea in ideas:
-                msg.append(f"- {idea}")
+                msg.append(f"   • {idea}")
 
-        msg.append("---")
+        msg.append("")
 
-    msg.append(f"🤖 由 AI Agent 自动生成 | [查看源码](https://github.com/你的用户名/你的仓库名)")
+    msg.append("🤖 由 AI Agent 自动分析生成")
+
     return "\n".join(msg)
 
 
 def send_notification(content):
     """
-    发送消息到飞书 Webhook
+    发送消息到飞书 Webhook（使用富卡片结构化排版，显示更美观）
     """
-    webhook_url = os.getenv("NOTIFIER_WEBHOOK",None)
+    webhook_url = os.getenv("NOTIFIER_WEBHOOK")
     if not webhook_url:
         print("⚠️ 未配置 Webhook，跳过发送。")
         return
 
     headers = {'Content-Type': 'application/json'}
 
-    # 飞书的消息体格式
+    # 将正文拆成多段，增强阅读体验
+    blocks = []
+    for block in content.strip().split("\n\n"):
+        blocks.append({
+            "tag": "markdown",
+            "content": block
+        })
+        blocks.append({"tag": "hr"})  # 分割线
+
     payload = {
-        "msg_type": "interactive",  # 使用富文本卡片更漂亮，这里先用 markdown 兼容性好
+        "msg_type": "interactive",
         "card": {
-            "elements": [
-                {
-                    "tag": "markdown",
-                    "content": content
-                }
-            ],
+            "config": {
+                "wide_screen_mode": True
+            },
             "header": {
                 "template": "blue",
                 "title": {
                     "content": "🔥 今日 GitHub 热门项目挖掘",
                     "tag": "plain_text"
                 }
-            }
+            },
+            "elements": blocks[:-1]  # 去掉最后一条 hr
         }
     }
 
-    # 如果嫌 interactive 卡片复杂，可以直接用 text 类型：
-    # payload = {"msg_type": "text", "content": {"text": content}}
-
     try:
         response = requests.post(
-            webhook_url, headers=headers, data=json.dumps(payload))
+            webhook_url, headers=headers, json=payload, timeout=10)
         response.raise_for_status()
         result = response.json()
         if result.get("code") == 0:
-            print("✅ 消息推送成功！")
+            print("✅ 飞书消息推送成功！")
         else:
             print(f"❌ 推送失败: {result}")
     except Exception as e:
