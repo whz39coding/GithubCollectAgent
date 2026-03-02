@@ -1,6 +1,5 @@
 
 <div align="center">
-  <!-- 如果你有Logo，可以把 src 换成你的 Logo 地址，没有就用 Emoji -->
   <h1>🤖 GitHub Insight Agent</h1>
 
   <p>
@@ -18,24 +17,26 @@
 
 
   <p>
-    <a href="#-功能特性">功能特性</a> •
-    <a href="#-快速开始">快速开始</a> •
-    <a href="#-自动化部署">自动化部署</a> •
-    <a href="#-效果展示">效果展示</a>
+     •<a href="#-简介-introduction">简介</a> •
+    <a href="#-功能特性-features">功能特性</a> •
+    <a href="#-快速开始-quick-start">快速开始</a> •
+    <a href="#-自动化部署-github-actions">自动化部署</a> •
+    <a href="#-效果展示-demo">效果展示</a>
   </p>
----
+</div>
+
 
 ## 📖 简介 (Introduction)
 
-**你是否还在每天漫无目的地刷 GitHub Trending？**
+**你是否还在每天漫无目的地刷 GitHub Trending？忙于其他工作导致错过了一些好的Github项目？**
 
-**GitHub Insight Agent** 是一个全自动化的开源情报探员。它不仅能帮你把每天最火的开源项目爬取下来，还能利用 **LLM (大语言模型)** 阅读冗长的 README 文档，提取核心价值，甚至通过**举一反三**的能力，为你提供基于该项目的商业灵感或二次开发思路。
+**GitHub Insight Agent** 是一个全自动化的开源情报探员。它不仅能帮你把每天最火的开源项目爬取下来，还能利用 **LLM (大语言模型)** 阅读冗长的 README 文档，提取核心价值，甚至通过**举一反三**的能力，为你提供基于该项目的 **商业灵感** 或 **进一步开发思路**。
 
-最终，一份排版精美的日报会准时推送到你的 **飞书 / 钉钉 / 微信**。
+最终，一份排版精美的日报会准时的 **自动** 推送到你的 **飞书 / 钉钉 / 微信**。
 
 ## ✨ 功能特性 (Features)
 
-- 🕵️ **全自动情报搜集**：定时抓取 GitHub Trending (Daily/Weekly) 榜单。
+- 🕵️ **全自动情报搜集**：可以根据自己的爱好设置筛选条件,发送时间,定时抓取 GitHub Trending (Daily/Weekly) 榜单。
 - 🧠 **深度 AI 分析**：
   - 拒绝简单的翻译，AI 会深度阅读 README。
   - **核心亮点提取**：一针见血地指出项目解决了什么痛点。
@@ -48,40 +49,41 @@
 
 > *下图为飞书机器人接收到的推送消息示例：*
 
-```text
-🔥 今日 GitHub 热门项目挖掘 (202X-XX-XX)
-------------------------------------------------
-📦 项目：browser-use/browser-use | ⭐ 15.6k
-🏷 领域：AI Agent
-💡 一句话：让 AI 像人类一样操控浏览器的自动化框架
-
-📝 深度解析：
-这是一个基于 LangChain 和 Playwright 的 Python 库...
-(此处省略详细介绍)
-
-🚀 举一反三 (开发灵感)：
-1. 基于此项目开发“全网比价助手”，自动抓取各大电商平台价格。
-2. 开发“企业自动化报销机器人”，自动登录税务平台下载发票。
-------------------------------------------------
-```
+<img src="./img/image.png" alt="飞书机器人推送" width="600">
 
 ## 🛠 技术架构 (Architecture)
 
-```mermaid
-graph LR
-A[GitHub Trending] -->|Collector| B[项目列表]
-B -->|Fetcher| C[获取 README]
-C -->|清洗 + 截断| D[Analyzer - LLM]
-D -->|Prompt 工程| E[结构化情报 JSON]
-E -->|Notifier| F[飞书 和 钉钉 Webhook]
-```
-
+┌────────────────────┐        收集        ┌────────────────────┐
+│  GitHub Trending   │ ───────────────▶         项目列表  
+└────────────────────┘                    └────────────────────┘
+                                                │
+                                                │ 获取 README
+                                                ▼
+                                        ┌────────────────────┐
+                                        │       README       │
+                                        └────────────────────┘
+                                                 │
+                                            清洗 / 截断
+                                                 ▼
+┌────────────────────┐        分析        ┌───────────────────┐
+│      AI 模型       │ ◀───────────────     处理后 README    
+└────────────────────┘                     └─────────────────┘
+        │
+        │ 生成
+        ▼
+┌────────────────────┐        推送        ┌────────────────────┐
+│   结构化 JSON 数据  │ ───────────────▶      通知 Webhook  
+└────────────────────┘                     └────────────────┘
+🔍 数据采集: 从 GitHub Trending 获取热门项目列表
+📥 内容获取: 自动抓取项目 README 文件,为后续节约模型token消耗,支持截取读取内容.
+🧠 AI 分析: 使用配置的 LLM 深度理解项目内容,提取核心功能和特色
+📊 结构化输出: 生成标准化的 JSON 格式报告,包含项目亮点和应用建议
+📤 消息推送: 可以**fork**本仓库到**你的Github仓库中**,之后设置Github Action工作流,**无需服务器**,可以实现自动的通过 Webhook 发送到飞书/钉钉,这样就可以及时的自动获取Github上的热门项目,格式化为美观的消息卡片.
 ## 🚀 快速开始 (Quick Start)
 
 ### 1. 克隆仓库
 ```bash
-git clone https://github.com/你的用户名/你的仓库名.git
-cd 你的仓库名
+git clone git@github.com:whz39coding/GithubCollectAgent.git
 ```
 
 ### 2. 安装依赖
@@ -90,7 +92,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. 配置环境变量
-在项目根目录新建 `.env` 文件（**注意：不要提交到 GitHub**），内容如下：
+在项目根目录新建 `.env` 文件（**注意：不要显式的在你的 GitHub项目中出现!!!!**），内容如下：
 
 ```ini
 # --- LLM 配置 (支持 DeepSeek, OpenAI 等) ---
@@ -98,8 +100,6 @@ LLM_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
 LLM_BASE_URL=https://api.deepseek.com
 LLM_MODEL=deepseek-chat
 
-# --- GitHub 配置 (防止 API 限流，建议配置) ---
-GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxx
 
 # --- 通知配置 (飞书/钉钉 Webhook) ---
 NOTIFIER_WEBHOOK=https://open.feishu.cn/open-apis/bot/v2/hook/xxxx
@@ -129,13 +129,12 @@ python main.py
 ```text
 .
 ├── .github/workflows/   # GitHub Actions 配置
-├── prompts/             # AI 提示词 (Prompt Engineering)
-├── analyzer.py          # AI 分析模块
-├── collector.py         # 爬虫模块
-├── fetcher.py           # 素材获取模块
-├── notifier.py          # 消息发送模块
+├── Prompt.txt           # AI 提示词 (Prompt Engineering)
+├── analysis_readme.py   # AI 分析模块
+├── collect.py           # 爬虫模块
+├── fetch_readme.py      # 获取项目的readme模块
+├── parse_result.py      # 消息发送模块
 ├── main.py              # 程序入口
-├── config.py            # 配置管理
 └── requirements.txt     # 依赖列表
 ```
 
