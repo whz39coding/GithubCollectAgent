@@ -83,9 +83,13 @@ flowchart TD
     class F,G output;
 ```
 🔍 数据采集: 从 GitHub Trending 获取热门项目列表
+
 📥 内容获取: 自动抓取项目 README 文件,为后续节约模型token消耗,支持截取读取内容.
+
 🧠 AI 分析: 使用配置的 LLM 深度理解项目内容,提取核心功能和特色
+
 📊 结构化输出: 生成标准化的 JSON 格式报告,包含项目亮点和应用建议
+
 📤 消息推送: 可以**fork**本仓库到**你的Github仓库中**,之后设置Github Action工作流,**无需服务器**,可以实现自动的通过 Webhook 发送到飞书/钉钉,这样就可以及时的自动获取Github上的热门项目,格式化为美观的消息卡片.
 
 
@@ -93,7 +97,7 @@ flowchart TD
 
 本项目内置了 GitHub Actions 工作流，可以每天定时运行。
 
-1.  **Fork 本仓库** 到你的 GitHub 账号。
+1.  **Fork 本仓库** 到你的 GitHub 账号。(可以顺便点一个Star哦😘)
 
 <img src="./img/image2.png" alt="image-20260302160206496" style="zoom:50%;" />
 
@@ -102,9 +106,6 @@ flowchart TD
 <img src="./img/image3.png" alt="image-20260302160422372" style="zoom:50%;" />
 
 3. 点击 **New repository secret**，依次添加 `.env` 中的所有变量
-
-   <img src="./img/image4.png" alt="image-20260302160558660" style="zoom:50%;" />
-
    - `LLM_API_KEY`
    - `LLM_BASE_URL`
    - `LLM_MODEL`
@@ -115,15 +116,12 @@ flowchart TD
 
 首先下载飞书[电脑版](https://www.feishu.cn/download)到本地.之后创建一个自己账户即可.之后点击左上角的加号“创建群组”,之后点击右上角的三个点进行设置:
 
-<img src="./img/image.png.png" alt="image-20260302161127448" style="zoom:50%;" />
-
-
-
+<img src="./img/image4.png" alt="image-20260302160558660" style="zoom:50%;" />
 
 
 再点击添加机器人,选择“自定义机器人”即可.改一下名字和描述也行,之后点击“添加”即可.你就会得到下面的界面:<img src="./img/image5.png" alt="image-20260302161322742" style="zoom:50%;" />
 
-得到自己的这个链接,复制添加到原来的`.env`文件就行.之后最重要的是,**要勾选自定义关键词**.之后**一定一定要填写为**:
+得到自己的这个链接,复制添加到`Secret`中就行.之后最重要的是,**要勾选自定义关键词**.之后**一定一定要填写为**:
 
 **Github自动发送助手**.
 
@@ -136,6 +134,8 @@ flowchart TD
 <img src="./img/image.png" alt="image-20260302162818141" style="zoom:50%;" />
 
 如果要规定发送时间的话还可以修改`.github/workflows/daily_agent.yml`文件进行设置规定的时间修改.
+如果要减少Token的消耗的话,可以在自己的仓库中修改`main.py`文件中的`MAX_LENGTH = 20000,ANALYSIS_NUM = 5`这些参数.
+如果要设置搜索条件的话,可以在`main.py`文件中修改`LANGUAGE和SINCE`
 
 ## 📂 项目结构
 
