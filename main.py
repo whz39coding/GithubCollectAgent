@@ -8,6 +8,8 @@ from parse_result import format_message, send_notification
 MAX_LENGTH = 20000
 SAVE_FLAG = False
 ANALYSIS_NUM = 5
+LANGUAGE = 'python' # 自定义要搜索项目的语言
+SINCE = 'weekly' # 也可以是daily
 def main(language="python", since="daily", max_length=MAX_LENGTH,save_flag=SAVE_FLAG):
     print(f"🚀 {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} 的任务开始 ...\n")
 
@@ -65,7 +67,7 @@ def main(language="python", since="daily", max_length=MAX_LENGTH,save_flag=SAVE_
 
 
 if __name__ == "__main__":
-    main(language="c",since='weekly')
+    main(language=LANGUAGE,since=SINCE)
 
 
 
