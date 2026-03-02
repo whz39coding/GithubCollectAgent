@@ -30,8 +30,8 @@ def format_message(projects_data):
         msg.extend([
             f"🔥 **TOP {idx}｜[{name}]({url})**",
             f"⭐ **推荐指数**：{'⭐' * score}",
-            f"🏷 **领域**：{p.get('category', '未分类')}  \n💻 **技术**：{"   -  ".join(p.get('tech_stack', '无'))}",
-            f"✨ **亮点**：{"   -  ".join(p.get('highlights', '无'))}",
+            f"🏷 **领域**：{p.get('category', '未分类')}  \n💻 **技术**：{'   -  '.join(p.get('tech_stack', ['无']))}",
+            f"✨ **亮点**：{'   -  '.join(p.get('highlights', '无'))}",
             f"💡 **一句话总结**：{summary}",
             f"📝 **详细解读**：{desc}",
         ])
