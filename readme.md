@@ -18,10 +18,9 @@
 
   <p>
      •<a href="#-简介-introduction">简介</a> •
-    <a href="#-功能特性-features">功能特性</a> •
-    <a href="#-快速开始-quick-start">快速开始</a> •
-    <a href="#-自动化部署-github-actions">自动化部署</a> •
-    <a href="#-效果展示-demo">效果展示</a>
+     <a href="#-效果展示-demo">效果展示</a> •
+     <a href="#bushu">自动化部署</a> •
+    <a href="#-功能特性-features">功能特性</a> •    
   </p>
 </div>
 
@@ -89,34 +88,6 @@ flowchart TD
 📊 结构化输出: 生成标准化的 JSON 格式报告,包含项目亮点和应用建议
 📤 消息推送: 可以**fork**本仓库到**你的Github仓库中**,之后设置Github Action工作流,**无需服务器**,可以实现自动的通过 Webhook 发送到飞书/钉钉,这样就可以及时的自动获取Github上的热门项目,格式化为美观的消息卡片.
 
-## 🚀 快速开始 (Quick Start)
-
-### 1. 克隆仓库
-```bash
-git clone git@github.com:whz39coding/GithubCollectAgent.git
-```
-
-### 2. 安装依赖
-```bash
-pip install -r requirements.txt
-```
-
-### 3. 配置环境变量
-在项目根目录新建 `.env` 文件（**注意：不要显式的在你的 GitHub项目中出现!!!!**），示例内容如下,根据自己的情况修改即可：
-
-```ini
-# --- LLM 配置 (支持 DeepSeek, OpenAI 等) ---
-LLM_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
-LLM_BASE_URL=https://api.deepseek.com
-LLM_MODEL=deepseek-chat
-# --- 通知配置 (飞书/钉钉 Webhook) 稍后会告知如何获取 ---
-NOTIFIER_WEBHOOK=https://open.feishu.cn/open-apis/bot/v2/hook/xxxx
-```
-
-### 4. 运行测试
-```bash
-python main.py
-```
 
 ## <a id="bushu">☁️ 自动化部署 (GitHub Actions)</a>
 
@@ -150,7 +121,7 @@ python main.py
 
 
 
-再点击添加机器人,选择“自定义机器人”即可.改一下名字和描述也行,之后点击“添加”即可.你就会得到下面的界面:<img src="E:\code\IJ\test_12_8\web_love\assets\image-20260302161322742.png" alt="image-20260302161322742" style="zoom:50%;" />
+再点击添加机器人,选择“自定义机器人”即可.改一下名字和描述也行,之后点击“添加”即可.你就会得到下面的界面:<img src="./img/image5.png" alt="image-20260302161322742" style="zoom:50%;" />
 
 得到自己的这个链接,复制添加到原来的`.env`文件就行.之后最重要的是,**要勾选自定义关键词**.之后**一定一定要填写为**:
 
@@ -162,7 +133,7 @@ python main.py
 
 4. 返回自己项目的主页,点击菜单栏中的 **Actions** ，启用 Workflow。可以点击`Run workflow`测试一下你的环境变量是不是配置成功,以保证你的Agent可以定时运行.
 
-<img src="E:\code\IJ\test_12_8\web_love\assets\image-20260302162818141.png" alt="image-20260302162818141" style="zoom:50%;" />
+<img src="./img/image.png" alt="image-20260302162818141" style="zoom:50%;" />
 
 如果要规定发送时间的话还可以修改`.github/workflows/daily_agent.yml`文件进行设置规定的时间修改.
 
