@@ -1,54 +1,4 @@
-1. google-research/timesfm:
-   star: 22037  语言/技术: Python, PyTorch, Flax, JAX, HuggingFace Transformers, PEFT (LoRA), uv
-   项目简介: TimesFM 是 Google Research 开发的一款专为时间序列预测设计的预训练基础模型（Foundation Model），属于 AI 工具领域。它旨在解决传统时序预测需要大量标注数据和复杂特征工程的问题，通过一个统一的 decoder-only 架构，提供开箱即用的点预测和连续分位数预测能力，极大降低了时序预测的门槛。
-   亮点: 核心功能：提供 TimesFM 2.5 版本，参数量从 500M 优化至 200M，但上下文长度从 2048 大幅提升至 16k，支持更长的历史数据输入。; 解决了什么具体问题：支持连续分位数预测（Continuous Quantile Forecast），可输出高达 1000 步的预测 horizon，并提供不确定性量化，解决了传统点预测无法评估风险的问题。; 亮点3：原生支持协变量（Covariates）通过 XReg 模块，允许用户引入外部特征（如节假日、促销活动）来提升预测精度，增强了模型的实用性。
-   详细报告: TimesFM 是 Google Research 推出的时间序列预测基础模型，其核心是一个 decoder-only 架构的 Transformer。该项目的主要目标是提供一个通用、高性能且易于使用的时序预测解决方案。
-
-在技术实现上，TimesFM 2.5 版本进行了显著优化：模型参数量从 2.0 的 500M 减少到 200M，但上下文窗口从 2048 扩展到 16384，这意味着它可以处理更长的历史序列，捕捉更长期的依赖关系。此外，它引入了一个可选的 30M 参数分位数头（quantile head），能够输出连续的分位数预测（如 10th 到 90th 分位数），为预测结果提供不确定性估计，这对于金融、库存管理等风险敏感场景至关重要。
-
-项目支持多种后端（PyTorch 和 Flax/JAX），方便不同技术栈的开发者使用。安装方式灵活，可通过 PyPI 直接安装（`pip install timesfm[torch]` 或 `flax`），也支持本地开发模式。代码示例展示了其简洁的 API：加载预训练模型、配置预测参数（如 max_context, max_horizon）、调用 `forecast` 方法即可获得点预测和分位数预测结果。
-
-TimesFM 还集成了现代 MLOps 生态：支持通过 HuggingFace Transformers + PEFT (LoRA) 进行高效微调，适应特定领域的数据；提供了 Agent Skill 文档（SKILL.md），便于集成到 AI Agent 工作流中；并已在 Google 内部产品中落地，如 BigQuery ML（企业级 SQL 预测）、Google Sheets（电子表格预测）和 Vertex AI Model Garden（Docker 化端点），证明了其生产环境可用性。
-
-文档中还提到了社区贡献的单元测试和协变量支持（XReg），表明项目在持续迭代和增强。虽然 README 被截断，但已展示的信息足以说明这是一个功能强大、设计现代、且具备工业级应用潜力的时序预测基础模型。
-   活跃度: 高。根据更新日志，项目在 2025 年 9 月发布 2.5 版本后，持续在 2025 年 10 月至 2026 年 4 月间添加了协变量支持、Flax 版本、微调示例、单元测试和 Agent Skill，开发迭代非常活跃。  社区健康: 未知
-   商业潜力: 高。TimesFM 已被集成到 Google 的 BigQuery ML、Sheets 和 Vertex AI 等核心产品中，证明其具备企业级应用价值。其开箱即用、支持微调、提供不确定性预测的特性，使其在金融、零售、能源、供应链等多个高价值行业有广泛的应用前景，可作为 PaaS/SaaS 服务的基础组件。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个 **智能库存预警系统**，用于零售或制造业，利用 TimesFM 的长上下文和分位数预测能力，精准预测未来数周甚至数月的商品需求，并结合不确定性量化自动触发补货或促销策略，解决库存积压或缺货问题。; 灵感2：可以将其集成到 **金融风控平台** 中，优化 **市场波动预测流程**。利用 TimesFM 的连续分位数输出，构建动态风险价值（VaR）模型，为投资组合提供更可靠的风险评估和压力测试。; 灵感X：开发一个 **能源消耗预测 SaaS 服务**，面向工厂或商业楼宇，结合天气、生产计划等协变量（通过 XReg），实现高精度的电力/燃气需求预测，帮助用户优化能源采购和降低成本。
-   项目链接: https://github.com/google-research/timesfm
-
-2. chopratejas/headroom:
-   star: 39214  语言/技术: Python, TypeScript, Rust, ONNX Runtime, HuggingFace Transformers, Kompress-v2-base, AST Parsing, MCP Protocol, ASGI Middleware, LangChain, Agno, Vercel AI SDK, LiteLLM, Docker
-   项目简介: Headroom 是一个专为 AI Agent 设计的「上下文压缩层」，核心功能是在数据到达大模型（LLM）之前，对工具输出、日志、RAG 分块、文件及对话历史进行 60%-95% 的 Token 压缩，同时保证答案质量不下降。它支持 Python/TypeScript 库、零代码改动代理（Proxy）、MCP 服务器、多种 AI 编程助手（Claude Code, Cursor, Codex 等）以及跨 Agent 共享记忆。其技术亮点包括 6 种压缩算法（JSON SmartCrusher、AST CodeCompressor、HuggingFace Kompress-base 模型等）、可逆压缩（CCR 按需还原原文）、输出 Token 削减（减少模型废话）以及基于失败会话自动学习的 headroom learn 功能。简而言之，这是一个让 AI Agent 跑得更省、更快、更聪明的“中间件神器”。
-   亮点: 极致 Token 压缩：实测在代码搜索、SRE 调试等场景实现 73%-92% 的 Token 节省，直接降低 API 调用成本; 可逆压缩（CCR）：原始数据本地缓存，LLM 需要时可随时检索还原，兼顾压缩与数据完整性; 输出 Token 削减：不仅压缩输入，还通过 Verbosity Steering 和 Effort Routing 减少模型输出中的废话，进一步省钱; 跨 Agent 记忆共享：支持 Claude、Codex、Gemini 等多 Agent 间的去重共享存储，提升多 Agent 协作效率; 零代码集成：通过 Proxy 模式一行命令即可接入现有项目，支持主流框架（LangChain, Agno, Strands 等）和 MCP 协议
-   详细报告: Headroom 解决的核心痛点是：现代 AI Agent（如 Claude Code、Cursor、GitHub Copilot CLI 等）在与大模型交互时，会产生大量冗余上下文（工具输出、日志、RAG 结果、历史对话），导致 Token 成本飙升、响应延迟增加，甚至因上下文窗口限制而丢失关键信息。
-
-该项目的技术架构分为几个核心模块：
-1. **ContentRouter**：智能识别内容类型（JSON、代码、文本、图片），路由到对应的压缩器。
-2. **SmartCrusher**：针对 JSON 数据（如 API 返回值、日志）进行结构化压缩，支持嵌套对象和混合类型。
-3. **CodeCompressor**：基于 AST（抽象语法树）感知的代码压缩，支持 Python、JS、Go、Rust、Java、C++ 等多种语言，能智能裁剪无关代码片段。
-4. **Kompress-base**：自研的 HuggingFace 模型（kompress-v2-base），专门针对 Agent 对话轨迹训练，擅长压缩自然语言文本。
-5. **CacheAligner**：稳定前缀以命中 LLM 提供商的 KV Cache，减少重复计算。
-6. **CCR（Compress, Cache, Retrieve）**：可逆压缩机制，原始数据本地存储，LLM 需要时通过 headroom_retrieve 工具按需还原。
-
-部署方式极其灵活：
-- **Library 模式**：`compress(messages)` 直接嵌入 Python/TypeScript 代码。
-- **Proxy 模式**：`headroom proxy --port 8787` 启动本地代理，零代码改动即可拦截所有 LLM 请求。
-- **Agent Wrap 模式**：`headroom wrap claude|codex|cursor` 一行命令包装现有 AI 编程助手。
-- **MCP Server 模式**：提供 `headroom_compress`、`headroom_retrieve`、`headroom_stats` 工具，任何 MCP 客户端均可调用。
-
-实测效果惊人：在代码搜索（100 结果）场景下从 17,765 Token 压缩到 1,408 Token（92% 压缩率）；SRE 故障调试从 65,694 Token 压缩到 5,118 Token；且在 GSM8K 数学基准和 TruthfulQA 事实性基准上准确率无损失甚至略有提升。
-
-此外，Headroom 还引入了 **headroom learn** 功能，能挖掘失败会话并自动将纠正规则写入 CLAUDE.md / AGENTS.md，实现 Agent 的自我进化。对于输出 Token 的优化，通过 Verbosity Steering（在系统提示末尾追加“简洁回答”指令）和 Effort Routing（在常规步骤降低 thinking effort）来减少模型废话，实测可削减 31.7% 的输出 Token。
-
-该项目同时支持 macOS（含 Apple GPU 加速）、Linux、Windows 和 Docker 环境，并提供了企业 SSL 检查环境下的安装指南。社区通过 Discord 活跃交流，文档托管在 Vercel 上，支持 llms.txt 标准供 AI 索引。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个「企业 AI 成本优化网关」，用于统一管理公司内部所有 AI Agent 的 Token 消耗，通过 Headroom 的 Proxy 模式拦截并压缩所有 API 调用，预计可降低 50%-80% 的 AI 运营成本。; 灵感2：可以将其集成到「RAG 增强系统」中，利用 CCR 可逆压缩特性，在压缩存储检索结果的同时保留原文按需还原能力，解决长文档问答中上下文窗口不足的问题。; 灵感3：开发一个「多 Agent 协作记忆中枢」，利用 Headroom 的跨 Agent 记忆共享和去重功能，让不同角色的 AI Agent（如代码助手、测试助手、文档助手）共享上下文，避免重复劳动并提升协作效率。
-   项目链接: https://github.com/chopratejas/headroom
-
-3. calesthio/OpenMontage:
+1. calesthio/OpenMontage:
    star: 5516  语言/技术: Python, Node.js, React, Remotion, HyperFrames, FFmpeg, Piper TTS, WhisperX, GSAP, YAML, CLIP
    项目简介: OpenMontage 是首个开源的、基于 AI Agent 的视频制作系统。它让你的 AI 编程助手（如 Claude Code、Cursor 等）变身成为完整的视频制作工作室——只需用自然语言描述需求，Agent 就能自动完成研究、脚本创作、素材生成、剪辑和最终合成。它不仅支持基于 AI 生成图片的视频，还能从免费素材库中检索真实视频片段进行剪辑，甚至支持本地 GPU 视频生成。
    亮点: 首个开源 Agentic 视频生产系统，支持从自然语言到成片的全流程自动化; 双渲染引擎架构：Remotion（React 数据驱动）和 HyperFrames（HTML/GSAP 动态图形）; 支持真实视频素材剪辑（非仅图片动画），可从 Archive.org、NASA、Pexels 等免费源获取素材; 零 API Key 即可运行：内置 Piper TTS、免费素材库和 Remotion 渲染; 完整的预算控制与决策审计追踪，避免意外花费; 多平台 AI 助手兼容（Claude Code、Cursor、Copilot、Windsurf、Codex）
@@ -79,23 +29,69 @@ TimesFM 还集成了现代 MLOps 生态：支持通过 HuggingFace Transformers 
    衍生灵感: 灵感1：开发一个 '社交媒体视频自动生成器'，基于 OpenMontage 的 Clip Factory 管道，自动将长视频（如直播回放、会议记录）剪辑为适合 TikTok、Instagram Reels、YouTube Shorts 的短视频，解决内容创作者多平台分发效率低下的问题。; 灵感2：构建 '电商产品视频营销平台'，利用 OpenMontage 的 Avatar Spokesperson 和 Cinematic 管道，自动生成产品宣传视频、开箱视频、使用教程，商家只需上传产品图片和描述即可批量生成营销素材。; 灵感3：开发 '教育内容自动化生产系统'，结合 OpenMontage 的 Animated Explainer 管道和预算控制功能，为在线教育平台自动生成课程预告片、知识点讲解视频、课程总结视频，大幅降低教育视频制作成本。; 灵感4：创建 '本地新闻/自媒体视频助手'，利用 Documentary Montage 管道从免费素材库检索真实视频片段，自动生成新闻背景视频、专题报道视觉素材，解决小型媒体机构素材获取成本高的问题。
    项目链接: https://github.com/calesthio/OpenMontage
 
-4. Lightricks/LTX-2:
-   star: 7527  语言/技术: Python, PyTorch, DiT (Diffusion Transformer), HuggingFace Transformers, Gemma 3 (Text Encoder), LoRA / IC-LoRA, FP8 Quantization, FlashAttention 4, xFormers, ComfyUI, uv (Python Package Manager), safetensors, Monorepo
-   项目简介: LTX-2 是由 Lightricks 开发的首个基于 DiT（Diffusion Transformer）架构的音视频一体式基础模型，将现代视频生成的所有核心能力集成在一个模型中：音视频同步、高保真画质、多种性能模式、生产级输出、API 访问和开源开放。它支持文本/图像到视频、音频到视频、视频修复、HDR 输出、唇形同步等多种生成模式，并提供蒸馏加速、FP8 量化、空间/时间超分等优化方案，是视频生成领域的一体化生产力工具。
-   亮点: 首个 DiT 架构音视频一体式基础模型，单模型覆盖文本/图像到视频、音频到视频、视频修复、HDR、唇形同步等全场景; 提供多种 Pipeline（两阶段高质量、单阶段快速、蒸馏加速、IC-LoRA 控制、关键帧插值等），灵活适配不同需求; 支持 FP8 量化、FlashAttention 4、梯度估计等推理优化，显著降低显存占用和提升生成速度; 提供完整的训练与微调工具链（ltx-trainer），支持 LoRA、全参数微调及 IC-LoRA; 支持 ComfyUI 集成，便于工作流自动化; 提供空间超分（2x/1.5x）和时间超分模块，支持生产级高分辨率输出
-   详细报告: LTX-2 是一个功能极其全面的视频生成基础模型，其核心创新在于将音视频生成统一到一个 DiT 架构中，而非传统的视频生成+后配音分离流程。项目采用 Monorepo 结构，包含三个核心包：ltx-core（模型实现与推理栈）、ltx-pipelines（高层 Pipeline 实现）和 ltx-trainer（训练与微调工具）。
+2. google-research/timesfm:
+   star: 22037  语言/技术: Python, PyTorch, Flax, JAX, HuggingFace Transformers, PEFT (LoRA), uv
+   项目简介: TimesFM 是 Google Research 开发的一款专为时间序列预测设计的预训练基础模型（Foundation Model），属于 AI 工具领域。它旨在解决传统时序预测需要大量标注数据和复杂特征工程的问题，通过一个统一的 decoder-only 架构，提供开箱即用的点预测和连续分位数预测能力，极大降低了时序预测的门槛。
+   亮点: 核心功能：提供 TimesFM 2.5 版本，参数量从 500M 优化至 200M，但上下文长度从 2048 大幅提升至 16k，支持更长的历史数据输入。; 解决了什么具体问题：支持连续分位数预测（Continuous Quantile Forecast），可输出高达 1000 步的预测 horizon，并提供不确定性量化，解决了传统点预测无法评估风险的问题。; 亮点3：原生支持协变量（Covariates）通过 XReg 模块，允许用户引入外部特征（如节假日、促销活动）来提升预测精度，增强了模型的实用性。
+   详细报告: TimesFM 是 Google Research 推出的时间序列预测基础模型，其核心是一个 decoder-only 架构的 Transformer。该项目的主要目标是提供一个通用、高性能且易于使用的时序预测解决方案。
 
-在生成能力方面，LTX-2 提供了覆盖几乎所有主流视频生成场景的 Pipeline：TI2VidTwoStagesPipeline 用于生产级文本/图像到视频生成（带 2x 超分）；DistilledPipeline 通过 8 个预定义 sigma 实现最快推理；ICLoraPipeline 支持视频到视频和图像到视频的转换；A2VidPipelineTwoStage 实现音频驱动的视频生成；RetakePipeline 支持对已有视频特定时间段进行重生成；HDRICLoraPipeline 输出线性 float 帧，适合 EXR 导出和色调映射；LipDubPipeline 实现唇形同步和说话人身份匹配。
+在技术实现上，TimesFM 2.5 版本进行了显著优化：模型参数量从 2.0 的 500M 减少到 200M，但上下文窗口从 2048 扩展到 16384，这意味着它可以处理更长的历史序列，捕捉更长期的依赖关系。此外，它引入了一个可选的 30M 参数分位数头（quantile head），能够输出连续的分位数预测（如 10th 到 90th 分位数），为预测结果提供不确定性估计，这对于金融、库存管理等风险敏感场景至关重要。
 
-在性能优化方面，项目提供了多层次的加速方案：FP8 量化（支持 bf16 即时下缩和 Hopper GPU 的 scaled matrix multiplication）；FlashAttention 4（针对 Blackwell B200 GPU）和 xFormers（其他 CUDA GPU）；梯度估计技术可将推理步数从 40 步降至 20-30 步而保持质量；单阶段 Pipeline 用于快速原型验证。
+项目支持多种后端（PyTorch 和 Flax/JAX），方便不同技术栈的开发者使用。安装方式灵活，可通过 PyPI 直接安装（`pip install timesfm[torch]` 或 `flax`），也支持本地开发模式。代码示例展示了其简洁的 API：加载预训练模型、配置预测参数（如 max_context, max_horizon）、调用 `forecast` 方法即可获得点预测和分位数预测结果。
 
-在控制能力方面，项目提供了丰富的 IC-LoRA 和 LoRA 模块：Union Control（综合控制）、Motion Track Control（运动跟踪）、Detailer（细节增强）、Pose Control（姿态控制）、多种 Camera Control（Dolly In/Out/Left/Right、Jib Up/Down、Static）以及 HDR 和 LipDub 专用 LoRA，用户可以通过组合不同的控制模块实现精细的视频生成控制。
+TimesFM 还集成了现代 MLOps 生态：支持通过 HuggingFace Transformers + PEFT (LoRA) 进行高效微调，适应特定领域的数据；提供了 Agent Skill 文档（SKILL.md），便于集成到 AI Agent 工作流中；并已在 Google 内部产品中落地，如 BigQuery ML（企业级 SQL 预测）、Google Sheets（电子表格预测）和 Vertex AI Model Garden（Docker 化端点），证明了其生产环境可用性。
 
-在文本编码方面，使用 Google Gemma 3 作为文本编码器，并支持自动提示词增强功能。模型权重以 safetensors 格式发布在 HuggingFace 上，包括 22B 参数的开发版和蒸馏版检查点。
+文档中还提到了社区贡献的单元测试和协变量支持（XReg），表明项目在持续迭代和增强。虽然 README 被截断，但已展示的信息足以说明这是一个功能强大、设计现代、且具备工业级应用潜力的时序预测基础模型。
+   活跃度: 高。根据更新日志，项目在 2025 年 9 月发布 2.5 版本后，持续在 2025 年 10 月至 2026 年 4 月间添加了协变量支持、Flax 版本、微调示例、单元测试和 Agent Skill，开发迭代非常活跃。  社区健康: 未知
+   商业潜力: 高。TimesFM 已被集成到 Google 的 BigQuery ML、Sheets 和 Vertex AI 等核心产品中，证明其具备企业级应用价值。其开箱即用、支持微调、提供不确定性预测的特性，使其在金融、零售、能源、供应链等多个高价值行业有广泛的应用前景，可作为 PaaS/SaaS 服务的基础组件。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个 **智能库存预警系统**，用于零售或制造业，利用 TimesFM 的长上下文和分位数预测能力，精准预测未来数周甚至数月的商品需求，并结合不确定性量化自动触发补货或促销策略，解决库存积压或缺货问题。; 灵感2：可以将其集成到 **金融风控平台** 中，优化 **市场波动预测流程**。利用 TimesFM 的连续分位数输出，构建动态风险价值（VaR）模型，为投资组合提供更可靠的风险评估和压力测试。; 灵感X：开发一个 **能源消耗预测 SaaS 服务**，面向工厂或商业楼宇，结合天气、生产计划等协变量（通过 XReg），实现高精度的电力/燃气需求预测，帮助用户优化能源采购和降低成本。
+   项目链接: https://github.com/google-research/timesfm
 
-项目还提供了 ComfyUI 集成支持，便于与现有工作流工具链对接。整体而言，LTX-2 是一个从研究到生产、从训练到部署、从基础生成到精细化控制的完整视频生成解决方案。
+3. chopratejas/headroom:
+   star: 39214  语言/技术: Python, TypeScript, Rust, ONNX Runtime, HuggingFace Transformers, Kompress-v2-base, AST Parsing, MCP Protocol, ASGI Middleware, LangChain, Agno, Vercel AI SDK, LiteLLM, Docker
+   项目简介: Headroom 是一个专为 AI Agent 设计的「上下文压缩层」，核心功能是在数据到达大模型（LLM）之前，对工具输出、日志、RAG 分块、文件及对话历史进行 60%-95% 的 Token 压缩，同时保证答案质量不下降。它支持 Python/TypeScript 库、零代码改动代理（Proxy）、MCP 服务器、多种 AI 编程助手（Claude Code, Cursor, Codex 等）以及跨 Agent 共享记忆。其技术亮点包括 6 种压缩算法（JSON SmartCrusher、AST CodeCompressor、HuggingFace Kompress-base 模型等）、可逆压缩（CCR 按需还原原文）、输出 Token 削减（减少模型废话）以及基于失败会话自动学习的 headroom learn 功能。简而言之，这是一个让 AI Agent 跑得更省、更快、更聪明的“中间件神器”。
+   亮点: 极致 Token 压缩：实测在代码搜索、SRE 调试等场景实现 73%-92% 的 Token 节省，直接降低 API 调用成本; 可逆压缩（CCR）：原始数据本地缓存，LLM 需要时可随时检索还原，兼顾压缩与数据完整性; 输出 Token 削减：不仅压缩输入，还通过 Verbosity Steering 和 Effort Routing 减少模型输出中的废话，进一步省钱; 跨 Agent 记忆共享：支持 Claude、Codex、Gemini 等多 Agent 间的去重共享存储，提升多 Agent 协作效率; 零代码集成：通过 Proxy 模式一行命令即可接入现有项目，支持主流框架（LangChain, Agno, Strands 等）和 MCP 协议
+   详细报告: Headroom 解决的核心痛点是：现代 AI Agent（如 Claude Code、Cursor、GitHub Copilot CLI 等）在与大模型交互时，会产生大量冗余上下文（工具输出、日志、RAG 结果、历史对话），导致 Token 成本飙升、响应延迟增加，甚至因上下文窗口限制而丢失关键信息。
+
+该项目的技术架构分为几个核心模块：
+1. **ContentRouter**：智能识别内容类型（JSON、代码、文本、图片），路由到对应的压缩器。
+2. **SmartCrusher**：针对 JSON 数据（如 API 返回值、日志）进行结构化压缩，支持嵌套对象和混合类型。
+3. **CodeCompressor**：基于 AST（抽象语法树）感知的代码压缩，支持 Python、JS、Go、Rust、Java、C++ 等多种语言，能智能裁剪无关代码片段。
+4. **Kompress-base**：自研的 HuggingFace 模型（kompress-v2-base），专门针对 Agent 对话轨迹训练，擅长压缩自然语言文本。
+5. **CacheAligner**：稳定前缀以命中 LLM 提供商的 KV Cache，减少重复计算。
+6. **CCR（Compress, Cache, Retrieve）**：可逆压缩机制，原始数据本地存储，LLM 需要时通过 headroom_retrieve 工具按需还原。
+
+部署方式极其灵活：
+- **Library 模式**：`compress(messages)` 直接嵌入 Python/TypeScript 代码。
+- **Proxy 模式**：`headroom proxy --port 8787` 启动本地代理，零代码改动即可拦截所有 LLM 请求。
+- **Agent Wrap 模式**：`headroom wrap claude|codex|cursor` 一行命令包装现有 AI 编程助手。
+- **MCP Server 模式**：提供 `headroom_compress`、`headroom_retrieve`、`headroom_stats` 工具，任何 MCP 客户端均可调用。
+
+实测效果惊人：在代码搜索（100 结果）场景下从 17,765 Token 压缩到 1,408 Token（92% 压缩率）；SRE 故障调试从 65,694 Token 压缩到 5,118 Token；且在 GSM8K 数学基准和 TruthfulQA 事实性基准上准确率无损失甚至略有提升。
+
+此外，Headroom 还引入了 **headroom learn** 功能，能挖掘失败会话并自动将纠正规则写入 CLAUDE.md / AGENTS.md，实现 Agent 的自我进化。对于输出 Token 的优化，通过 Verbosity Steering（在系统提示末尾追加“简洁回答”指令）和 Effort Routing（在常规步骤降低 thinking effort）来减少模型废话，实测可削减 31.7% 的输出 Token。
+
+该项目同时支持 macOS（含 Apple GPU 加速）、Linux、Windows 和 Docker 环境，并提供了企业 SSL 检查环境下的安装指南。社区通过 Discord 活跃交流，文档托管在 Vercel 上，支持 llms.txt 标准供 AI 索引。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 LTX-2 的 A2VidPipeline 和 LipDubPipeline，可以开发一个 AI 虚拟主播系统，输入音频即可自动生成匹配的虚拟人视频，适用于在线教育、新闻播报、电商直播等场景。; 灵感2：利用 LTX-2 的 RetakePipeline 和 ICLoraPipeline，可以构建一个 AI 视频后期编辑工具，支持对已有视频片段进行局部重生成、风格迁移、HDR 增强等操作，大幅降低视频制作门槛。; 灵感3：结合 LTX-2 的 Camera Control LoRAs 和关键帧插值能力，可以开发一个 AI 分镜/预演工具，导演输入文字描述后自动生成带镜头运动的动态预览视频，用于影视前期策划。; 灵感4：基于 LTX-2 的蒸馏模型和 FP8 量化优化，可以构建一个面向中小企业的云端视频生成 API 服务，以低成本提供高质量的产品宣传视频、社交媒体内容自动生成。
-   项目链接: https://github.com/Lightricks/LTX-2
+   衍生灵感: 灵感1：基于此项目，可以开发一个「企业 AI 成本优化网关」，用于统一管理公司内部所有 AI Agent 的 Token 消耗，通过 Headroom 的 Proxy 模式拦截并压缩所有 API 调用，预计可降低 50%-80% 的 AI 运营成本。; 灵感2：可以将其集成到「RAG 增强系统」中，利用 CCR 可逆压缩特性，在压缩存储检索结果的同时保留原文按需还原能力，解决长文档问答中上下文窗口不足的问题。; 灵感3：开发一个「多 Agent 协作记忆中枢」，利用 Headroom 的跨 Agent 记忆共享和去重功能，让不同角色的 AI Agent（如代码助手、测试助手、文档助手）共享上下文，避免重复劳动并提升协作效率。
+   项目链接: https://github.com/chopratejas/headroom
+
+4. public-apis/public-apis:
+   star: 443171  语言/技术: Markdown, JSON, REST, GraphQL, OAuth, API Key
+   项目简介: 一句话概括：这是一个由社区维护的免费公共 API 目录集合，旨在为开发者提供一个‘API 宝藏库’，解决寻找可靠、免费 API 的痛点。它本身不提供代码或框架，而是一个精心策划的资源索引，覆盖从天气、金融到动漫、安全等数十个领域，极大降低了开发者集成第三方服务的门槛。
+   亮点: 覆盖超过 100 个类别的免费公共 API，包括天气、金融、动漫、安全、机器学习等; 每个 API 标注了认证方式（如 apiKey、OAuth）、HTTPS 支持和 CORS 兼容性，便于开发者快速评估; 由社区和 APILayer 团队共同维护，持续更新，具备较高的可信度和实用性
+   详细报告: 这个项目本质上是一个‘API 黄页’，但它比传统黄页更懂程序员。它不是代码库，而是一个结构化的 Markdown 文档，列出了成千上万可用的公共 API，并按类别（如 Animals、Anime、Weather、Finance 等）组织。每个条目包含 API 名称、描述、认证方式、是否支持 HTTPS 和 CORS 等关键信息，帮助开发者在几秒内判断某个 API 是否适合集成到自己的应用中。
+
+虽然项目本身不包含可执行代码，但其价值在于‘信息聚合’和‘质量筛选’。它解决了开发者常面临的难题：如何快速找到稳定、免费、易用的第三方服务？例如，一个想构建天气应用的开发者可以直接在 Weather 类别下找到 OpenWeatherMap、AccuWeather、WeatherAPI 等多个选项，并对比其认证方式和数据格式。
+
+项目由社区驱动，任何人都可以通过提交 PR 添加新 API 或更新现有条目，这种模式保证了内容的多样性和时效性。同时，APILayer 作为赞助商，也提供了其商业 API（如 IPstack、Marketstack）的入口，形成了一种‘免费+增值’的生态。
+
+技术栈方面，项目主要依赖 Markdown 进行内容组织，数据以表格形式呈现，结构清晰。虽然 GitHub 指标显示近期无提交、无发布、语言分布为空，但这可能因为项目已进入稳定维护阶段，核心内容不再频繁变动。文档质量高，分类细致，是开发者寻找 API 时的‘第一站’。
+   活跃度: 低（根据 GitHub 指标：无近期提交、无发布、无 issues 活动）  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个‘API 发现引擎’ Web 应用，支持按类别、认证方式、HTTPS/CORS 支持等条件筛选，并集成实时可用性检测功能，帮助开发者快速测试 API 连通性。; 灵感2：可以将其数据爬取并构建为本地 JSON 数据库，开发一个 VS Code 插件或 CLI 工具，让开发者在编码时直接搜索和插入常用 API 端点，提升开发效率。; 灵感3：结合 AI 技术，构建一个‘智能 API 推荐系统’，根据用户描述的应用场景（如‘我需要查股票价格’），自动从该目录中推荐最合适的 API，并提供集成示例代码。
+   项目链接: https://github.com/public-apis/public-apis
