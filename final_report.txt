@@ -1,118 +1,15 @@
 1. calesthio/OpenMontage:
-   star: 12753  语言/技术: Python 3.10+, Node.js 18+, Remotion (React-based video rendering), HyperFrames (HTML/CSS/GSAP rendering), FFmpeg, Piper TTS, WhisperX, FAL.ai API, OpenAI API, Google Veo/Kling/Imagen, Archive.org/NASA/Wikimedia Commons, Pexels/Pixabay/Unsplash, Suno API, ElevenLabs API, xAI Grok API, HeyGen API, Runway API, Ollama/LM Studio (coming soon)
-   项目简介: OpenMontage 是首个开源的 Agentic 视频制作系统，让 AI 编程助手变身全功能视频工作室。用户只需用自然语言描述需求，AI Agent 就能自动完成研究、脚本编写、素材生成、剪辑和最终合成，支持从零制作动画短片、纪录片蒙太奇、产品广告等多种视频类型，且成本极低（最低 $0.15）。
-   亮点: 首个开源 Agentic 视频生产系统，将 AI 编程助手变成完整视频工作室; 支持真实素材视频制作（非仅图片动画），通过 CLIP 检索免费素材库自动剪辑; 零 API Key 即可制作视频（Piper TTS + 免费素材 + Remotion 合成）; 多维度预算控制（预估-预留-对账），防止意外账单; 支持 Claude Code/Cursor/Copilot/Windsurf/Codex 等主流 AI 编程助手; 11 种专业视频管线（Animated Explainer, Documentary Montage, Cinematic 等）; 决策审计追踪，记录每个创意和技术选择的理由
-   详细报告: OpenMontage 是一个革命性的开源项目，它将 AI 编程助手（如 Claude Code、Cursor 等）转变为全功能的视频制作工作室。这个项目的核心理念是：用户只需用自然语言描述想要什么视频，AI Agent 就能自动完成从研究、脚本编写、素材生成、剪辑到最终合成的完整视频制作流程。
-
-**核心功能与工作流程：**
-
-1. **自然语言驱动的视频制作**：用户只需输入类似 '制作一个 60 秒的动画解释视频，讲解神经网络如何学习' 这样的提示词，系统就会自动启动完整的生产管线。
-
-2. **双渲染引擎架构**：
-   - **Remotion**：基于 React 的渲染引擎，适合数据驱动的解释器、教育内容，支持弹簧动画、文字卡片、统计卡片、图表、TikTok 风格逐字字幕等
-   - **HyperFrames**：基于 HTML/CSS/GSAP 的渲染引擎，适合动态图形、产品宣传、网站转视频、SVG 角色动画等
-
-3. **真实素材视频制作**：这是 OpenMontage 的重要创新点。系统可以从 Archive.org、NASA、Wikimedia Commons、Pexels 等免费素材库构建 CLIP 可搜索的素材库，检索真实运动镜头，剪辑成时间线，渲染成片。这不是常见的 '动画几张静态图然后称之为视频' 的伎俩。
-
-4. **零成本制作路径**：即使没有任何付费 API Key，用户也可以制作视频：
-   - Piper TTS 提供免费的离线文本转语音
-   - Archive.org + NASA + Wikimedia Commons 提供免费素材
-   - Pexels + Unsplash + Pixabay 提供免费素材（开发者 Key 免费获取）
-   - Remotion 提供 React 基础渲染
-   - FFmpeg 提供编码、字幕烧录、音频混合、调色
-
-5. **11 种专业视频管线**：
-   - Animated Explainer：AI 生成的解释视频
-   - Animation：动态图形、动画序列
-   - Avatar Spokesperson：虚拟人讲解视频
-   - Cinematic：电影级预告片、情绪驱动剪辑
-   - Clip Factory：长视频批量剪辑
-   - Documentary Montage：纪录片蒙太奇（真实素材）
-   - Hybrid：实拍素材 + AI 生成辅助视觉
-   - Localization & Dub：字幕、配音、翻译
-   - Podcast Repurpose：播客转视频
-   - Screen Demo：软件录屏演示
-   - Talking Head：主讲人视频
-
-6. **智能预算控制系统**：
-   - 执行前预估成本
-   - 预留预算锁定资金
-   - 执行后对账记录实际花费
-   - 可配置模式：observe（仅跟踪）、warn（超支警告）、cap（硬限制）
-   - 单笔操作审批阈值（默认 $0.50）
-   - 总预算上限（默认 $10）
-
-7. **决策审计追踪**：每个重大创意和技术选择（提供商选择、风格/剧本选择、音乐轨道、语音选择、渲染器家族、任何回退或降级）都会记录备选方案、置信度分数和推理过程。
-
-8. **多平台 AI 助手兼容**：支持 Claude Code、Cursor、GitHub Copilot、Codex、Windsurf 等主流 AI 编程助手，每个平台都有专门的配置文件。
-
-**技术架构亮点：**
-
-- **管线驱动**：所有工作通过 `pipeline_defs/` 中的 YAML 清单、`skills/pipelines/` 中的阶段导演技能、以及工具注册表进行
-- **工具自动发现**：工具注册表自动发现新工具，无需手动注册
-- **提供商选择评分**：每个提供商选择基于 7 个维度评分，附带可审计的决策日志
-- **自我审查机制**：在输出前运行多点自我审查，包括 ffprobe 验证、帧采样、音频电平分析、交付承诺验证和字幕检查
-
-**实际案例与成本：**
-
-- 'SIGNAL FROM TOMORROW'：科幻电影预告片，完全由 OpenMontage 制作
-- 'THE LAST BANANA'：60 秒皮克斯风格动画短片，成本仅 $1.33
-- 'VOID — Neural Interface'：产品广告，仅使用一个 OpenAI API Key，成本 $0.69
-- 'Afternoon in Candyland'：吉卜力风格动画，成本仅 $0.15
-- 'Mori no Seishin'：森林精灵之旅，成本 $0.15
-- 'Into the Abyss'：深海探索动画，成本 $0.15
-
-**扩展性：**
-
-- 添加新工具：在 `tools/` 子目录创建 Python 文件，继承 `BaseTool`，实现工具合约，注册表自动发现
-- 添加新管线：在 `pipeline_defs/` 创建 YAML 清单，在 `skills/pipelines/<your-pipeline>/` 创建阶段导演技能
-- 本地 GPU 支持：通过 `make install-gpu` 解锁本地视频生成（wan2.1、hunyuan、ltx2、cogvideo 等模型）
-- 即将支持本地 LLM（Ollama 和 LM Studio）
-
-**许可证：** GNU AGPLv3
-   活跃度: 根据 GitHub API 指标，项目近期没有提交记录，活跃度较低。但项目功能完整，文档详细，可能处于稳定版本或开发间歇期。  社区健康: 项目处于早期阶段，GitHub 指标显示 forks: 0, open_issues: 0, closed_issues_recent: 0, commits_recent: 0，社区活跃度较低。但项目提供了 GitHub Discussions 社区，包含 Show and Tell、Ideas、Q&A 等分类，显示出建设社区的意愿。
-   商业潜力: OpenMontage 具有巨大的商业潜力。视频内容市场需求旺盛，但专业视频制作成本高昂、周期长。OpenMontage 将视频制作成本从数百美元降至几美分，时间从数天缩短至几分钟，这将彻底改变视频内容生产行业。潜在商业模式包括：SaaS 订阅服务、API 调用计费、企业定制解决方案、教育平台集成等。
+   star: 16389  语言/技术: Python, React, Remotion, FFmpeg, Node.js, GSAP, WhisperX, Piper TTS
+   项目简介: OpenMontage 是一个开源的代理式（agentic）视频制作系统，通过自然语言提示让 AI 助手自动完成从研究、脚本、素材生成到剪辑合成的全流程。它支持真实视频制作（利用免费素材库和 CLIP 检索）和图像动画化两种路径，核心基于 Python、React (Remotion)、HTML/GSAP 渲染，并集成多种 AI 生成服务。
+   亮点: 支持真实视频制作：通过 CLIP 检索免费素材库（如 Archive.org, Pexels）剪辑真实视频; 多管线（Pipeline）架构：涵盖动画解释、纪录片蒙太奇、播客重制等多种结构化工作流; 预算控制与决策审计：提供成本预估、预算上限及完整的决策日志; 多代理兼容：支持 Claude Code, Cursor, Copilot 等多种 AI 编程助手
+   详细报告: OpenMontage 的核心理念是将 AI 编程助手转变为完整的视频制作工作室。它不仅仅是一个动画生成器，而是一个端到端的生产系统。项目利用 Python 作为主要逻辑语言，结合 React (Remotion) 和 HTML/GSAP (HyperFrames) 进行视频渲染。其技术亮点包括：1. 代理驱动工作流：通过读取 Markdown 技能文件（Stage Director Skills）自动执行视频制作；2. 真实视频路径：利用 CLIP 搜索技术从 Archive.org、NASA、Wikimedia Commons 等开放档案中检索并剪辑真实视频片段；3. 预算控制机制：在执行前预估成本，支持预算上限和单动作审批，防止出现意外账单；4. 自我审查机制：通过 ffprobe 验证、帧采样、音频电平分析等自动化手段进行多点自检。此外，项目支持多种 AI 生成服务（如 FLUX, Veo, Kling, fal.ai 等），并允许本地 GPU 部署（Wan2.1, Hunyuan 等模型）。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 通过提供企业级的自动化视频制作服务（如产品广告、培训视频、社交媒体内容），或作为 SaaS 平台提供按次/订阅制的视频渲染服务。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 OpenMontage 开发一个 '社交媒体视频工厂' SaaS 平台，用户输入主题和风格偏好，自动生成 TikTok/Instagram/YouTube Shorts 视频，解决内容创作者批量生产短视频的痛点。; 灵感2：将其集成到电商系统中，开发 'AI 产品视频自动生成器'，根据产品图片和描述自动生成 30 秒产品展示视频，大幅降低电商视频制作成本。; 灵感3：开发 '教育内容自动化平台'，教师输入课程主题，系统自动生成带动画、旁白、字幕的教学视频，解决教育资源不均衡的问题。; 灵感4：构建 '新闻视频自动播报系统'，根据文字新闻稿件自动生成带虚拟主播、背景画面、字幕的新闻播报视频，适用于自媒体和新闻机构。; 灵感5：开发 '企业培训视频生成器'，HR 输入培训内容，系统自动生成带虚拟人讲解、动画演示、字幕的培训视频，降低企业培训成本。
+   衍生灵感: 灵感1：基于此项目的管线架构，可以开发一个“电商产品视频自动生成器”，通过输入产品链接，自动提取卖点、生成脚本并合成带货视频。; 灵感2：集成到 MCN（多频道网络）系统中，实现短视频内容的批量自动化生产，特别是针对科普、历史解说等图文结合类账号。; 灵感3：开发一个“会议/播客记录神器”，将音频转录、精彩片段提取与视频重制功能结合，用于企业内宣或内容营销。
    项目链接: https://github.com/calesthio/OpenMontage
 
-2. mukul975/Anthropic-Cybersecurity-Skills:
-   star: 18888  语言/技术: YAML, Markdown, Python, agentskills.io标准, MITRE ATT&CK v19.1, NIST CSF 2.0, MITRE ATLAS v5.4, MITRE D3FEND v1.3, NIST AI RMF 1.0, MITRE F3 v1.1
-   项目简介: 这是一个为AI智能体量身打造的开源网络安全技能库，包含817个生产级安全技能，覆盖29个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、D3FEND、NIST AI RMF及MITRE F3六大行业框架。它让AI助手能像资深安全分析师一样执行威胁狩猎、事件响应、取证分析等复杂任务，填补了AI在结构化安全知识上的空白。
-   亮点: 首个统一映射六大安全框架的开源AI技能库，实现'一次编写，六重合规'; 采用渐进式披露架构（~30 tokens扫描元数据，500–2000 tokens加载完整工作流），极大优化AI上下文窗口使用效率; 每个技能均包含YAML frontmatter（用于快速发现）+ Markdown结构化工作流（含触发条件、前置依赖、执行步骤、验证方法），真正可操作而非理论清单; 新增MITRE Fight Fraud Framework (F3) 映射，覆盖金融欺诈特有的Positioning与Monetization战术，填补ATT&CK空白
-   详细报告: 该项目旨在解决AI智能体缺乏真实安全从业者决策流程的问题。不同于传统工具仓库提供脚本或字典，此库提供的是完整的、可执行的专家级工作流。例如，当用户提示'分析此内存转储是否存在凭证窃取'时，AI会自动扫描所有817个技能的元数据（仅消耗约30 tokens/个），识别出如'performing-memory-forensics-with-volatility3'等12个相关技能，并加载前3个最匹配项，然后按步骤执行Volatility3插件、检查LSASS访问模式、关联Windows事件日志，最终验证IOC并映射到ATT&CK T1003。这种设计使AI从'猜测命令'升级为'遵循标准操作流程'。项目严格遵循agentskills.io开放标准，每个技能目录包含SKILL.md（定义）、references/（标准映射）、scripts/（辅助脚本）、assets/（模板）。所有MITRE ATT&CK映射均通过官方mitreattack-python库验证，确保无废弃ID。此外，项目支持Claude Code、GitHub Copilot、Cursor、Gemini CLI等26+主流AI平台，开箱即用。文档还提及正在进行的GARS-2026全球智能体AI准备度调查，体现其学术与实践结合的定位。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个'AI安全副驾驶'插件，集成到SIEM或SOAR平台中，自动调用对应技能生成事件响应建议、ATT&CK映射报告和修复清单，提升SOC分析师效率。; 灵感2：基于F3金融欺诈框架映射，构建'反欺诈智能体'，用于银行或支付平台，自动检测BEC、SIM卡劫持、资金分层等新型金融犯罪行为。; 灵感3：将此技能库作为训练数据源，微调一个专用于网络安全领域的垂直大模型，使其具备原生安全推理能力，而非依赖外部知识检索。
-   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
-
-3. bytedance/deer-flow:
-   star: 73405  语言/技术: Python, LangChain, LangGraph, Docker, Kubernetes, FastAPI, Next.js, MCP (Model Context Protocol), InfoQuest
-   项目简介: DeerFlow 2.0 是由字节跳动（ByteDance）团队推出的开源“超级智能体框架（Super Agent Harness）”。它旨在通过编排子智能体（Sub-agents）、长期记忆（Memory）和沙箱（Sandbox）环境，利用可扩展的技能（Skills）来完成几乎任何复杂任务。V2.0 是一次彻底的重写，引入了 LangGraph 作为底层引擎，支持多模型接入（如 DeepSeek、GPT 系列、Qwen 等），并集成了字节自研的智能搜索工具 InfoQuest。它不仅能进行深度研究，还能通过 IM 频道（如 Telegram）接收任务，并在安全的沙箱环境中执行代码和文件操作，被称为“程序员救星”级别的自动化工具。
-   亮点: 超级智能体编排：通过 LangGraph 深度整合子智能体、记忆和沙箱，实现复杂任务的自动拆解与执行。; 全方位模型支持：兼容 OpenAI、DeepSeek、vLLM、OpenRouter 等多种 LLM 后端，甚至支持 Claude Code 和 Codex CLI 作为提供者。; 安全沙箱机制：提供本地、Docker 和 Kubernetes 三种沙箱执行模式，确保代码运行的安全性。; 无缝集成与扩展：支持 MCP 服务器扩展技能，并内置了字节跳动的 InfoQuest 智能搜索工具包。
-   详细报告: DeerFlow 2.0 是一个里程碑式的开源项目，标志着 AI 应用从单一的“对话”向“自主执行”的演进。该项目核心在于构建一个能够自主规划、使用工具并执行代码的超级智能体。
-
-**核心功能解析：**
-1. **架构升级**：V2.0 完全抛弃了 V1 的代码，转而使用 LangGraph 作为核心状态机引擎。这使得多智能体之间的协作更加流畅，状态管理更加稳健。
-2. **子智能体系统（Sub-Agents）**：DeerFlow 允许主智能体根据任务需求生成并调度不同的子智能体（如研究员、编码员、测试员），每个子智能体都可以拥有独立的工具和模型配置。
-3. **记忆与上下文工程（Context Engineering）**：项目引入了长期记忆机制，智能体能够记住之前的交互和工具调用结果，避免重复劳动。同时，通过智能的上下文管理，有效应对大模型的上下文窗口限制。
-4. **沙箱与工具执行**：为了安全地运行生成的代码，DeerFlow 提供了多层次的沙箱。从简单的本地执行到隔离的 Docker 容器，再到生产级的 Kubernetes Pod，满足不同安全等级的需求。
-5. **技能与 MCP 扩展**：用户可以通过安装“技能（Skills）”来增强 Agent 的能力，支持标准的 MCP 协议，方便接入外部 API 和数据库。
-6. **多渠道交互**：除了 Web UI，DeerFlow 还支持通过 Telegram 等 IM 工具直接下发任务，让 Agent 成为用户的私人助理。
-
-**技术栈深度：**
-后端采用 Python 生态，深度绑定 LangChain 和 LangGraph；前端采用 Next.js 提供流畅的交互体验；部署层面重度依赖 Docker 和 Kubernetes，适合企业级部署。此外，它还集成了 LangSmith 和 Langfuse 进行链路追踪，方便开发者调试 Agent 的行为。
-
-**解决的问题：**
-DeerFlow 解决了当前 AI 应用“只会说，不会做”的痛点。通过沙箱技术和工具调用，它让 AI 能够真正操作文件系统、执行脚本、浏览网页，从而自动完成诸如“帮我重构这个仓库的代码并生成测试报告”这样的复杂工程任务。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 DeerFlow 的 InfoQuest 集成与沙箱能力，可以开发一个“自动化竞品分析平台”，自动抓取竞品网站数据，在沙箱中生成结构化分析报告。; 灵感2：利用其 IM 频道（Telegram）接入能力，可以构建一个“智能客服/售后 Agent”，直接在大象/飞书等 IM 中接收用户反馈，并自动调用内部 API 处理退换货或技术问题。; 灵感3：结合其 Sub-Agent 编排机制，可以打造一个“AI 辅助软件开发团队”，一个 Agent 写代码，一个 Agent 做 Code Review，一个 Agent 跑测试，实现全流程自动化。
-   项目链接: https://github.com/bytedance/deer-flow
-
-4. ZhuLinsen/daily_stock_analysis:
+2. ZhuLinsen/daily_stock_analysis:
    star: 44938  语言/技术: Python, FastAPI, GitHub Actions, Docker, AkShare, Tushare, YFinance, Pytdx, Baostock, Longbridge, OpenAI API, Anthropic Claude, Google Gemini, DeepSeek, 通义千问, Ollama, SerpAPI, Tavily, Bocha Search, Brave Search, SearXNG, Stock Sentiment API, 企业微信 Webhook, 飞书 Webhook, Telegram Bot, Discord Webhook, Slack Bot, SMTP 邮件
    项目简介: 📈 股票智能分析系统是一个基于 AI 大模型的全球化多市场股票分析工具，支持 A 股、港股、美股、日股、韩股的自选股每日自动分析，并生成包含评分、趋势判断、买卖点位、风险警报和催化因素的「决策仪表盘」，通过企业微信、飞书、Telegram、Discord、Slack 或邮件推送给用户。项目集成了多种 AI 模型（如 Gemini、Claude、DeepSeek、通义千问等）和多个行情数据源（AkShare、Tushare、YFinance 等），同时提供 Web 可视化工作台、Agent 策略问股、回测、持仓管理等功能，旨在为个人投资者提供一站式、自动化、智能化的股票分析服务，解决手动盯盘效率低、信息分散、缺乏系统性决策支持的核心痛点。
    亮点: 🤖 AI 驱动的多市场股票决策仪表盘：自动生成包含评分、趋势、买卖点位、风险警报和催化因素的结构化分析报告，覆盖 A 股、港股、美股、日股、韩股五大市场; 📡 多源数据聚合与智能降级：集成 6 大行情数据源和 7 种新闻搜索服务，支持按市场边界自动降级处理（如日股/韩股部分功能标记为 not_supported），确保数据可用性; 💬 Agent 策略问股系统：内置 15 种投资策略（均线、缠论、波浪、趋势、热点、事件驱动等），支持多轮追问、会话导出和多 Agent 编排（实验性），覆盖 Web/Bot/API 三种交互方式; 🚀 零成本快速部署：支持 GitHub Actions 零服务器部署（5 分钟完成），同时支持 Docker、本地定时任务、FastAPI 服务等多种部署方式; 📱 全渠道推送：支持企业微信、飞书、Telegram、Discord、Slack、邮件六大通知渠道，满足不同用户的消息接收习惯
@@ -136,3 +33,39 @@ Agent 策略问股是另一个亮点功能，内置了 15 种投资策略（均�
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此项目的多模型兼容架构和多渠道推送能力，可以开发一个「加密货币智能分析系统」，将股票数据源替换为 CoinGecko、Binance API 等加密货币数据源，AI 分析逻辑复用现有框架，为加密货币投资者提供类似的自动化分析和推送服务。; 灵感2：可以将其 Agent 策略问股系统独立抽取出来，开发一个「通用金融知识问答助手」，不仅限于股票，还可以覆盖基金、债券、期货、外汇等品类，集成到券商的 App 或微信小程序中，作为智能客服或投教工具。; 灵感3：基于项目的多源数据聚合和智能降级机制，可以开发一个「竞品价格监控与市场分析系统」，将股票数据源替换为电商平台的竞品价格数据，新闻搜索替换为行业动态和竞品公告，为企业提供自动化的竞品情报分析和预警推送。; 灵感4：可以将项目的 Web 工作台和回测功能扩展，开发一个「量化策略回测与模拟交易平台」，在现有回测基础上加入模拟交易、实盘对接、策略市场（用户分享和订阅策略）等功能，打造一个面向个人量化投资者的社区化平台。
    项目链接: https://github.com/ZhuLinsen/daily_stock_analysis
+
+3. mukul975/Anthropic-Cybersecurity-Skills:
+   star: 18888  语言/技术: YAML, Markdown, Python, agentskills.io标准, MITRE ATT&CK v19.1, NIST CSF 2.0, MITRE ATLAS v5.4, MITRE D3FEND v1.3, NIST AI RMF 1.0, MITRE F3 v1.1
+   项目简介: 这是一个为AI智能体量身打造的开源网络安全技能库，包含817个生产级安全技能，覆盖29个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、D3FEND、NIST AI RMF及MITRE F3六大行业框架。它让AI助手能像资深安全分析师一样执行威胁狩猎、事件响应、取证分析等复杂任务，填补了AI在结构化安全知识上的空白。
+   亮点: 首个统一映射六大安全框架的开源AI技能库，实现'一次编写，六重合规'; 采用渐进式披露架构（~30 tokens扫描元数据，500–2000 tokens加载完整工作流），极大优化AI上下文窗口使用效率; 每个技能均包含YAML frontmatter（用于快速发现）+ Markdown结构化工作流（含触发条件、前置依赖、执行步骤、验证方法），真正可操作而非理论清单; 新增MITRE Fight Fraud Framework (F3) 映射，覆盖金融欺诈特有的Positioning与Monetization战术，填补ATT&CK空白
+   详细报告: 该项目旨在解决AI智能体缺乏真实安全从业者决策流程的问题。不同于传统工具仓库提供脚本或字典，此库提供的是完整的、可执行的专家级工作流。例如，当用户提示'分析此内存转储是否存在凭证窃取'时，AI会自动扫描所有817个技能的元数据（仅消耗约30 tokens/个），识别出如'performing-memory-forensics-with-volatility3'等12个相关技能，并加载前3个最匹配项，然后按步骤执行Volatility3插件、检查LSASS访问模式、关联Windows事件日志，最终验证IOC并映射到ATT&CK T1003。这种设计使AI从'猜测命令'升级为'遵循标准操作流程'。项目严格遵循agentskills.io开放标准，每个技能目录包含SKILL.md（定义）、references/（标准映射）、scripts/（辅助脚本）、assets/（模板）。所有MITRE ATT&CK映射均通过官方mitreattack-python库验证，确保无废弃ID。此外，项目支持Claude Code、GitHub Copilot、Cursor、Gemini CLI等26+主流AI平台，开箱即用。文档还提及正在进行的GARS-2026全球智能体AI准备度调查，体现其学术与实践结合的定位。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个'AI安全副驾驶'插件，集成到SIEM或SOAR平台中，自动调用对应技能生成事件响应建议、ATT&CK映射报告和修复清单，提升SOC分析师效率。; 灵感2：基于F3金融欺诈框架映射，构建'反欺诈智能体'，用于银行或支付平台，自动检测BEC、SIM卡劫持、资金分层等新型金融犯罪行为。; 灵感3：将此技能库作为训练数据源，微调一个专用于网络安全领域的垂直大模型，使其具备原生安全推理能力，而非依赖外部知识检索。
+   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+
+4. bytedance/deer-flow:
+   star: 73405  语言/技术: Python, LangChain, LangGraph, Docker, Kubernetes, FastAPI, Next.js, MCP (Model Context Protocol), InfoQuest
+   项目简介: DeerFlow 2.0 是由字节跳动（ByteDance）团队推出的开源“超级智能体框架（Super Agent Harness）”。它旨在通过编排子智能体（Sub-agents）、长期记忆（Memory）和沙箱（Sandbox）环境，利用可扩展的技能（Skills）来完成几乎任何复杂任务。V2.0 是一次彻底的重写，引入了 LangGraph 作为底层引擎，支持多模型接入（如 DeepSeek、GPT 系列、Qwen 等），并集成了字节自研的智能搜索工具 InfoQuest。它不仅能进行深度研究，还能通过 IM 频道（如 Telegram）接收任务，并在安全的沙箱环境中执行代码和文件操作，被称为“程序员救星”级别的自动化工具。
+   亮点: 超级智能体编排：通过 LangGraph 深度整合子智能体、记忆和沙箱，实现复杂任务的自动拆解与执行。; 全方位模型支持：兼容 OpenAI、DeepSeek、vLLM、OpenRouter 等多种 LLM 后端，甚至支持 Claude Code 和 Codex CLI 作为提供者。; 安全沙箱机制：提供本地、Docker 和 Kubernetes 三种沙箱执行模式，确保代码运行的安全性。; 无缝集成与扩展：支持 MCP 服务器扩展技能，并内置了字节跳动的 InfoQuest 智能搜索工具包。
+   详细报告: DeerFlow 2.0 是一个里程碑式的开源项目，标志着 AI 应用从单一的“对话”向“自主执行”的演进。该项目核心在于构建一个能够自主规划、使用工具并执行代码的超级智能体。
+
+**核心功能解析：**
+1. **架构升级**：V2.0 完全抛弃了 V1 的代码，转而使用 LangGraph 作为核心状态机引擎。这使得多智能体之间的协作更加流畅，状态管理更加稳健。
+2. **子智能体系统（Sub-Agents）**：DeerFlow 允许主智能体根据任务需求生成并调度不同的子智能体（如研究员、编码员、测试员），每个子智能体都可以拥有独立的工具和模型配置。
+3. **记忆与上下文工程（Context Engineering）**：项目引入了长期记忆机制，智能体能够记住之前的交互和工具调用结果，避免重复劳动。同时，通过智能的上下文管理，有效应对大模型的上下文窗口限制。
+4. **沙箱与工具执行**：为了安全地运行生成的代码，DeerFlow 提供了多层次的沙箱。从简单的本地执行到隔离的 Docker 容器，再到生产级的 Kubernetes Pod，满足不同安全等级的需求。
+5. **技能与 MCP 扩展**：用户可以通过安装“技能（Skills）”来增强 Agent 的能力，支持标准的 MCP 协议，方便接入外部 API 和数据库。
+6. **多渠道交互**：除了 Web UI，DeerFlow 还支持通过 Telegram 等 IM 工具直接下发任务，让 Agent 成为用户的私人助理。
+
+**技术栈深度：**
+后端采用 Python 生态，深度绑定 LangChain 和 LangGraph；前端采用 Next.js 提供流畅的交互体验；部署层面重度依赖 Docker 和 Kubernetes，适合企业级部署。此外，它还集成了 LangSmith 和 Langfuse 进行链路追踪，方便开发者调试 Agent 的行为。
+
+**解决的问题：**
+DeerFlow 解决了当前 AI 应用“只会说，不会做”的痛点。通过沙箱技术和工具调用，它让 AI 能够真正操作文件系统、执行脚本、浏览网页，从而自动完成诸如“帮我重构这个仓库的代码并生成测试报告”这样的复杂工程任务。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 DeerFlow 的 InfoQuest 集成与沙箱能力，可以开发一个“自动化竞品分析平台”，自动抓取竞品网站数据，在沙箱中生成结构化分析报告。; 灵感2：利用其 IM 频道（Telegram）接入能力，可以构建一个“智能客服/售后 Agent”，直接在大象/飞书等 IM 中接收用户反馈，并自动调用内部 API 处理退换货或技术问题。; 灵感3：结合其 Sub-Agent 编排机制，可以打造一个“AI 辅助软件开发团队”，一个 Agent 写代码，一个 Agent 做 Code Review，一个 Agent 跑测试，实现全流程自动化。
+   项目链接: https://github.com/bytedance/deer-flow
