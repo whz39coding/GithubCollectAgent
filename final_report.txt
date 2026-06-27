@@ -1,19 +1,26 @@
-1. calesthio/OpenMontage:
-   star: 20076  语言/技术: Python, Node.js, React (Remotion), FFmpeg, GSAP, HTML/CSS, Piper TTS, WhisperX
-   项目简介: OpenMontage 是一个开源的、基于 AI Agent 的全自动视频制作系统。它旨在将 AI 编程助手（如 Claude Code、Cursor）转变为“全自动影视棚”，通过自然语言描述即可完成研究、脚本编写、素材生成、剪辑和合成。其核心亮点在于支持多种专业制作流程（如纪录片混剪、动画短片、产品广告），并集成了强大的预算控制和多模态生成能力，即使是零 API Key 也能利用开源素材和本地渲染制作视频。
-   亮点: Agent 驱动的工作流：将 AI 编程助手升级为全自动视频编辑导演; 零成本制作能力：支持使用免费素材库（Archive.org, NASA）和本地 TTS 生成视频; 多管线支持：涵盖动画解说、实拍混剪、口播替换等多种专业制作流程; 强预算控制：内置成本估算和审批机制，防止 API 调用费用超支
-   详细报告: OpenMontage 的核心理念是利用 AI Agent（如 Claude Code 或 Cursor）来自动化传统上极其繁琐的视频制作过程。用户只需输入自然语言提示词，Agent 就会接管整个制作流程：从网络调研、撰写分镜脚本，到生成 AI 图像/视频素材，再到自动配音（支持多种 TTS 服务如 Piper, ElevenLabs）和 Remotion 渲染合成。
-
-该项目最引人注目的特点是其实用性和对成本的极致控制。它不仅能利用 FLUX、Kling 等高端付费 API 生成素材，还提供了“零 API Key”方案，通过整合 Archive.org、NASA、Pexels 等开源素材库，结合本地 TTS 引擎和 Remotion 渲染引擎，实现真正的免费视频制作。此外，它的“预算杀手”在于其完善的成本控制模块，可以在执行任何生成动作前进行成本估算，并在超出设定阈值（如 $0.50）时暂停请求确认，这对于商业化应用至关重要。
-
-在架构上，OpenMontage 采用了管线（Pipeline）设计模式，包含动画解说、实拍纪录片混剪、播客重生等多种预设管线。每个管线都由一系列“导演技能”（Markdown 指令文件）驱动，确保 Agent 能够严格按照专业标准执行。同时，它支持通过 YAML 清单和 Python 工具类极高地扩展新工具和新管线，具有极强的可定制性。
+1. commaai/openpilot:
+   star: 61837  语言/技术: Python, C, Linux, ROS-like architecture, Computer Vision, CAN bus, comma device (comma four/3X)
+   项目简介: 一句话概括：openpilot 是一个开源的“机器人操作系统”，目前最成熟的应用是作为先进的驾驶辅助系统（ADAS），为 300+ 款消费级汽车提供接近自动驾驶水平的辅助驾驶功能，堪称“平民版自动驾驶大脑”。
+   亮点: 将消费级汽车升级为具备 L2+ 辅助驾驶能力的智能汽车，支持 300+ 车型，极大降低了体验自动驾驶的门槛。; 遵循 ISO26262 功能安全指南，核心安全模型用 C 语言实现在 panda 模块中，并具备完善的软件在环（SIL）和硬件在环（HIL）测试体系。; 完全开源且 MIT 许可，支持自定义软件分支（如 nightly、staging），拥有活跃的社区和贡献者激励计划（赏金、招聘）。; 内置数据回传机制用于训练更好的模型，同时允许用户关闭数据收集，平衡了隐私与算法迭代。
+   详细报告: openpilot 是由 comma.ai 开发的开源机器人操作系统，其当前最核心、最成熟的应用场景是作为汽车的高级驾驶辅助系统（ADAS）。它不是简单的车道保持或自适应巡航，而是一个端到端的、基于深度学习的驾驶决策系统，能够处理复杂的城市场景和高速路况。用户只需一台 comma four 或 comma 3X 设备、一款受支持的汽车以及一个线束，即可将原车升级至具备自动转向、自动刹车、交通标志识别、自动变道等能力的智能驾驶体验。系统通过车辆 CAN 总线与原厂系统通信，读取车速、方向盘转角、制动/油门踏板状态等数据，并利用前视摄像头进行环境感知。其软件架构高度模块化，包含感知、规划、控制等多个进程，通过消息队列（如 msgq）进行高效通信。核心安全机制由 panda 模块保障，该模块以 C 语言编写，严格遵循 ISO26262 标准，确保即使在主系统异常时也能维持基本的安全状态（如安全停车）。项目采用 Python 作为主要开发语言，兼顾开发效率与性能关键路径的 C 实现。测试体系极为严谨，包括每次提交的 CI 测试、SIL/HIL 测试、以及内部持续回放真实路测数据的‘测试柜’机制，确保代码变更不会引入回归风险。此外，openpilot 支持多种分支策略：稳定版（release-mici）、预发布版（staging）、每日构建版（nightly）和实验性功能版（nightly-dev），满足不同用户需求。用户数据默认上传用于模型训练，但可手动关闭，体现了对隐私的尊重。项目鼓励社区贡献，提供详尽的贡献指南、开发工具链和文档，并设有赏金计划和全职岗位，推动生态持续进化。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 具有极高的商业潜力，可应用于自媒体矩阵批量制作、跨境电商营销视频生成、教育课程自动化视频化以及广告创意快速原型制作。
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目的 Agent 架构，可以开发一个“跨境电商多语种视频营销助手”，通过一条中文指令，自动生成并渲染包含多语种字幕和配音的 TikTok/Reels 营销视频。; 灵感2：将其集成到知识付费或教育机构中，开发“课程视频自动化生成系统”，输入课程大纲文档，Agent 自动匹配无版权图片并生成带有动态字幕和旁白的教学视频。; 灵感3：利用其“参考视频分析”能力，开发一个“短视频爆款克隆器”，用户上传爆款视频，系统自动分析其节奏和结构，并生成风格类似但主题完全不同的新视频，用于自媒体矩阵分发。
-   项目链接: https://github.com/calesthio/OpenMontage
+   衍生灵感: 灵感1：基于 openpilot 的感知与控制框架，可开发一个‘智能叉车辅助系统’，用于仓库或物流园区内的自动路径跟随、障碍物规避和托盘定位，降低人工操作成本。; 灵感2：将其集成到‘远程驾驶教学平台’中，利用 openpilot 的驾驶行为数据（如方向盘修正频率、刹车时机）生成学员驾驶评分报告，用于驾校理论+实践一体化教学。; 灵感3：借鉴其端到端驾驶模型架构，构建一个‘农业机器人自动驾驶套件’，应用于小型农用车辆在果园或温室中的自动巡检、喷药或采摘路径规划。
+   项目链接: https://github.com/commaai/openpilot
 
-2. xbtlin/ai-berkshire:
+2. opendatalab/MinerU:
+   star: 70536  语言/技术: Python, FastAPI, Gradio, Docker, vLLM, LMDeploy, PaddleOCR, PyTorch
+   项目简介: MinerU is an open-source, high-accuracy document parsing engine that converts PDF, DOCX, PPTX, XLSX, images, and web pages into structured Markdown or JSON, serving as a 'data cleaning expert' for LLM RAG and Agent workflows. Its core strengths lie in its VLM+OCR dual-engine architecture, formula-to-LaTeX conversion, table-to-HTML conversion, and layout reconstruction, supporting OCR in 109 languages. The project provides multiple deployment methods including CLI, API, Docker, etc., and is compatible with mainstream AI chip platforms.
+   亮点: High Precision Parsing: Supports converting complex documents (including formulas, tables, images) into Markdown/JSON, with layout reconstruction and reading order restoration.; Multi-format Support: Native support for parsing mainstream formats like PDF, DOCX, PPTX, XLSX, images, and web pages.; Multilingual and Multimodal: OCR supports 109 languages; VLM models support image and chart parsing.; Flexible Deployment: Offers multiple deployment options including pipeline, vlm-engine, hybrid-engine, supporting pure CPU environments and various GPU accelerations.; Ecosystem Integration: Provides Python/Go/TypeScript SDKs, REST APIs, and supports integration with frameworks like LangChain and Dify.
+   详细报告: MinerU focuses on solving document parsing challenges in the era of large models, especially symbol conversion issues in scientific literature. Its core features include: 1. **Dual Engine Architecture**: Combining VLM and OCR engines to improve parsing accuracy; 2. **Format Conversion**: Automatically recognizes and converts formulas to LaTeX format and tables to HTML format; 3. **Layout Analysis**: Supports complex layouts such as multi-column, cross-page tables, and merged tables; 4. **Language Support**: OCR supports detection and recognition of 109 languages; 5. **Output Formats**: Supports various output formats such as Markdown and JSON, suitable for downstream retrieval, extraction, and processing; 6. **Deployment and Integration**: Provides various deployment methods including CLI, API, Docker, etc., and supports integration with AI frameworks like LangChain and Dify. The project iterates quickly; version 3.4 upgraded the OCR model to PP-OCRv6, increasing accuracy by 11% and speed by 100%; version 3.3 optimized hybrid parsing performance, increasing speed by 35%-220% on different platforms; version 3.1.0 added native support for PPTX and XLSX; version 3.0.0 achieved native DOCX parsing, significantly improving speed and accuracy. MinerU also supports private, fully offline deployment and is compatible with various domestic AI chips (e.g., Ascend, Cambricon, etc.).
+   活跃度: Unknown  社区健康: Unknown
+   商业潜力: MinerU's commercial potential is mainly reflected in the fields of enterprise knowledge management, AI data processing, and RAG application development. Its high-precision parsing capability can serve legal document analysis, financial report processing, academic literature organization, and other scenarios. With the popularization of LLM applications, demand for structured document data continues to grow, and MinerU, as an open-source solution, has significant commercial advantages.
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: Develop an enterprise-level knowledge base automatic construction system: Use MinerU to parse various documents (reports, contracts, technical papers) into structured data, then integrate with vector databases and RAG frameworks to build an intelligent Q&A system.; Build a multilingual document translation and summarization tool: Combine MinerU's multilingual OCR capabilities with external translation models to achieve precise translation and key information extraction for multi-language documents.; Create a financial data analysis assistant: Use MinerU to parse financial statements and reports, automatically extract key financial indicators, and integrate with data analysis tools to generate insights.
+   项目链接: https://github.com/opendatalab/MinerU
+
+3. xbtlin/ai-berkshire:
    star: 2227  语言/技术: Claude Code, Python, LLM Agent, Markdown, Mermaid
    项目简介: AI Berkshire 是一套基于 Claude Code 的 AI 投研 Skill 合集，将巴菲特、芒格、段永平、李录四位价值投资大师的方法论系统化，通过多 Agent 并行协作，自动生成专业级、带强制结论和安全边际区间的投资研究报告。它解决了直接问 AI 只能得到模棱两可平衡分析的问题，提供强制通过/不通过/灰色地带决策、多视角对抗、结构化反偏见机制、金融数据精确校验和可复现的研究流程。
    亮点: 四大师视角强制对抗：段永平、巴菲特、芒格、李录的分析框架互相挑战，产生真实张力而非单一分析; 多 Agent 并行投研团队：4个独立 Agent 同时研究一家公司，各自搜索、独立判断，相当于4倍信息源; 结构化反偏见机制：信息丰富度 A/B/C 评级、芒格式逆向检验、快速否决清单、反共识检查、留白原则; 金融数据精确性：使用 Python decimal.Decimal 精确十进制计算，市值手算校验，至少2个独立来源交叉验证; 16个场景化 Skill 入口：覆盖深度研究、财报分析、行业筛选、持仓管理、思维工具全链路; 可复现的研究流程：同样输入保证结构一致、深度一致的输出，支持跨公司横向对比和跨时间纵向对比
@@ -36,24 +43,17 @@
    衍生灵感: 灵感1：开发一个「AI 行业研报生成器」，将四大师对抗框架应用于特定行业（如新能源、半导体），自动生成带多视角冲突分析的行业研究报告，用于券商研究所或企业战略部门。; 灵感2：将其集成到现有投资管理系统或财富管理 App 中，作为智能投顾模块，为个人投资者提供机构级的公司筛选和估值分析服务。; 灵感3：基于 /news-pulse 的股价异动归因能力，开发一个「持仓异动预警机器人」，接入个人投资者的券商账户，股价异动时自动推送归因分析，减少情绪化交易决策。; 灵感4：将金融严谨性工具层（精确十进制计算、多源交叉验证、Benford 定律检测）独立抽离，开发为通用财务数据校验 SDK，供金融科技公司集成使用。
    项目链接: https://github.com/xbtlin/ai-berkshire
 
-3. aws/agent-toolkit-for-aws:
-   star: 1181  语言/技术: Model Context Protocol (MCP), Python, AWS CDK, CloudFormation, Amazon Bedrock, AgentCore, AWS Glue, Athena, S3 Tables, CloudWatch, CloudTrail, IAM
-   项目简介: Agent Toolkit for AWS 是 AWS 官方推出的“AI 编程助手增强包”，旨在让 Claude Code、Codex、Cursor 等 AI 编码助手具备构建、部署和管理 AWS 云应用的能力。它通过 MCP Server、Skills 和 Plugins 提供 300+ AWS 服务的 API 访问、沙箱脚本执行、实时文档检索以及企业级审计与权限控制，解决了 AI Agent 在云原生开发中“懂代码不懂云”的痛点。
-   亮点: 全栈 AWS 赋能：覆盖从基础设施即代码 (CDK/CF) 到 Serverless、容器、存储、可观测性及账单管理的全链路云开发技能。; 企业级安全与审计：引入 IAM Condition Keys 区分人机操作，提供 CloudWatch 指标和 CloudTrail 日志，让 AI 的操作可监控、可限制（如只读策略）。; 按需加载的技能系统：Agent Skills 采用按需检索机制，避免上下文溢出，让 AI 专注于当前任务（如 ETL 或安全扫描）。; 多平台无缝集成：提供 Claude Code 插件、Cursor 团队市场、Codex 插件及 Kiro MCP 配置，支持主流 AI 编程工具链。
-   详细报告: Agent Toolkit for AWS 是 AWS 在 AI Agent 生态中的核心布局，它不仅仅是一个文档集，而是一套完整的“Agent 操作系统”。其核心架构分为三层：底层的 AWS MCP Server 提供了对 300+ AWS 服务的统一 API 访问，并创新性地引入了沙箱环境供 Agent 执行 Python 脚本，解决了复杂多步操作的逻辑处理问题；中层的 Skills 是经过端到端评估的指令包，涵盖了从数据湖分析 (S3 Tables, Glue) 到 DevSecOps 的特定工作流，且支持按需加载，极大优化了 Token 使用效率；上层的 Plugins 则针对 Claude Code、Cursor 等 IDE 进行了封装，实现了一键安装。特别值得关注的是其安全特性，通过 IAM Condition Keys 实现了“人机策略分离”，开发者可以限制 Agent 仅拥有只读权限，即便其背后的 IAM 角色拥有写权限，这为企业级应用提供了极大的信心。此外，该工具包集成了 Amazon Bedrock 和 AgentCore 技能，专门用于构建基于 AWS 的 AI Agent，形成了“用 AI 开发 AI”的闭环。对于开发者而言，这意味着你可以用自然语言让 AI 助手帮你生成 CDK 代码、排查 CloudWatch 告警，甚至执行自动化渗透测试，极大地降低了云原生开发的认知负荷。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目的 MCP Server 架构，可以开发一个“多云管理平台 Agent”，将类似的 Skills 和审计机制扩展到 Azure 或 GCP，实现跨云资源的自然语言编排与成本优化。; 灵感2：利用其 DevSecOps 插件中的安全扫描与渗透测试能力，集成到企业的 CI/CD 流水线中，构建一个“代码提交即审计”的自动化合规检查平台。; 灵感3：参考其“人机分离”的 IAM 策略模型，为开源项目或 SaaS 产品开发一个通用的“AI Agent 权限网关”，解决第三方 AI 工具接入时的权限过大问题。
-   项目链接: https://github.com/aws/agent-toolkit-for-aws
+4. calesthio/OpenMontage:
+   star: 20076  语言/技术: Python, Node.js, React (Remotion), FFmpeg, GSAP, HTML/CSS, Piper TTS, WhisperX
+   项目简介: OpenMontage 是一个开源的、基于 AI Agent 的全自动视频制作系统。它旨在将 AI 编程助手（如 Claude Code、Cursor）转变为“全自动影视棚”，通过自然语言描述即可完成研究、脚本编写、素材生成、剪辑和合成。其核心亮点在于支持多种专业制作流程（如纪录片混剪、动画短片、产品广告），并集成了强大的预算控制和多模态生成能力，即使是零 API Key 也能利用开源素材和本地渲染制作视频。
+   亮点: Agent 驱动的工作流：将 AI 编程助手升级为全自动视频编辑导演; 零成本制作能力：支持使用免费素材库（Archive.org, NASA）和本地 TTS 生成视频; 多管线支持：涵盖动画解说、实拍混剪、口播替换等多种专业制作流程; 强预算控制：内置成本估算和审批机制，防止 API 调用费用超支
+   详细报告: OpenMontage 的核心理念是利用 AI Agent（如 Claude Code 或 Cursor）来自动化传统上极其繁琐的视频制作过程。用户只需输入自然语言提示词，Agent 就会接管整个制作流程：从网络调研、撰写分镜脚本，到生成 AI 图像/视频素材，再到自动配音（支持多种 TTS 服务如 Piper, ElevenLabs）和 Remotion 渲染合成。
 
-4. mukul975/Anthropic-Cybersecurity-Skills:
-   star: 18888  语言/技术: YAML, Markdown, Python, agentskills.io标准, MITRE ATT&CK v19.1, NIST CSF 2.0, MITRE ATLAS v5.4, MITRE D3FEND v1.3, NIST AI RMF 1.0, MITRE F3 v1.1
-   项目简介: 这是一个为AI智能体量身打造的开源网络安全技能库，包含817个生产级安全技能，覆盖29个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、D3FEND、NIST AI RMF及MITRE F3六大行业框架。它让AI助手能像资深安全分析师一样执行威胁狩猎、事件响应、取证分析等复杂任务，填补了AI在结构化安全知识上的空白。
-   亮点: 首个统一映射六大安全框架的开源AI技能库，实现'一次编写，六重合规'; 采用渐进式披露架构（~30 tokens扫描元数据，500–2000 tokens加载完整工作流），极大优化AI上下文窗口使用效率; 每个技能均包含YAML frontmatter（用于快速发现）+ Markdown结构化工作流（含触发条件、前置依赖、执行步骤、验证方法），真正可操作而非理论清单; 新增MITRE Fight Fraud Framework (F3) 映射，覆盖金融欺诈特有的Positioning与Monetization战术，填补ATT&CK空白
-   详细报告: 该项目旨在解决AI智能体缺乏真实安全从业者决策流程的问题。不同于传统工具仓库提供脚本或字典，此库提供的是完整的、可执行的专家级工作流。例如，当用户提示'分析此内存转储是否存在凭证窃取'时，AI会自动扫描所有817个技能的元数据（仅消耗约30 tokens/个），识别出如'performing-memory-forensics-with-volatility3'等12个相关技能，并加载前3个最匹配项，然后按步骤执行Volatility3插件、检查LSASS访问模式、关联Windows事件日志，最终验证IOC并映射到ATT&CK T1003。这种设计使AI从'猜测命令'升级为'遵循标准操作流程'。项目严格遵循agentskills.io开放标准，每个技能目录包含SKILL.md（定义）、references/（标准映射）、scripts/（辅助脚本）、assets/（模板）。所有MITRE ATT&CK映射均通过官方mitreattack-python库验证，确保无废弃ID。此外，项目支持Claude Code、GitHub Copilot、Cursor、Gemini CLI等26+主流AI平台，开箱即用。文档还提及正在进行的GARS-2026全球智能体AI准备度调查，体现其学术与实践结合的定位。
+该项目最引人注目的特点是其实用性和对成本的极致控制。它不仅能利用 FLUX、Kling 等高端付费 API 生成素材，还提供了“零 API Key”方案，通过整合 Archive.org、NASA、Pexels 等开源素材库，结合本地 TTS 引擎和 Remotion 渲染引擎，实现真正的免费视频制作。此外，它的“预算杀手”在于其完善的成本控制模块，可以在执行任何生成动作前进行成本估算，并在超出设定阈值（如 $0.50）时暂停请求确认，这对于商业化应用至关重要。
+
+在架构上，OpenMontage 采用了管线（Pipeline）设计模式，包含动画解说、实拍纪录片混剪、播客重生等多种预设管线。每个管线都由一系列“导演技能”（Markdown 指令文件）驱动，确保 Agent 能够严格按照专业标准执行。同时，它支持通过 YAML 清单和 Python 工具类极高地扩展新工具和新管线，具有极强的可定制性。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+   商业潜力: 具有极高的商业潜力，可应用于自媒体矩阵批量制作、跨境电商营销视频生成、教育课程自动化视频化以及广告创意快速原型制作。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个'AI安全副驾驶'插件，集成到SIEM或SOAR平台中，自动调用对应技能生成事件响应建议、ATT&CK映射报告和修复清单，提升SOC分析师效率。; 灵感2：基于F3金融欺诈框架映射，构建'反欺诈智能体'，用于银行或支付平台，自动检测BEC、SIM卡劫持、资金分层等新型金融犯罪行为。; 灵感3：将此技能库作为训练数据源，微调一个专用于网络安全领域的垂直大模型，使其具备原生安全推理能力，而非依赖外部知识检索。
-   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+   衍生灵感: 灵感1：基于此项目的 Agent 架构，可以开发一个“跨境电商多语种视频营销助手”，通过一条中文指令，自动生成并渲染包含多语种字幕和配音的 TikTok/Reels 营销视频。; 灵感2：将其集成到知识付费或教育机构中，开发“课程视频自动化生成系统”，输入课程大纲文档，Agent 自动匹配无版权图片并生成带有动态字幕和旁白的教学视频。; 灵感3：利用其“参考视频分析”能力，开发一个“短视频爆款克隆器”，用户上传爆款视频，系统自动分析其节奏和结构，并生成风格类似但主题完全不同的新视频，用于自媒体矩阵分发。
+   项目链接: https://github.com/calesthio/OpenMontage
