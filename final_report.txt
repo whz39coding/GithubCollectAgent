@@ -1,4 +1,23 @@
-1. commaai/openpilot:
+1. xbtlin/ai-berkshire:
+   star: 4401  语言/技术: Claude Code, OpenAI Codex, Python (decimal.Decimal), Markdown, Mermaid, AI Agent (Multi-Agent Architecture)
+   项目简介: AI Berkshire 是一套基于 Claude Code 与 Codex 的投资研究 Skill 合集，将巴菲特、芒格、段永平、李录四位价值投资大师的方法论系统化，通过多 Agent 并行协作与严谨的金融计算工具，生成具有强制结论、多视角对抗和防偏见机制的专业级投研报告。项目以 2024 年 +69.29%、2025 年至今 +66.38% 的实盘超额收益为背书，解决的核心痛点是：普通人直接问 AI 只能得到模棱两可的废话，而 AI Berkshire 能输出带具体价格区间、通过/不通过结论、可执行的投资决策报告。
+   亮点: 四大师视角对抗机制：段永平看商业模式、巴菲特看财务估值、芒格做逆向思考、李录看长期确定性，四种思维互相挑战，避免单一视角盲点; 强制结论输出：通过/不通过/灰色地带三档，附带具体价格区间和仓位建议，拒绝 AI 常见的两面讨好式废话; 多层反偏见机制：信息丰富度 A/B/C 评级、快速否决清单（8条红线一票否决）、反共识检查、留白原则，防止 LLM 幻觉伪装成确定性; 金融数据精确性：使用 Python decimal.Decimal 精确十进制计算，市值手算校验、多源交叉验证、Benford 定律检测，杜绝 LLM 心算导致的单位错误; 多 Agent 并行研究：4 个独立 Agent 各自搜索、独立判断、互相挑战，4 倍搜索量和信息源，产出综合研判报告; 18 个 Skill 覆盖投研全流程：深度研究、财报精读、行业漏斗筛选、持仓管理、股价异动归因、未上市公司研究、投资论文追踪等
+   详细报告: AI Berkshire 是一个将价值投资大师方法论与 AI Agent 技术深度融合的开源项目，本质上是一个为个人投资者打造的 AI 投研团队操作系统。项目的核心理念是：一个人 + Claude Code/Codex = 一个投研团队。
+
+项目的技术架构分为三层：Skill 层提供 16 个明确入口（深度研究、财报分析、行业筛选、持仓管理、思维工具等场景化命令），Agent 层在每个 Skill 内部启动 4 个独立 Agent 并行工作（各自搜索网络、交叉验证数据、独立给出结论），工具层则通过 Python 脚本确保金融计算的精确性（市值验算、PE/PB/ROE 精确计算、多源交叉验证、Benford 定律财务造假检测等）。
+
+项目的核心差异化在于对 AI 输出质量的深度优化。普通 LLM 回答投资问题时会给出模棱两可的平衡分析，AI Berkshire 通过四大师视角对抗、强制结论输出、多层反偏见机制（信息丰富度评级、快速否决清单、反共识检查、留白原则）来确保输出具有真正的决策价值。例如在分析拼多多时，段永平给出 3.7/5（好生意），巴菲特给出 4.4/5（真便宜），芒格给出 3.5/5（护城河比想象中浅），李录给出 2.0/5（管理层文化有隐患）——这种真实矛盾才是投资决策的真实状态。
+
+项目提供了 18 个 Skill 覆盖投研全流程：投资前（能力圈测试、好生意判断、护城河评估、管理层评估、安全边际计算）、投资中（产业链全景扫描、行业漏斗筛选、供应链瓶颈猎手）、投资后（组合管理、投资论文追踪、股价异动归因）。每个 Skill 都有标准化的输出格式和评分体系，确保同一家公司半年后重新分析可直接对比变化，不同公司之间可以横向对比。
+
+项目还展示了实战研究报告，包括拼多多、腾讯、茅台等公司的深度分析，以及 7 家公司对比筛选的实测结果。设计理念强调四位大师不是简单分工，而是设计来互相挑战——段永平说好生意，芒格会问怎么会死；巴菲特说够便宜，李录会问 10 年后还在吗。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个 AI 投研助手 SaaS 平台，将 AI Berkshire 的 Skill 体系封装为 Web 服务，让没有 Claude Code/Codex 的普通投资者也能通过网页输入股票代码，自动生成带价格区间和仓位建议的专业投研报告，采用订阅制收费。; 灵感2：将其集成到东方财富、同花顺等现有股票软件中，作为 AI 投研插件，在用户查看行情时自动触发 /news-pulse 进行股价异动归因，或触发 /investment-checklist 进行快速筛选，提升现有金融终端的 AI 决策能力。; 灵感3：基于四大师对抗机制，开发一个 AI 辩论赛平台，将投资分析扩展为通用决策工具——例如商业战略决策时，让不同 Agent 分别扮演乐观派、悲观派、财务专家、行业专家进行对抗式分析，输出带置信度的决策建议。; 灵感4：利用其金融严谨性工具（decimal.Decimal 精确计算、多源交叉验证、Benford 定律检测）开发一个独立的上市公司财务造假检测系统，输入财报数据自动输出异常评分和造假概率预警。
+   项目链接: https://github.com/xbtlin/ai-berkshire
+
+2. commaai/openpilot:
    star: 61837  语言/技术: Python, C, Linux, ROS-like architecture, Computer Vision, CAN bus, comma device (comma four/3X)
    项目简介: 一句话概括：openpilot 是一个开源的“机器人操作系统”，目前最成熟的应用是作为先进的驾驶辅助系统（ADAS），为 300+ 款消费级汽车提供接近自动驾驶水平的辅助驾驶功能，堪称“平民版自动驾驶大脑”。
    亮点: 将消费级汽车升级为具备 L2+ 辅助驾驶能力的智能汽车，支持 300+ 车型，极大降低了体验自动驾驶的门槛。; 遵循 ISO26262 功能安全指南，核心安全模型用 C 语言实现在 panda 模块中，并具备完善的软件在环（SIL）和硬件在环（HIL）测试体系。; 完全开源且 MIT 许可，支持自定义软件分支（如 nightly、staging），拥有活跃的社区和贡献者激励计划（赏金、招聘）。; 内置数据回传机制用于训练更好的模型，同时允许用户关闭数据收集，平衡了隐私与算法迭代。
@@ -9,51 +28,36 @@
    衍生灵感: 灵感1：基于 openpilot 的感知与控制框架，可开发一个‘智能叉车辅助系统’，用于仓库或物流园区内的自动路径跟随、障碍物规避和托盘定位，降低人工操作成本。; 灵感2：将其集成到‘远程驾驶教学平台’中，利用 openpilot 的驾驶行为数据（如方向盘修正频率、刹车时机）生成学员驾驶评分报告，用于驾校理论+实践一体化教学。; 灵感3：借鉴其端到端驾驶模型架构，构建一个‘农业机器人自动驾驶套件’，应用于小型农用车辆在果园或温室中的自动巡检、喷药或采摘路径规划。
    项目链接: https://github.com/commaai/openpilot
 
-2. opendatalab/MinerU:
-   star: 70536  语言/技术: Python, FastAPI, Gradio, Docker, vLLM, LMDeploy, PaddleOCR, PyTorch
-   项目简介: MinerU is an open-source, high-accuracy document parsing engine that converts PDF, DOCX, PPTX, XLSX, images, and web pages into structured Markdown or JSON, serving as a 'data cleaning expert' for LLM RAG and Agent workflows. Its core strengths lie in its VLM+OCR dual-engine architecture, formula-to-LaTeX conversion, table-to-HTML conversion, and layout reconstruction, supporting OCR in 109 languages. The project provides multiple deployment methods including CLI, API, Docker, etc., and is compatible with mainstream AI chip platforms.
-   亮点: High Precision Parsing: Supports converting complex documents (including formulas, tables, images) into Markdown/JSON, with layout reconstruction and reading order restoration.; Multi-format Support: Native support for parsing mainstream formats like PDF, DOCX, PPTX, XLSX, images, and web pages.; Multilingual and Multimodal: OCR supports 109 languages; VLM models support image and chart parsing.; Flexible Deployment: Offers multiple deployment options including pipeline, vlm-engine, hybrid-engine, supporting pure CPU environments and various GPU accelerations.; Ecosystem Integration: Provides Python/Go/TypeScript SDKs, REST APIs, and supports integration with frameworks like LangChain and Dify.
-   详细报告: MinerU focuses on solving document parsing challenges in the era of large models, especially symbol conversion issues in scientific literature. Its core features include: 1. **Dual Engine Architecture**: Combining VLM and OCR engines to improve parsing accuracy; 2. **Format Conversion**: Automatically recognizes and converts formulas to LaTeX format and tables to HTML format; 3. **Layout Analysis**: Supports complex layouts such as multi-column, cross-page tables, and merged tables; 4. **Language Support**: OCR supports detection and recognition of 109 languages; 5. **Output Formats**: Supports various output formats such as Markdown and JSON, suitable for downstream retrieval, extraction, and processing; 6. **Deployment and Integration**: Provides various deployment methods including CLI, API, Docker, etc., and supports integration with AI frameworks like LangChain and Dify. The project iterates quickly; version 3.4 upgraded the OCR model to PP-OCRv6, increasing accuracy by 11% and speed by 100%; version 3.3 optimized hybrid parsing performance, increasing speed by 35%-220% on different platforms; version 3.1.0 added native support for PPTX and XLSX; version 3.0.0 achieved native DOCX parsing, significantly improving speed and accuracy. MinerU also supports private, fully offline deployment and is compatible with various domestic AI chips (e.g., Ascend, Cambricon, etc.).
-   活跃度: Unknown  社区健康: Unknown
-   商业潜力: MinerU's commercial potential is mainly reflected in the fields of enterprise knowledge management, AI data processing, and RAG application development. Its high-precision parsing capability can serve legal document analysis, financial report processing, academic literature organization, and other scenarios. With the popularization of LLM applications, demand for structured document data continues to grow, and MinerU, as an open-source solution, has significant commercial advantages.
+3. hugohe3/ppt-master:
+   star: 33237  语言/技术: Python 3.10+, PPTX XML / DrawingML, python-pptx (implied by native PPTX generation), AI IDE Agents (Claude Code, Cursor, Copilot, Codex CLI, Aider, Gemini CLI), Pandoc (optional, for legacy formats), SVG / SVG Repo / Tabler Icons / Phosphor Icons, AI Image Generation (gpt-image-2), Text-to-Speech / Narration (implied by narrated decks)
+   项目简介: PPT Master is an open-source, local-first workflow harness that turns any source document into a natively editable PPTX file using AI IDE agents (e.g., Claude Code, Cursor, Copilot). It does not provide a GUI; instead, it orchestrates an AI agent to generate real DrawingML shapes, editable text boxes, native slide transitions, speaker notes, and even AI-narrated audio. The core output is a genuine .pptx that can be opened, edited, and presented directly in PowerPoint — not a flat image deck. The project emphasizes data privacy (no upload required beyond AI model calls), model flexibility (Claude, GPT, Gemini, Kimi, etc.), and zero platform lock-in. It requires only Python 3.10+ and an AI IDE, with optional Pandoc for legacy formats. The workflow is designed to leverage large-context models (ideally ~1M tokens) combined with AI image generation (gpt-image-2) for top-tier results, though other models work at lower quality. The author, a finance professional, built it to solve the pain point of uneditable AI-generated slides and to promote Python + AI agent literacy.
+   亮点: Generates truly native, fully editable PPTX with real DrawingML shapes, text boxes, charts, and transitions — not flat images or HTML slides.; Supports AI-generated slide transitions, entrance animations, and speaker notes that can be converted to audio narration (even voice cloning mentioned in docs).; Local-first pipeline: source documents stay on your machine; only AI model API calls go online. No cloud processing of content.; Model-agnostic harness: works with Claude, GPT, Gemini, Kimi, DeepSeek, etc. Best results with Claude Opus + gpt-image-2, but flexible.; Template-aware: can follow your own PPT template, enabling brand-consistent decks.; Multi-format source input: supports .docx, .html, .epub, .ipynb natively; Pandoc extends to .doc, .odt, .rtf, .tex, .rst, .org, .typ.; Multiple canvas formats: 16:9, Xiaohongshu, WeChat, and 10+ more.; Transparent cost: tool is free; you only pay for AI model usage (pay-as-you-go via sponsors like PackyCode, APIKEY.FUN, RunAPI at steep discounts).; Runs inside any AI IDE agent (Claude Code, Cursor, VS Code Copilot, Zed, Windsurf, Codebuddy, etc.) — no separate app needed.; Designed as a learning vehicle for Python + AI agents, not just a PPT tool.
+   详细报告: PPT Master is fundamentally a workflow skill (a 'harness') that runs inside AI-powered IDEs. The user chats with the AI agent (e.g., 'make a deck from this PDF') and the agent executes a multi-step pipeline: parse the source document, plan the structure, generate slide content, create native PPTX elements (shapes, text, charts), apply transitions and animations, add speaker notes, and optionally generate narrated audio. The output is a real .pptx file that opens in PowerPoint with every element individually clickable and editable. This is a sharp departure from tools like Gamma (HTML-based) or Copilot (template-fill or image-based). The project explicitly states it is 'not a complete agent' — it is a harness that, combined with a capable model (ideally Claude with ~1M context + gpt-image-2), becomes a high-quality agent. The architecture uses SVG as an intermediate representation for layout and design, then converts to native PPTX DrawingML. The author emphasizes that the human using it matters as much as the tool: with practice and polishing, results can be stunning. The project includes extensive examples (editorial magazine, data journalism, Swiss grid, glassmorphism SaaS, Memphis pop, risograph zine) demonstrating diverse visual styles. Documentation covers getting started, Windows installation, canvas formats, image generation (AI + web search via Pexels/Pixabay), narration, voice cloning, and technical design. The project is MIT licensed, sponsored by API relay providers offering discounted access. The author is Hugo He, a finance professional (CPA, CPV, Consulting Engineer) who wanted editable AI-generated slides and built this to fill that gap while promoting Python and AI agent literacy.
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及 explicit business model, but the project's MIT license and sponsor-driven model suggest a free-core + ecosystem approach. Potential monetization paths include enterprise templates, managed API access, or integration into larger document automation platforms.
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: Develop an enterprise-level knowledge base automatic construction system: Use MinerU to parse various documents (reports, contracts, technical papers) into structured data, then integrate with vector databases and RAG frameworks to build an intelligent Q&A system.; Build a multilingual document translation and summarization tool: Combine MinerU's multilingual OCR capabilities with external translation models to achieve precise translation and key information extraction for multi-language documents.; Create a financial data analysis assistant: Use MinerU to parse financial statements and reports, automatically extract key financial indicators, and integrate with data analysis tools to generate insights.
-   项目链接: https://github.com/opendatalab/MinerU
+   衍生灵感: Inspiration 1: Develop an 'Auto-Report Agent' for consulting or financial teams — feed it raw data or a PDF report, and it generates a client-ready, editable PowerPoint deck with charts, speaker notes, and even a narrated walkthrough, slashing deck preparation time from days to minutes.; Inspiration 2: Integrate PPT Master into a CI/CD or automated documentation pipeline — e.g., when a Jupyter notebook or Markdown spec is updated, automatically regenerate a presentation deck for stakeholder review, keeping docs and slides in sync without manual effort.; Inspiration 3: Build a 'Lecture Generator' for educators — input a textbook chapter or course outline, and the agent produces a fully animated, narrated lecture deck with embedded quizzes or speaker notes, enabling rapid course creation for online education platforms.; Inspiration 4: Create a 'Sales Pitch Customizer' — combine PPT Master with a CRM or product database so that sales reps can generate tailored, on-brand pitch decks for specific prospects by simply describing the client's needs to the AI agent.
+   项目链接: https://github.com/hugohe3/ppt-master
 
-3. xbtlin/ai-berkshire:
-   star: 2227  语言/技术: Claude Code, Python, LLM Agent, Markdown, Mermaid
-   项目简介: AI Berkshire 是一套基于 Claude Code 的 AI 投研 Skill 合集，将巴菲特、芒格、段永平、李录四位价值投资大师的方法论系统化，通过多 Agent 并行协作，自动生成专业级、带强制结论和安全边际区间的投资研究报告。它解决了直接问 AI 只能得到模棱两可平衡分析的问题，提供强制通过/不通过/灰色地带决策、多视角对抗、结构化反偏见机制、金融数据精确校验和可复现的研究流程。
-   亮点: 四大师视角强制对抗：段永平、巴菲特、芒格、李录的分析框架互相挑战，产生真实张力而非单一分析; 多 Agent 并行投研团队：4个独立 Agent 同时研究一家公司，各自搜索、独立判断，相当于4倍信息源; 结构化反偏见机制：信息丰富度 A/B/C 评级、芒格式逆向检验、快速否决清单、反共识检查、留白原则; 金融数据精确性：使用 Python decimal.Decimal 精确十进制计算，市值手算校验，至少2个独立来源交叉验证; 16个场景化 Skill 入口：覆盖深度研究、财报分析、行业筛选、持仓管理、思维工具全链路; 可复现的研究流程：同样输入保证结构一致、深度一致的输出，支持跨公司横向对比和跨时间纵向对比
-   详细报告: AI Berkshire 的核心理念是「一个人 + Claude = 一个投研团队」。它不是简单的 prompt 模板，而是一套经过真金白银验证的投资研究框架，2024年实盘收益 +69.29%，2025年至今 +66.38%，大幅跑赢全球主要指数。
+4. NanmiCoder/MediaCrawler:
+   star: 53836  语言/技术: Python, Playwright, Node.js, Uvicorn, SQLite, MySQL, WebUI
+   项目简介: MediaCrawler 是一个基于 Playwright 浏览器自动化的多平台自媒体数据采集“瑞士军刀”。它最大的技术亮点在于“降维打击”——通过复用浏览器的登录态来绕过复杂的 JS 逆向工程，让普通开发者也能轻松抓取小红书、抖音、快手、B站、微博等 7 大主流平台的搜索、主页、评论及互动数据。它不仅支持 CLI 命令行操作，还提供了 WebUI 可视化界面和 API 服务，极大地降低了自媒体数据分析的门槛。
+   亮点: 免逆向黑科技：利用 Playwright 保留登录态，通过 JS 表达式获取签名参数，大幅降低爬虫技术门槛; 全网主流平台通吃：支持小红书、抖音、快手、B站、微博、贴吧、知乎等 7 大平台的核心数据采集; 多维度数据采集：不仅限于笔记/视频，还支持二级评论爬取、创作者主页解析及评论词云图生成; 双模运行架构：支持 CDP 模式（连接现有 Chrome 以降低风控）和标准 Playwright 模式，并提供 WebUI 可视化界面
+   详细报告: MediaCrawler 是一个功能极其强大的多平台自媒体数据采集工具，主要解决当前自媒体数据分散、平台反爬严格导致数据难以获取的痛点。
 
-项目采用三层架构设计：Skill 层提供16个明确入口，按场景选用；Agent 层让每个 Skill 内部由4个 Agent 并行工作，各自独立搜索、交叉验证、独立给出结论，最后由 Team Lead 综合；工具层负责精确计算、实时检索和报告抽检，确保数据严谨可验证。
+**核心功能与技术原理：**
+项目基于 Playwright 浏览器自动化框架，其核心逻辑是“以逸待劳”。传统的爬虫需要逆向分析复杂的加密算法（如 X-S 签名等），而 MediaCrawler 巧妙地保留了浏览器的登录态，直接在浏览器上下文中通过 JS 表达式获取签名参数，从而免去了繁琐的 JS 逆向过程。
 
-在深度研究方面，/investment-research 按七个模块顺序执行：数据收集、生意本质（段永平）、护城河（巴菲特）、逆向思考（芒格）、管理层评估、文明趋势（李录）、估值与安全边际。关键特色是 AI 研究偏见自觉机制，对信息丰富度进行 A/B/C 评级，防止资料多就等于确定性高的幻觉。
+**支持的平台与数据类型：**
+它覆盖了主流自媒体平台（小红书、抖音、快手、B站、微博、贴吧、知乎），功能矩阵非常全面。支持关键词搜索、指定帖子 ID 爬取、二级评论获取、指定创作者主页抓取。此外，还支持登录态缓存（避免频繁扫码）、IP 代理池（防封禁）以及生成评论词云图（数据可视化）。
 
-/investment-team 启动4个独立 Agent 并行研究一家公司，每个 Agent 各自搜索网络、交叉验证数据、独立给出评分，4倍于单一 prompt 的搜索量。这种多视角对抗在分析拼多多时表现明显：段永平评分3.7认为 C2M 模式难以复制，巴菲特评分4.4认为扣现金PE仅6.3x是印钞机，芒格评分3.5指出护城河比想象中浅，李录评分2.0认为管理层文化有隐患——巴菲特说真便宜，李录说不确定就不买，这种冲突才是投资决策的真实状态。
+**运行与使用体验：**
+项目推荐使用 uv（极速 Python 包管理器）进行环境管理，支持 Node.js 环境。它提供了多种启动方式：CLI 命令行（适合极客）、WebUI 可视化界面（通过 Uvicorn 启动 API 服务，适合非技术人员）以及作为 Python 模块调用。数据保存格式也非常灵活，支持 CSV、JSON、JSONL、Excel、SQLite 和 MySQL，方便接入各种下游数据分析流程。
 
-金融严谨性工具层使用 Python decimal.Decimal 而非 float，确保 0.1 + 0.2 = 0.3 在金融场景中绝对精确。提供市值验算、估值验算、多源交叉验证、三情景估值、Benford 定律检测财务数据异常等功能。
-
-其他重要 Skill 包括：/investment-checklist 六关快速筛选，10分钟决定是否深入研究；/industry-research 产业链全景扫描；/industry-funnel 从全市场逐层精选到3家；/private-company-research 专为未上市公司设计的侦探式研究框架，带置信度标注；/news-pulse 股价异动10分钟快速归因；/portfolio-review 组合管理与再平衡；/thesis-tracker 买入后投资论文持续跟踪。
-
-项目路线图显示未来计划加入历史回测、宏观经济周期分析框架，以及基于 MCP 的实时数据接入（Wind/Bloomberg/Yahoo Finance）。
+**Pro 版本与生态：**
+文档提到了 MediaCrawlerPro 版本，包含断点续爬、多账号管理、自媒体内容拆解 Agent 等高级功能，甚至支持 AI Agent Skill（Claude Code/Cursor），这表明该项目正在向 AI 自动化方向演进。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个「AI 行业研报生成器」，将四大师对抗框架应用于特定行业（如新能源、半导体），自动生成带多视角冲突分析的行业研究报告，用于券商研究所或企业战略部门。; 灵感2：将其集成到现有投资管理系统或财富管理 App 中，作为智能投顾模块，为个人投资者提供机构级的公司筛选和估值分析服务。; 灵感3：基于 /news-pulse 的股价异动归因能力，开发一个「持仓异动预警机器人」，接入个人投资者的券商账户，股价异动时自动推送归因分析，减少情绪化交易决策。; 灵感4：将金融严谨性工具层（精确十进制计算、多源交叉验证、Benford 定律检测）独立抽离，开发为通用财务数据校验 SDK，供金融科技公司集成使用。
-   项目链接: https://github.com/xbtlin/ai-berkshire
-
-4. calesthio/OpenMontage:
-   star: 20076  语言/技术: Python, Node.js, React (Remotion), FFmpeg, GSAP, HTML/CSS, Piper TTS, WhisperX
-   项目简介: OpenMontage 是一个开源的、基于 AI Agent 的全自动视频制作系统。它旨在将 AI 编程助手（如 Claude Code、Cursor）转变为“全自动影视棚”，通过自然语言描述即可完成研究、脚本编写、素材生成、剪辑和合成。其核心亮点在于支持多种专业制作流程（如纪录片混剪、动画短片、产品广告），并集成了强大的预算控制和多模态生成能力，即使是零 API Key 也能利用开源素材和本地渲染制作视频。
-   亮点: Agent 驱动的工作流：将 AI 编程助手升级为全自动视频编辑导演; 零成本制作能力：支持使用免费素材库（Archive.org, NASA）和本地 TTS 生成视频; 多管线支持：涵盖动画解说、实拍混剪、口播替换等多种专业制作流程; 强预算控制：内置成本估算和审批机制，防止 API 调用费用超支
-   详细报告: OpenMontage 的核心理念是利用 AI Agent（如 Claude Code 或 Cursor）来自动化传统上极其繁琐的视频制作过程。用户只需输入自然语言提示词，Agent 就会接管整个制作流程：从网络调研、撰写分镜脚本，到生成 AI 图像/视频素材，再到自动配音（支持多种 TTS 服务如 Piper, ElevenLabs）和 Remotion 渲染合成。
-
-该项目最引人注目的特点是其实用性和对成本的极致控制。它不仅能利用 FLUX、Kling 等高端付费 API 生成素材，还提供了“零 API Key”方案，通过整合 Archive.org、NASA、Pexels 等开源素材库，结合本地 TTS 引擎和 Remotion 渲染引擎，实现真正的免费视频制作。此外，它的“预算杀手”在于其完善的成本控制模块，可以在执行任何生成动作前进行成本估算，并在超出设定阈值（如 $0.50）时暂停请求确认，这对于商业化应用至关重要。
-
-在架构上，OpenMontage 采用了管线（Pipeline）设计模式，包含动画解说、实拍纪录片混剪、播客重生等多种预设管线。每个管线都由一系列“导演技能”（Markdown 指令文件）驱动，确保 Agent 能够严格按照专业标准执行。同时，它支持通过 YAML 清单和 Python 工具类极高地扩展新工具和新管线，具有极强的可定制性。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 具有极高的商业潜力，可应用于自媒体矩阵批量制作、跨境电商营销视频生成、教育课程自动化视频化以及广告创意快速原型制作。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目的 Agent 架构，可以开发一个“跨境电商多语种视频营销助手”，通过一条中文指令，自动生成并渲染包含多语种字幕和配音的 TikTok/Reels 营销视频。; 灵感2：将其集成到知识付费或教育机构中，开发“课程视频自动化生成系统”，输入课程大纲文档，Agent 自动匹配无版权图片并生成带有动态字幕和旁白的教学视频。; 灵感3：利用其“参考视频分析”能力，开发一个“短视频爆款克隆器”，用户上传爆款视频，系统自动分析其节奏和结构，并生成风格类似但主题完全不同的新视频，用于自媒体矩阵分发。
-   项目链接: https://github.com/calesthio/OpenMontage
+   衍生灵感: 灵感1：基于此项目的爬虫能力，可以开发一个【竞品舆情监控与 AI 分析系统】，自动抓取特定品牌在小红书/微博的提及，并利用 LLM 进行情感分析和危机预警。; 灵感2：可以将其集成到【电商选品助手】中，通过抓取抖音/快手的热门视频评论，挖掘用户痛点与潜在爆款需求。; 灵感3：利用其 WebUI 和 API 的基础框架，改造成一个【私有化部署的 MC N 数据看板】，为自媒体运营团队提供多账号数据统一管理与复盘分析功能。
+   项目链接: https://github.com/NanmiCoder/MediaCrawler
