@@ -1,4 +1,15 @@
-1. xbtlin/ai-berkshire:
+1. commaai/openpilot:
+   star: 61837  语言/技术: Python, C, Linux, ROS-like architecture, Computer Vision, CAN bus, comma device (comma four/3X)
+   项目简介: 一句话概括：openpilot 是一个开源的“机器人操作系统”，目前最成熟的应用是作为先进的驾驶辅助系统（ADAS），为 300+ 款消费级汽车提供接近自动驾驶水平的辅助驾驶功能，堪称“平民版自动驾驶大脑”。
+   亮点: 将消费级汽车升级为具备 L2+ 辅助驾驶能力的智能汽车，支持 300+ 车型，极大降低了体验自动驾驶的门槛。; 遵循 ISO26262 功能安全指南，核心安全模型用 C 语言实现在 panda 模块中，并具备完善的软件在环（SIL）和硬件在环（HIL）测试体系。; 完全开源且 MIT 许可，支持自定义软件分支（如 nightly、staging），拥有活跃的社区和贡献者激励计划（赏金、招聘）。; 内置数据回传机制用于训练更好的模型，同时允许用户关闭数据收集，平衡了隐私与算法迭代。
+   详细报告: openpilot 是由 comma.ai 开发的开源机器人操作系统，其当前最核心、最成熟的应用场景是作为汽车的高级驾驶辅助系统（ADAS）。它不是简单的车道保持或自适应巡航，而是一个端到端的、基于深度学习的驾驶决策系统，能够处理复杂的城市场景和高速路况。用户只需一台 comma four 或 comma 3X 设备、一款受支持的汽车以及一个线束，即可将原车升级至具备自动转向、自动刹车、交通标志识别、自动变道等能力的智能驾驶体验。系统通过车辆 CAN 总线与原厂系统通信，读取车速、方向盘转角、制动/油门踏板状态等数据，并利用前视摄像头进行环境感知。其软件架构高度模块化，包含感知、规划、控制等多个进程，通过消息队列（如 msgq）进行高效通信。核心安全机制由 panda 模块保障，该模块以 C 语言编写，严格遵循 ISO26262 标准，确保即使在主系统异常时也能维持基本的安全状态（如安全停车）。项目采用 Python 作为主要开发语言，兼顾开发效率与性能关键路径的 C 实现。测试体系极为严谨，包括每次提交的 CI 测试、SIL/HIL 测试、以及内部持续回放真实路测数据的‘测试柜’机制，确保代码变更不会引入回归风险。此外，openpilot 支持多种分支策略：稳定版（release-mici）、预发布版（staging）、每日构建版（nightly）和实验性功能版（nightly-dev），满足不同用户需求。用户数据默认上传用于模型训练，但可手动关闭，体现了对隐私的尊重。项目鼓励社区贡献，提供详尽的贡献指南、开发工具链和文档，并设有赏金计划和全职岗位，推动生态持续进化。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 openpilot 的感知与控制框架，可开发一个‘智能叉车辅助系统’，用于仓库或物流园区内的自动路径跟随、障碍物规避和托盘定位，降低人工操作成本。; 灵感2：将其集成到‘远程驾驶教学平台’中，利用 openpilot 的驾驶行为数据（如方向盘修正频率、刹车时机）生成学员驾驶评分报告，用于驾校理论+实践一体化教学。; 灵感3：借鉴其端到端驾驶模型架构，构建一个‘农业机器人自动驾驶套件’，应用于小型农用车辆在果园或温室中的自动巡检、喷药或采摘路径规划。
+   项目链接: https://github.com/commaai/openpilot
+
+2. xbtlin/ai-berkshire:
    star: 4401  语言/技术: Claude Code, OpenAI Codex, Python (decimal.Decimal), Markdown, Mermaid, AI Agent (Multi-Agent Architecture)
    项目简介: AI Berkshire 是一套基于 Claude Code 与 Codex 的投资研究 Skill 合集，将巴菲特、芒格、段永平、李录四位价值投资大师的方法论系统化，通过多 Agent 并行协作与严谨的金融计算工具，生成具有强制结论、多视角对抗和防偏见机制的专业级投研报告。项目以 2024 年 +69.29%、2025 年至今 +66.38% 的实盘超额收益为背书，解决的核心痛点是：普通人直接问 AI 只能得到模棱两可的废话，而 AI Berkshire 能输出带具体价格区间、通过/不通过结论、可执行的投资决策报告。
    亮点: 四大师视角对抗机制：段永平看商业模式、巴菲特看财务估值、芒格做逆向思考、李录看长期确定性，四种思维互相挑战，避免单一视角盲点; 强制结论输出：通过/不通过/灰色地带三档，附带具体价格区间和仓位建议，拒绝 AI 常见的两面讨好式废话; 多层反偏见机制：信息丰富度 A/B/C 评级、快速否决清单（8条红线一票否决）、反共识检查、留白原则，防止 LLM 幻觉伪装成确定性; 金融数据精确性：使用 Python decimal.Decimal 精确十进制计算，市值手算校验、多源交叉验证、Benford 定律检测，杜绝 LLM 心算导致的单位错误; 多 Agent 并行研究：4 个独立 Agent 各自搜索、独立判断、互相挑战，4 倍搜索量和信息源，产出综合研判报告; 18 个 Skill 覆盖投研全流程：深度研究、财报精读、行业漏斗筛选、持仓管理、股价异动归因、未上市公司研究、投资论文追踪等
@@ -17,47 +28,40 @@
    衍生灵感: 灵感1：开发一个 AI 投研助手 SaaS 平台，将 AI Berkshire 的 Skill 体系封装为 Web 服务，让没有 Claude Code/Codex 的普通投资者也能通过网页输入股票代码，自动生成带价格区间和仓位建议的专业投研报告，采用订阅制收费。; 灵感2：将其集成到东方财富、同花顺等现有股票软件中，作为 AI 投研插件，在用户查看行情时自动触发 /news-pulse 进行股价异动归因，或触发 /investment-checklist 进行快速筛选，提升现有金融终端的 AI 决策能力。; 灵感3：基于四大师对抗机制，开发一个 AI 辩论赛平台，将投资分析扩展为通用决策工具——例如商业战略决策时，让不同 Agent 分别扮演乐观派、悲观派、财务专家、行业专家进行对抗式分析，输出带置信度的决策建议。; 灵感4：利用其金融严谨性工具（decimal.Decimal 精确计算、多源交叉验证、Benford 定律检测）开发一个独立的上市公司财务造假检测系统，输入财报数据自动输出异常评分和造假概率预警。
    项目链接: https://github.com/xbtlin/ai-berkshire
 
-2. commaai/openpilot:
-   star: 61837  语言/技术: Python, C, Linux, ROS-like architecture, Computer Vision, CAN bus, comma device (comma four/3X)
-   项目简介: 一句话概括：openpilot 是一个开源的“机器人操作系统”，目前最成熟的应用是作为先进的驾驶辅助系统（ADAS），为 300+ 款消费级汽车提供接近自动驾驶水平的辅助驾驶功能，堪称“平民版自动驾驶大脑”。
-   亮点: 将消费级汽车升级为具备 L2+ 辅助驾驶能力的智能汽车，支持 300+ 车型，极大降低了体验自动驾驶的门槛。; 遵循 ISO26262 功能安全指南，核心安全模型用 C 语言实现在 panda 模块中，并具备完善的软件在环（SIL）和硬件在环（HIL）测试体系。; 完全开源且 MIT 许可，支持自定义软件分支（如 nightly、staging），拥有活跃的社区和贡献者激励计划（赏金、招聘）。; 内置数据回传机制用于训练更好的模型，同时允许用户关闭数据收集，平衡了隐私与算法迭代。
-   详细报告: openpilot 是由 comma.ai 开发的开源机器人操作系统，其当前最核心、最成熟的应用场景是作为汽车的高级驾驶辅助系统（ADAS）。它不是简单的车道保持或自适应巡航，而是一个端到端的、基于深度学习的驾驶决策系统，能够处理复杂的城市场景和高速路况。用户只需一台 comma four 或 comma 3X 设备、一款受支持的汽车以及一个线束，即可将原车升级至具备自动转向、自动刹车、交通标志识别、自动变道等能力的智能驾驶体验。系统通过车辆 CAN 总线与原厂系统通信，读取车速、方向盘转角、制动/油门踏板状态等数据，并利用前视摄像头进行环境感知。其软件架构高度模块化，包含感知、规划、控制等多个进程，通过消息队列（如 msgq）进行高效通信。核心安全机制由 panda 模块保障，该模块以 C 语言编写，严格遵循 ISO26262 标准，确保即使在主系统异常时也能维持基本的安全状态（如安全停车）。项目采用 Python 作为主要开发语言，兼顾开发效率与性能关键路径的 C 实现。测试体系极为严谨，包括每次提交的 CI 测试、SIL/HIL 测试、以及内部持续回放真实路测数据的‘测试柜’机制，确保代码变更不会引入回归风险。此外，openpilot 支持多种分支策略：稳定版（release-mici）、预发布版（staging）、每日构建版（nightly）和实验性功能版（nightly-dev），满足不同用户需求。用户数据默认上传用于模型训练，但可手动关闭，体现了对隐私的尊重。项目鼓励社区贡献，提供详尽的贡献指南、开发工具链和文档，并设有赏金计划和全职岗位，推动生态持续进化。
+3. Robbyant/lingbot-map:
+   star: 8336  语言/技术: Python, PyTorch, FlashInfer, CUDA, ONNX Runtime, Kaolin, Open3D, viser, ffmpeg
+   项目简介: LingBot-Map 是一个用于流式3D重建的前馈式3D基础模型，通过几何上下文Transformer架构统一了坐标定位、密集几何线索和长程漂移校正，在518×378分辨率下能以约20 FPS稳定推理超过10,000帧的长序列，并在KITTI、Oxford Spires等多个基准上超越现有流式与迭代优化方法。
+   亮点: 几何上下文Transformer（Geometric Context Transformer）：通过锚点上下文、姿态参考窗口和轨迹记忆，在单一流式框架中统一坐标定位、密集几何线索与长程漂移校正; 高效流式推理：采用paged KV cache attention的前馈架构，在518×378分辨率下实现约20 FPS的稳定推理，支持超过10,000帧的长序列; SOTA重建质量：在KITTI、Oxford Spires、VBR、Droid-W、TUM-D、7-scenes、ETH3D、Tanks and Temples、NRGBD等多个基准上超越现有流式与迭代优化方法; 滑动窗口推理：支持超长序列（>3000帧）的窗口化推理，通过KV cache重置避免漂移崩溃; 天空掩码：集成ONNX天空分割模型，自动过滤点云中的天空点，提升室外场景可视化质量; 离线渲染管线：提供完整的离线批量渲染流程，支持自定义相机轨迹（跟随、鸟瞰、静态、旋转）并输出MP4点云漫游视频
+   详细报告: LingBot-Map 是一个由 Robbyant Team 开发的流式3D重建基础模型，核心创新在于其几何上下文Transformer（Geometric Context Transformer）架构。该架构通过三个关键机制——锚点上下文（anchor context）、姿态参考窗口（pose-reference window）和轨迹记忆（trajectory memory）——在一个统一的流式框架中同时解决了坐标定位、密集几何线索提取和长程漂移校正三大难题。与传统的迭代优化方法（如COLMAP、Bundle Adjustment）不同，LingBot-Map 采用前馈式推理，无需迭代优化即可实时输出相机姿态和密集点云。
+
+在效率方面，项目集成了 FlashInfer 提供的 paged KV cache attention 机制，使得模型在单张 NVIDIA GPU 上能以约 20 FPS 的速度处理 518×378 分辨率的图像序列，且支持超过 10,000 帧的长序列推理。对于超长序列（如25,000帧的13分钟室内漫游视频），项目提供了滑动窗口推理模式（`--mode windowed`），通过重置 KV cache 来避免漂移崩溃，窗口大小和重叠关键帧数可调。
+
+模型提供三个版本：lingbot-map-long（针对长序列和大场景优化，推荐）、lingbot-map（短长序列均衡）、lingbot-map-stage1（第一阶段训练检查点，可加载到VGGT模型进行双向推理）。模型权重托管在 HuggingFace 和 ModelScope 上。
+
+项目提供了完整的交互式演示（demo.py）和离线渲染管线（demo_render/batch_demo.py）。交互式演示基于 viser 实现浏览器端3D可视化，支持实时点云渲染、置信度过滤、空间降采样等。离线渲染管线则针对超长序列设计，支持从视频或图像文件夹批量推理并生成电影级的点云漫游MP4视频，相机轨迹可通过 YAML 配置文件自定义，支持跟随（follow）、鸟瞰（birdeye）、静态（static）、旋转（pivot）四种模式及其组合。
+
+在数据预处理方面，项目支持天空掩码（sky masking）功能，使用 ONNX 分割模型自动过滤点云中的天空点，特别适用于室外场景。天空掩码结果会被缓存以加速后续运行。
+
+性能优化方面，项目支持多种加速和降内存选项：FlashInfer 加速（默认开启，回退到 SDPA）、CPU 卸载（`--offload_to_cpu`）、减少双向尺度帧数量（`--num_scale_frames 2`）、降低相机头迭代次数（`--camera_num_iterations 1`）等。对于显存受限的用户，社区还提供了针对 RTX 4060 8GB 的优化实现。
+
+评测基准方面，项目已发布 KITTI 和 Oxford Spires 的评测脚本，并在多个公开数据集上验证了 SOTA 性能。安装依赖包括 PyTorch 2.8.0（CUDA 12.8）、FlashInfer、Kaolin（用于离线渲染）、ONNX Runtime（用于天空分割）等。整体文档质量较高，提供了丰富的示例场景和详细的参数说明。
+   活跃度: 活跃（2026年4-5月持续更新，发布评测基准、长视频演示、性能优化）  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目开发一个实时3D扫描移动应用，用户只需用手机摄像头环绕拍摄物体或场景，即可在手机端实时生成高精度3D模型，用于电商商品展示、AR/VR内容创作或文物数字化保护。; 灵感2：将其集成到自动驾驶高精地图构建系统中，利用车载摄像头流式输入实时更新局部3D地图，结合滑动窗口推理处理长距离行驶序列，降低对GPS/IMU的依赖。; 灵感3：开发一个影视级3D场景重建SaaS平台，用户上传无人机航拍视频或手持拍摄视频，系统自动输出电影级点云漫游视频，用于房地产看房、旅游景区宣传或虚拟制片预演。
+   项目链接: https://github.com/Robbyant/lingbot-map
+
+4. cupy/cupy:
+   star: 11587  语言/技术: Python, C++, CUDA, ROCm, NumPy, SciPy
+   项目简介: CuPy 是一个专为 GPU 加速计算设计的 Python 库，堪称“NumPy/SciPy 的显卡加速器”。它最大的杀手锏是作为 NumPy 和 SciPy 的“无缝替代品”（drop-in replacement），让开发者只需极少的代码修改，就能将现有的 CPU 计算任务一键迁移到 NVIDIA CUDA 或 AMD ROCm 的 GPU 上运行，轻松实现几十倍甚至上百倍的计算性能飞跃。
+   亮点: 无缝迁移：作为 NumPy/SciPy 的完美替代品，现有代码几乎零修改即可上 GPU 加速。; 底层掌控：提供 RawKernels、Streams 和 CUDA Runtime API 访问，让高级用户能深度压榨显卡性能。; 跨平台支持：同时支持 NVIDIA CUDA 和 AMD ROCm 生态，打破硬件壁垒。
+   详细报告: CuPy 解决了一个长期困扰数据科学家和算法工程师的痛点：Python 虽然易用，但原生的 NumPy 在 CPU 上跑大规模矩阵运算时实在太慢了；而手写 CUDA C++ 代码又门槛极高、维护困难。CuPy 的出现就像是给 Python 装上了“涡轮增压器”。
+
+在技术实现上，CuPy 在底层深度整合了 NVIDIA CUDA 和 AMD ROCm 的高性能计算能力，但在上层接口上严格遵循了 NumPy 和 SciPy 的 API 规范。这意味着，如果你有一段现成的 NumPy 代码，你只需要把 `import numpy as np` 改成 `import cupy as cp`，原本受限于 CPU 内存带宽和算力的计算任务就会自动转移到 GPU 的数千个核心上并行处理。这对于深度学习训练前的数据预处理、大规模科学计算、金融建模等场景是革命性的。
+
+除了高层的数组操作，CuPy 并没有把开发者锁在“黑盒”里。它提供了 `RawKernels` 功能，允许用户直接嵌入自定义的 CUDA C/C++ 代码，甚至可以直接操作 CUDA Streams 来管理异步任务并发。这种“既要易用性，又要底层控制力”的设计，让它成为了连接 Python 生态与 GPU 硬件之间最坚实的桥梁。此外，CuPy 还吸收了原本独立的 cuSignal（信号处理库），进一步扩充了其在特定领域的计算能力。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 openpilot 的感知与控制框架，可开发一个‘智能叉车辅助系统’，用于仓库或物流园区内的自动路径跟随、障碍物规避和托盘定位，降低人工操作成本。; 灵感2：将其集成到‘远程驾驶教学平台’中，利用 openpilot 的驾驶行为数据（如方向盘修正频率、刹车时机）生成学员驾驶评分报告，用于驾校理论+实践一体化教学。; 灵感3：借鉴其端到端驾驶模型架构，构建一个‘农业机器人自动驾驶套件’，应用于小型农用车辆在果园或温室中的自动巡检、喷药或采摘路径规划。
-   项目链接: https://github.com/commaai/openpilot
-
-3. hugohe3/ppt-master:
-   star: 33237  语言/技术: Python 3.10+, PPTX XML / DrawingML, python-pptx (implied by native PPTX generation), AI IDE Agents (Claude Code, Cursor, Copilot, Codex CLI, Aider, Gemini CLI), Pandoc (optional, for legacy formats), SVG / SVG Repo / Tabler Icons / Phosphor Icons, AI Image Generation (gpt-image-2), Text-to-Speech / Narration (implied by narrated decks)
-   项目简介: PPT Master is an open-source, local-first workflow harness that turns any source document into a natively editable PPTX file using AI IDE agents (e.g., Claude Code, Cursor, Copilot). It does not provide a GUI; instead, it orchestrates an AI agent to generate real DrawingML shapes, editable text boxes, native slide transitions, speaker notes, and even AI-narrated audio. The core output is a genuine .pptx that can be opened, edited, and presented directly in PowerPoint — not a flat image deck. The project emphasizes data privacy (no upload required beyond AI model calls), model flexibility (Claude, GPT, Gemini, Kimi, etc.), and zero platform lock-in. It requires only Python 3.10+ and an AI IDE, with optional Pandoc for legacy formats. The workflow is designed to leverage large-context models (ideally ~1M tokens) combined with AI image generation (gpt-image-2) for top-tier results, though other models work at lower quality. The author, a finance professional, built it to solve the pain point of uneditable AI-generated slides and to promote Python + AI agent literacy.
-   亮点: Generates truly native, fully editable PPTX with real DrawingML shapes, text boxes, charts, and transitions — not flat images or HTML slides.; Supports AI-generated slide transitions, entrance animations, and speaker notes that can be converted to audio narration (even voice cloning mentioned in docs).; Local-first pipeline: source documents stay on your machine; only AI model API calls go online. No cloud processing of content.; Model-agnostic harness: works with Claude, GPT, Gemini, Kimi, DeepSeek, etc. Best results with Claude Opus + gpt-image-2, but flexible.; Template-aware: can follow your own PPT template, enabling brand-consistent decks.; Multi-format source input: supports .docx, .html, .epub, .ipynb natively; Pandoc extends to .doc, .odt, .rtf, .tex, .rst, .org, .typ.; Multiple canvas formats: 16:9, Xiaohongshu, WeChat, and 10+ more.; Transparent cost: tool is free; you only pay for AI model usage (pay-as-you-go via sponsors like PackyCode, APIKEY.FUN, RunAPI at steep discounts).; Runs inside any AI IDE agent (Claude Code, Cursor, VS Code Copilot, Zed, Windsurf, Codebuddy, etc.) — no separate app needed.; Designed as a learning vehicle for Python + AI agents, not just a PPT tool.
-   详细报告: PPT Master is fundamentally a workflow skill (a 'harness') that runs inside AI-powered IDEs. The user chats with the AI agent (e.g., 'make a deck from this PDF') and the agent executes a multi-step pipeline: parse the source document, plan the structure, generate slide content, create native PPTX elements (shapes, text, charts), apply transitions and animations, add speaker notes, and optionally generate narrated audio. The output is a real .pptx file that opens in PowerPoint with every element individually clickable and editable. This is a sharp departure from tools like Gamma (HTML-based) or Copilot (template-fill or image-based). The project explicitly states it is 'not a complete agent' — it is a harness that, combined with a capable model (ideally Claude with ~1M context + gpt-image-2), becomes a high-quality agent. The architecture uses SVG as an intermediate representation for layout and design, then converts to native PPTX DrawingML. The author emphasizes that the human using it matters as much as the tool: with practice and polishing, results can be stunning. The project includes extensive examples (editorial magazine, data journalism, Swiss grid, glassmorphism SaaS, Memphis pop, risograph zine) demonstrating diverse visual styles. Documentation covers getting started, Windows installation, canvas formats, image generation (AI + web search via Pexels/Pixabay), narration, voice cloning, and technical design. The project is MIT licensed, sponsored by API relay providers offering discounted access. The author is Hugo He, a finance professional (CPA, CPV, Consulting Engineer) who wanted editable AI-generated slides and built this to fill that gap while promoting Python and AI agent literacy.
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及 explicit business model, but the project's MIT license and sponsor-driven model suggest a free-core + ecosystem approach. Potential monetization paths include enterprise templates, managed API access, or integration into larger document automation platforms.
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: Inspiration 1: Develop an 'Auto-Report Agent' for consulting or financial teams — feed it raw data or a PDF report, and it generates a client-ready, editable PowerPoint deck with charts, speaker notes, and even a narrated walkthrough, slashing deck preparation time from days to minutes.; Inspiration 2: Integrate PPT Master into a CI/CD or automated documentation pipeline — e.g., when a Jupyter notebook or Markdown spec is updated, automatically regenerate a presentation deck for stakeholder review, keeping docs and slides in sync without manual effort.; Inspiration 3: Build a 'Lecture Generator' for educators — input a textbook chapter or course outline, and the agent produces a fully animated, narrated lecture deck with embedded quizzes or speaker notes, enabling rapid course creation for online education platforms.; Inspiration 4: Create a 'Sales Pitch Customizer' — combine PPT Master with a CRM or product database so that sales reps can generate tailored, on-brand pitch decks for specific prospects by simply describing the client's needs to the AI agent.
-   项目链接: https://github.com/hugohe3/ppt-master
-
-4. NanmiCoder/MediaCrawler:
-   star: 53836  语言/技术: Python, Playwright, Node.js, Uvicorn, SQLite, MySQL, WebUI
-   项目简介: MediaCrawler 是一个基于 Playwright 浏览器自动化的多平台自媒体数据采集“瑞士军刀”。它最大的技术亮点在于“降维打击”——通过复用浏览器的登录态来绕过复杂的 JS 逆向工程，让普通开发者也能轻松抓取小红书、抖音、快手、B站、微博等 7 大主流平台的搜索、主页、评论及互动数据。它不仅支持 CLI 命令行操作，还提供了 WebUI 可视化界面和 API 服务，极大地降低了自媒体数据分析的门槛。
-   亮点: 免逆向黑科技：利用 Playwright 保留登录态，通过 JS 表达式获取签名参数，大幅降低爬虫技术门槛; 全网主流平台通吃：支持小红书、抖音、快手、B站、微博、贴吧、知乎等 7 大平台的核心数据采集; 多维度数据采集：不仅限于笔记/视频，还支持二级评论爬取、创作者主页解析及评论词云图生成; 双模运行架构：支持 CDP 模式（连接现有 Chrome 以降低风控）和标准 Playwright 模式，并提供 WebUI 可视化界面
-   详细报告: MediaCrawler 是一个功能极其强大的多平台自媒体数据采集工具，主要解决当前自媒体数据分散、平台反爬严格导致数据难以获取的痛点。
-
-**核心功能与技术原理：**
-项目基于 Playwright 浏览器自动化框架，其核心逻辑是“以逸待劳”。传统的爬虫需要逆向分析复杂的加密算法（如 X-S 签名等），而 MediaCrawler 巧妙地保留了浏览器的登录态，直接在浏览器上下文中通过 JS 表达式获取签名参数，从而免去了繁琐的 JS 逆向过程。
-
-**支持的平台与数据类型：**
-它覆盖了主流自媒体平台（小红书、抖音、快手、B站、微博、贴吧、知乎），功能矩阵非常全面。支持关键词搜索、指定帖子 ID 爬取、二级评论获取、指定创作者主页抓取。此外，还支持登录态缓存（避免频繁扫码）、IP 代理池（防封禁）以及生成评论词云图（数据可视化）。
-
-**运行与使用体验：**
-项目推荐使用 uv（极速 Python 包管理器）进行环境管理，支持 Node.js 环境。它提供了多种启动方式：CLI 命令行（适合极客）、WebUI 可视化界面（通过 Uvicorn 启动 API 服务，适合非技术人员）以及作为 Python 模块调用。数据保存格式也非常灵活，支持 CSV、JSON、JSONL、Excel、SQLite 和 MySQL，方便接入各种下游数据分析流程。
-
-**Pro 版本与生态：**
-文档提到了 MediaCrawlerPro 版本，包含断点续爬、多账号管理、自媒体内容拆解 Agent 等高级功能，甚至支持 AI Agent Skill（Claude Code/Cursor），这表明该项目正在向 AI 自动化方向演进。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目的爬虫能力，可以开发一个【竞品舆情监控与 AI 分析系统】，自动抓取特定品牌在小红书/微博的提及，并利用 LLM 进行情感分析和危机预警。; 灵感2：可以将其集成到【电商选品助手】中，通过抓取抖音/快手的热门视频评论，挖掘用户痛点与潜在爆款需求。; 灵感3：利用其 WebUI 和 API 的基础框架，改造成一个【私有化部署的 MC N 数据看板】，为自媒体运营团队提供多账号数据统一管理与复盘分析功能。
-   项目链接: https://github.com/NanmiCoder/MediaCrawler
+   衍生灵感: 灵感1：开发一个“一键加速”的代码迁移插件，集成到 Jupyter Notebook 或 VS Code 中，自动分析项目中的 NumPy 代码并提示迁移至 CuPy，降低 GPU 计算的上手门槛。; 灵感2：构建一个基于 CuPy 的实时大数据可视化引擎，利用 GPU 的并行计算能力，在浏览器端实现百万级数据点的实时渲染和交互。; 灵感3：针对边缘计算设备（如 Jetson 系列），开发一个基于 CuPy 的轻量化 AI 推理预处理流水线，加速图像和传感器数据的实时处理。
+   项目链接: https://github.com/cupy/cupy
