@@ -9,27 +9,27 @@
    衍生灵感: 
    项目链接: https://github.com/usestrix/strix
 
-2. browser-use/video-use:
-   star: 12754  语言/技术: Python
+2. HKUDS/Vibe-Trading:
+   star: 16742  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f5157daae70 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f9796ac6030 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/browser-use/video-use
+   项目链接: https://github.com/HKUDS/Vibe-Trading
 
-3. xbtlin/ai-berkshire:
-   star: 7681  语言/技术: Python
+3. allenai/olmocr:
+   star: 18359  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f515831b140 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f9796ac7fb0 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/xbtlin/ai-berkshire
+   项目链接: https://github.com/allenai/olmocr
 
 4. Mebus/cupp:
    star: 6134  语言/技术: Python
