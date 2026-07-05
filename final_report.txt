@@ -9,16 +9,16 @@
    衍生灵感: 
    项目链接: https://github.com/usestrix/strix
 
-2. ansible/ansible:
-   star: 69236  语言/技术: Python
+2. harvard-edge/cs249r_book:
+   star: 26247  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fe04d145760 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fe04d645e50 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/ansible/ansible
+   项目链接: https://github.com/harvard-edge/cs249r_book
 
 3. rommapp/romm:
    star: 9862  语言/技术: Python
@@ -31,13 +31,13 @@
    衍生灵感: 
    项目链接: https://github.com/rommapp/romm
 
-4. harvard-edge/cs249r_book:
-   star: 26247  语言/技术: Python
+4. agentskills/agentskills:
+   star: 21687  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fe04d645e50 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f1d5bed7d70 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/harvard-edge/cs249r_book
+   项目链接: https://github.com/agentskills/agentskills
