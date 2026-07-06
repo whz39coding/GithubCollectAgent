@@ -1,26 +1,15 @@
-1. usestrix/strix:
-   star: 32612  语言/技术: Python
+1. alirezarezvani/claude-skills:
+   star: 20712  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f1d5be9c140 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb5d8465040 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/usestrix/strix
+   项目链接: https://github.com/alirezarezvani/claude-skills
 
-2. harvard-edge/cs249r_book:
-   star: 26247  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fe04d645e50 state=finished raised NotFoundError>]
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/harvard-edge/cs249r_book
-
-3. rommapp/romm:
+2. rommapp/romm:
    star: 9862  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
@@ -31,13 +20,24 @@
    衍生灵感: 
    项目链接: https://github.com/rommapp/romm
 
-4. agentskills/agentskills:
-   star: 21687  语言/技术: Python
+3. harvard-edge/cs249r_book:
+   star: 26247  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f1d5bed7d70 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fe04d645e50 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/agentskills/agentskills
+   项目链接: https://github.com/harvard-edge/cs249r_book
+
+4. usestrix/strix:
+   star: 32612  语言/技术: Python
+   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
+   亮点: 
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f1d5be9c140 state=finished raised NotFoundError>]
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 未知
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 
+   项目链接: https://github.com/usestrix/strix
