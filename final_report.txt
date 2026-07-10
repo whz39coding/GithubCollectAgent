@@ -1,13 +1,13 @@
-1. mvanhorn/last30days-skill:
-   star: 50890  语言/技术: Python
+1. unclecode/crawl4ai:
+   star: 71938  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fef69fa04d0 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f386e2929f0 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/mvanhorn/last30days-skill
+   项目链接: https://github.com/unclecode/crawl4ai
 
 2. bradautomates/claude-video:
    star: 4418  语言/技术: Python
@@ -31,13 +31,13 @@
    衍生灵感: 
    项目链接: https://github.com/kyutai-labs/pocket-tts
 
-4. jingyaogong/minimind:
-   star: 53034  语言/技术: Python
+4. microsoft/SkillOpt:
+   star: 11988  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fef69dce2a0 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f386e2b3fb0 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/jingyaogong/minimind
+   项目链接: https://github.com/microsoft/SkillOpt
