@@ -9,35 +9,35 @@
    衍生灵感: 
    项目链接: https://github.com/davila7/claude-code-templates
 
-2. mvanhorn/last30days-skill:
-   star: 51492  语言/技术: Python
+2. home-assistant/core:
+   star: 88739  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f8dbf6ab950 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb7b83f71d0 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/mvanhorn/last30days-skill
+   项目链接: https://github.com/home-assistant/core
 
-3. huggingface/speech-to-speech:
-   star: 6025  语言/技术: Python
+3. ansible/ansible:
+   star: 69236  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f8dbf6aabd0 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fe04d145760 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/huggingface/speech-to-speech
+   项目链接: https://github.com/ansible/ansible
 
-4. roboflow/supervision:
-   star: 47777  语言/技术: Python
+4. pytorch/pytorch:
+   star: 101759  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f8dbf6e37a0 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb7b83f6b40 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/roboflow/supervision
+   项目链接: https://github.com/pytorch/pytorch
