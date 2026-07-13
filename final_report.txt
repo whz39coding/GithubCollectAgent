@@ -1,15 +1,37 @@
-1. davila7/claude-code-templates:
-   star: 28795  语言/技术: Python
+1. HKUDS/Vibe-Trading:
+   star: 20756  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f8dbf882ed0 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f49daf86780 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/davila7/claude-code-templates
+   项目链接: https://github.com/HKUDS/Vibe-Trading
 
-2. home-assistant/core:
+2. PrefectHQ/prefect:
+   star: 23212  语言/技术: Python
+   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
+   亮点: 
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f49dadd8cb0 state=finished raised NotFoundError>]
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 未知
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 
+   项目链接: https://github.com/PrefectHQ/prefect
+
+3. Shubhamsaboo/awesome-llm-apps:
+   star: 118764  语言/技术: Python
+   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
+   亮点: 
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7f49dadb2990 state=finished raised NotFoundError>]
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 未知
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 
+   项目链接: https://github.com/Shubhamsaboo/awesome-llm-apps
+
+4. home-assistant/core:
    star: 88739  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
@@ -19,25 +41,3 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
    项目链接: https://github.com/home-assistant/core
-
-3. ansible/ansible:
-   star: 69236  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fe04d145760 state=finished raised NotFoundError>]
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/ansible/ansible
-
-4. pytorch/pytorch:
-   star: 101759  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb7b83f6b40 state=finished raised NotFoundError>]
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/pytorch/pytorch
