@@ -1,4 +1,26 @@
-1. Shubhamsaboo/awesome-llm-apps:
+1. HKUDS/Vibe-Trading:
+   star: 23806  语言/技术: Python
+   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
+   亮点: 
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb99357af00 state=finished raised NotFoundError>]
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 未知
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 
+   项目链接: https://github.com/HKUDS/Vibe-Trading
+
+2. HKUDS/DeepTutor:
+   star: 26391  语言/技术: Python
+   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
+   亮点: 
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb99359b7d0 state=finished raised NotFoundError>]
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 未知
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 
+   项目链接: https://github.com/HKUDS/DeepTutor
+
+3. Shubhamsaboo/awesome-llm-apps:
    star: 121031  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
@@ -9,35 +31,13 @@
    衍生灵感: 
    项目链接: https://github.com/Shubhamsaboo/awesome-llm-apps
 
-2. virattt/ai-hedge-fund:
-   star: 61935  语言/技术: Python
+4. github/spec-kit:
+   star: 121631  语言/技术: Python
    项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
    亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fad072d75c0 state=finished raised NotFoundError>]
+   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb9933df710 state=finished raised NotFoundError>]
    活跃度: 未知  社区健康: 未知
    商业潜力: 未知
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 
-   项目链接: https://github.com/virattt/ai-hedge-fund
-
-3. HKUDS/Vibe-Trading:
-   star: 23006  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fad0730ab10 state=finished raised NotFoundError>]
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/HKUDS/Vibe-Trading
-
-4. Graphify-Labs/graphify:
-   star: 86591  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fad073187d0 state=finished raised NotFoundError>]
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/Graphify-Labs/graphify
+   项目链接: https://github.com/github/spec-kit
