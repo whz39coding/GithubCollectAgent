@@ -12,7 +12,7 @@ ENV_FILE = BACKEND_ROOT / ".env"
 
 
 class Settings(BaseSettings):
-    send_message_flag: bool = Field(default=True, alias="SEND_MESSAGE")
+    send_message_flag: bool = Field(default=False, alias="SEND_MESSAGE")
     check_github_api : bool =Field(default=False,alias="CHECK_GITHUB_API")
     github_token: str | None = Field(default=None, alias="GITHUB_TOKEN")
     llm_api_key: str = Field(alias="LLM_API_KEY")
