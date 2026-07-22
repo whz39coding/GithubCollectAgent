@@ -1,0 +1,50 @@
+name: Daily GitHub Agent
+permissions:
+  contents: read
+on:
+  schedule:
+    # 每天北京时间早上 9:00 运行 (UTC 1:00)
+    - cron: "0 1 * * *"
+  workflow_dispatch: # 允许你手动点击按钮触发测试
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Agent
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          NOTIFIER_WEBHOOK: ${{ secrets.NOTIFIER_WEBHOOK }}
+          GITHUB_TOKEN: ${{ github.token }}
+          TRENDING_LANGUAGE: python
+          TRENDING_SINCE: daily
+          ANALYSIS_NUM: "4"
+          README_MAX_LENGTH: "20000"
+          SAVE_README: "false"
+          PROMPT_TEMPLATE_PATH: Prompt.txt
+          LOG_DIR: logs
+          DATABASE_URL: sqlite:///backend/database/agent.db
+          FINAL_REPORT_PATH: final_report.txt
+        run: python main.py
+
+      - name: Sync results to server
+        env:
+          ACTION_SYNC_URL: ${{ secrets.ACTION_SYNC_URL }}
+          ACTION_SYNC_SECRET: ${{ secrets.ACTION_SYNC_SECRET }}
+          ACTION_DELIVERY_ID: github-${{ github.run_id }}-${{ github.run_attempt }}
+        run: python sync_results.py

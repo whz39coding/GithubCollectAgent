@@ -1,0 +1,290 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #101828 !important;
+  padding: 18px 12px;
+}
+
+.sidebar .ant-menu {
+  background: transparent;
+  color: #cbd5e1;
+  border-inline-end: 0;
+}
+
+.sidebar .ant-menu-item {
+  color: #cbd5e1;
+}
+
+.sidebar .ant-menu-item:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.sidebar .ant-menu-item-selected {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.sidebar .ant-menu-item-selected .anticon,
+.sidebar .ant-menu-item-selected .ant-menu-title-content {
+  color: #ffffff !important;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  margin: 4px 6px 24px;
+}
+
+.brand span {
+  display: block;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: #2563eb;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.topbar {
+  min-height: 88px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  line-height: 1.4;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.topbar h4 {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.topbar .ant-typography {
+  max-width: 100%;
+}
+
+.content {
+  padding: 32px 40px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.insight-list-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.insight-list-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.insight-card {
+  min-height: 180px;
+}
+
+.insight-list-card {
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e2e8f0;
+}
+
+.insight-list-card .ant-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+
+.card-title-row,
+.detail-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.detail-title-row {
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.muted-summary {
+  margin: 0;
+  color: #475569;
+  min-height: 44px;
+}
+
+.business-box {
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-top: auto;
+}
+
+.business-title {
+  color: #4f46e5;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.business-text {
+  margin: 0;
+  color: #475569;
+  font-size: 13px;
+}
+
+.score-tag {
+  font-size: 14px;
+  padding: 4px 8px;
+  margin: 0;
+}
+
+.tech-stack-block {
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.tech-tag {
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.detail-page-card {
+  border-radius: 12px;
+  min-height: 100%;
+}
+
+.detail-score-tag {
+  font-size: 16px;
+  padding: 4px 10px;
+}
+
+.detail-summary {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.8;
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.detail-lines {
+  font-size: 15px;
+  color: #334155;
+  line-height: 1.8;
+}
+
+.detail-line {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.business-alert {
+  border-radius: 12px;
+  border: 1px solid #c7d2fe;
+  background-color: #f5f3ff;
+  padding: 20px;
+}
+
+.business-alert-text {
+  color: #3730a3;
+  font-size: 15px;
+  margin-top: 8px;
+  display: block;
+}
+
+.side-card {
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.side-list-item {
+  padding: 12px 0;
+  border-bottom: 1px dashed #f1f5f9;
+}
+
+.health-card {
+  border-radius: 12px;
+  background: #f8fafc;
+  border: none;
+}
+
+.health-blue,
+.health-green {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.health-blue {
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.health-green {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.date-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+pre {
+  background: #0f172a;
+  color: #ecd53f;
+  padding: 16px;
+  border-radius: 6px;
+  overflow: auto;
+}

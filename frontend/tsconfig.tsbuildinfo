@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/api.ts","./src/main.tsx","./src/types.ts","./src/components/metric.tsx","./src/pages/agentsettings.tsx","./src/pages/dashboard.tsx","./src/pages/insightdetailview.tsx","./src/pages/insightlibrary.tsx","./src/pages/runlogs.tsx"],"version":"5.9.3"}
