@@ -25,10 +25,18 @@ class GithubFetcher:
         if self.settings.github_token:
             headers["Authorization"] = f"token {self.settings.github_token}"
 
+        proxies = None
+        if self.settings.http_proxy:
+            proxies = {
+                "http": self.settings.http_proxy,
+                "https": self.settings.https_proxy or self.settings.http_proxy,
+            }
+
         response = requests.get(
             f"https://api.github.com/repos/{repo_name}/readme",
             headers=headers,
             timeout=10,
+            proxies=proxies,
         )
         if response.status_code in {403, 404}:
             return response

@@ -1,10 +1,10 @@
 name: Daily GitHub Agent
 permissions:
-  contents: write
+  contents: read
 on:
   schedule:
     # 每天北京时间早上 9:00 运行 (UTC 1:00)
-    - cron: '0 1 * * *'
+    - cron: "0 1 * * *"
   workflow_dispatch: # 允许你手动点击按钮触发测试
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -33,23 +33,18 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           TRENDING_LANGUAGE: python
           TRENDING_SINCE: daily
-          ANALYSIS_NUM: '4'
-          README_MAX_LENGTH: '20000'
-          SAVE_README: 'false'
+          ANALYSIS_NUM: "4"
+          README_MAX_LENGTH: "20000"
+          SAVE_README: "false"
           PROMPT_TEMPLATE_PATH: Prompt.txt
           LOG_DIR: logs
           DATABASE_URL: sqlite:///backend/database/agent.db
           FINAL_REPORT_PATH: final_report.txt
         run: python main.py
 
-      # - name: Commit database changes
-       # run: |
-         # git config user.name "github-actions[bot]"
-         # git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-         # git add backend/database/agent.db final_report.txt
-         # if git diff --cached --quiet; then
-           # echo "No database changes to commit."
-         # else
-           # git commit -m "chore: update daily agent database"
-           # git push
-         # fi
+      - name: Sync results to server
+        env:
+          ACTION_SYNC_URL: ${{ secrets.ACTION_SYNC_URL }}
+          ACTION_SYNC_SECRET: ${{ secrets.ACTION_SYNC_SECRET }}
+          ACTION_DELIVERY_ID: github-${{ github.run_id }}-${{ github.run_attempt }}
+        run: python sync_results.py

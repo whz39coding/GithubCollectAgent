@@ -4,7 +4,7 @@ import {
   HistoryOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Badge, Button, Layout, Menu, Space, Typography } from "antd";
+import { Badge, Button, Layout, Menu, Space, Typography, message } from "antd";
 import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -18,6 +18,7 @@ import {
   Overview,
   RunLog,
   Trends,
+  triggerRun,
 } from "./api";
 import { Dashboard } from "./pages/Dashboard";
 import { AgentSettings } from "./pages/AgentSettings";
@@ -71,7 +72,43 @@ function App() {
     loadAll();
   }, [filters]);
 
+  const [triggering, setTriggering] = useState(false);
+
+  const handleTrigger = async () => {
+    setTriggering(true);
+    try {
+      const res = await triggerRun();
+      message.success(res.message);
+      loadAll();
+    } catch (err: any) {
+      if (err.response && err.response.status === 409) {
+        message.warning(err.response?.data?.detail || "分析任务正在运行中，请勿重复触发");
+      } else {
+        message.error("触发分析任务失败，请检查网络或后台日志");
+      }
+    } finally {
+      setTriggering(false);
+    }
+  };
+
   const latestRun = overview?.latest_run;
+
+  useEffect(() => {
+    let timer: any = null;
+    if (latestRun?.status === "running") {
+      timer = setInterval(() => {
+        Promise.all([fetchOverview(), fetchRuns()])
+          .then(([overviewData, runsData]) => {
+            setOverview(overviewData);
+            setRuns(runsData);
+          })
+          .catch((err) => console.error("Polling run status failed:", err));
+      }, 5000);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [latestRun?.status]);
   const languageData = useMemo(() => {
     const totals = new Map<string, number>();
     trends?.languages.forEach((item) => {
@@ -93,8 +130,8 @@ function App() {
         <div className="brand">
           <div className="brand-mark">GI</div>
           <div>
-            <strong>GitHub Insight</strong>
-            <span>Agent Console</span>
+            <strong>GitHub 洞察探员</strong>
+            <span>系统控制台</span>
           </div>
         </div>
         <Menu
@@ -102,19 +139,19 @@ function App() {
           selectedKeys={[activeKey]}
           onClick={(item) => setActiveKey(item.key)}
           items={[
-            { key: "dashboard", icon: <BarChartOutlined />, label: "Dashboard" },
-            { key: "insights", icon: <DatabaseOutlined />, label: "Insight Library" },
-            { key: "runs", icon: <HistoryOutlined />, label: "Run Logs" },
-            { key: "settings", icon: <SettingOutlined />, label: "Agent Settings" },
+            { key: "dashboard", icon: <BarChartOutlined />, label: "数据大盘" },
+            { key: "insights", icon: <DatabaseOutlined />, label: "开源洞察库" },
+            { key: "runs", icon: <HistoryOutlined />, label: "任务日志" },
+            { key: "settings", icon: <SettingOutlined />, label: "探员设置" },
           ]}
         />
       </Sider>
       <Layout>
         <Header className="topbar">
           <div>
-            <Title level={4}>开源洞察数据看板</Title>
+            <Title level={4}>GitHub 开源智能洞察大盘</Title>
             <Text type="secondary">
-              由 GitHub Actions 每日定时生成，前端只读展示 SQLite 结果
+              每日定时抓取热门项目，使用 LLM 深度阅读并挖掘其核心亮点与商业开发潜力
             </Text>
           </div>
           <Space>
@@ -129,10 +166,17 @@ function App() {
             />
             <Text>
               {latestRun
-                ? `最近运行：${dayjs(latestRun.started_at).format("YYYY-MM-DD HH:mm")}`
-                : "暂无运行记录"}
+                ? `最近分析运行：${dayjs(latestRun.started_at).format("YYYY-MM-DD HH:mm")}`
+                : "暂无分析运行记录"}
             </Text>
-            <Button onClick={loadAll}>刷新数据</Button>
+            <Button onClick={loadAll}>同步刷新</Button>
+            <Button
+              type="primary"
+              loading={triggering || latestRun?.status === "running"}
+              onClick={handleTrigger}
+            >
+              {latestRun?.status === "running" ? "正在执行分析..." : "手动触发分析"}
+            </Button>
           </Space>
         </Header>
         <Content className="content">

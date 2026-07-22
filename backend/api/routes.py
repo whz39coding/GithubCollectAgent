@@ -1,12 +1,16 @@
+import re
 from datetime import date, timedelta
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request
+from pydantic import ValidationError
 from sqlalchemy import func, or_
 from sqlmodel import Session, select
 
 from backend.api.schemas import (
     AgentConfigOut,
     AgentConfigUpdate,
+    ActionIngestPayload,
+    ActionIngestResult,
     DashboardOverview,
     DashboardTrends,
     HealthOut,
@@ -19,12 +23,54 @@ from backend.api.schemas import (
     InsightUpdate,
     TrendPoint,
 )
-from backend.core.config import BACKEND_ROOT, PROJECT_ROOT
+from backend.core.config import BACKEND_ROOT, PROJECT_ROOT, get_settings
 from backend.database.engine import get_session
-from backend.database.models import DailyInsight, Repository, RunLog
+from backend.database.models import DailyInsight, Repository, RunLog, RunStatus
+from backend.main import run as run_agent
+from backend.services.action_ingest import ingest_action_payload, verify_ingest_signature
 
 
 router = APIRouter(prefix="/api")
+
+
+@router.post("/actions/ingest", response_model=ActionIngestResult)
+async def ingest_action_results(
+    request: Request,
+    session: Session = Depends(get_session),
+) -> ActionIngestResult:
+    secret = get_settings().ingest_api_secret
+    if not secret:
+        raise HTTPException(status_code=503, detail="Actions ingest is not configured")
+
+    timestamp = request.headers.get("X-Ingest-Timestamp", "")
+    delivery_id = request.headers.get("X-Ingest-Delivery", "")
+    signature = request.headers.get("X-Ingest-Signature", "")
+    if not re.fullmatch(r"[A-Za-z0-9._:-]{1,128}", delivery_id):
+        raise HTTPException(status_code=401, detail="Invalid ingest delivery")
+
+    body = await request.body()
+    if len(body) > 2_000_000:
+        raise HTTPException(status_code=413, detail="Ingest payload is too large")
+    if not verify_ingest_signature(
+        secret,
+        timestamp,
+        delivery_id,
+        body,
+        signature,
+    ):
+        raise HTTPException(status_code=401, detail="Invalid ingest signature")
+
+    try:
+        payload = ActionIngestPayload.model_validate_json(body)
+    except ValidationError as exc:
+        raise HTTPException(status_code=422, detail=exc.errors()) from exc
+
+    outcome = ingest_action_payload(session, delivery_id, payload)
+    return ActionIngestResult(
+        accepted=True,
+        duplicate=outcome.duplicate,
+        imported_count=outcome.imported_count,
+    )
 
 
 def run_to_out(run: RunLog | None) -> RunLogOut | None:
@@ -242,6 +288,23 @@ def list_runs(limit: int = Query(default=20, ge=1, le=100), session: Session = D
     return [item for item in (run_to_out(run) for run in runs) if item is not None]
 
 
+@router.post("/runs/trigger")
+def trigger_run(background_tasks: BackgroundTasks, session: Session = Depends(get_session)) -> dict[str, str]:
+    # 检查是否有任务正在运行中
+    running_task = session.exec(
+        select(RunLog).where(RunLog.status == RunStatus.RUNNING)
+    ).first()
+    if running_task:
+        raise HTTPException(
+            status_code=409,
+            detail="分析任务正在运行中，请勿重复触发"
+        )
+
+    # 异步触发运行
+    background_tasks.add_task(run_agent)
+    return {"message": "分析任务已在后台启动"}
+
+
 @router.get("/settings/agent", response_model=AgentConfigOut)
 def get_agent_config() -> AgentConfigOut:
     return AgentConfigOut(env=_read_env_file(), prompt=_read_prompt_file())
@@ -251,6 +314,13 @@ def get_agent_config() -> AgentConfigOut:
 def update_agent_config(payload: AgentConfigUpdate) -> AgentConfigOut:
     _write_env_file(payload.env)
     _write_prompt_file(payload.prompt)
+
+    # 动态清除 Pydantic Settings 的缓存，并重新加载环境变量
+    from backend.core.config import get_settings, ENV_FILE
+    from dotenv import load_dotenv
+    get_settings.cache_clear()
+    load_dotenv(dotenv_path=ENV_FILE, override=True)
+
     return AgentConfigOut(env=_read_env_file(), prompt=_read_prompt_file())
 
 
@@ -307,6 +377,8 @@ def _write_env_file(values: dict[str, str]) -> None:
         "LOG_DIR",
         "DATABASE_URL",
         "FINAL_REPORT_PATH",
+        "HTTP_PROXY",
+        "HTTPS_PROXY",
     ]
     lines = [f"{key}={values.get(key, '')}" for key in allowed_keys]
     (BACKEND_ROOT / ".env").write_text("\n".join(lines) + "\n", encoding="utf-8")

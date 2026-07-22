@@ -54,6 +54,8 @@ export function AgentSettings() {
       LOG_DIR: values.LOG_DIR || "logs",
       DATABASE_URL: values.DATABASE_URL || "sqlite:///backend/database/agent.db",
       FINAL_REPORT_PATH: values.FINAL_REPORT_PATH || "final_report.txt",
+      HTTP_PROXY: values.HTTP_PROXY || "",
+      HTTPS_PROXY: values.HTTPS_PROXY || "",
     };
     await updateAgentConfig({ env, prompt: values.prompt || "" });
     message.success("Agent 配置已保存");
@@ -70,7 +72,26 @@ export function AgentSettings() {
         <Form form={form} layout="vertical">
           <Space size={16} wrap>
             <Form.Item label="分析语言" name="TRENDING_LANGUAGE">
-              <Input style={{ width: 180 }} placeholder="python" />
+              <Select
+                showSearch
+                style={{ width: 180 }}
+                placeholder="选择语言"
+                optionFilterProp="label"
+                options={[
+                  { value: "", label: "All (全部语言)" },
+                  { value: "python", label: "Python" },
+                  { value: "go", label: "Go" },
+                  { value: "typescript", label: "TypeScript" },
+                  { value: "javascript", label: "JavaScript" },
+                  { value: "rust", label: "Rust" },
+                  { value: "java", label: "Java" },
+                  { value: "c++", label: "C++" },
+                  { value: "c", label: "C" },
+                  { value: "swift", label: "Swift" },
+                  { value: "kotlin", label: "Kotlin" },
+                  { value: "shell", label: "Shell" },
+                ]}
+              />
             </Form.Item>
             <Form.Item label="榜单周期" name="TRENDING_SINCE">
               <Select style={{ width: 180 }} options={[
@@ -96,6 +117,24 @@ export function AgentSettings() {
             </Form.Item>
             <Form.Item label="保存 README 原文" name="SAVE_README" valuePropName="checked">
               <Switch />
+            </Form.Item>
+          </Space>
+
+          <Space size={16} wrap>
+            <Form.Item label="飞书 Webhook 地址 (FEISHU_WEBHOOK)" name="FEISHU_WEBHOOK">
+              <Input style={{ width: 470 }} placeholder="https://open.feishu.cn/open-apis/bot/v2/hook/..." />
+            </Form.Item>
+            <Form.Item label="备用 Webhook 地址 (NOTIFIER_WEBHOOK)" name="NOTIFIER_WEBHOOK">
+              <Input style={{ width: 470 }} placeholder="https://..." />
+            </Form.Item>
+          </Space>
+
+          <Space size={16} wrap>
+            <Form.Item label="HTTP 代理 (HTTP_PROXY)" name="HTTP_PROXY">
+              <Input style={{ width: 470 }} placeholder="例如: http://127.0.0.1:7890" />
+            </Form.Item>
+            <Form.Item label="HTTPS 代理 (HTTPS_PROXY)" name="HTTPS_PROXY">
+              <Input style={{ width: 470 }} placeholder="例如: http://127.0.0.1:7890" />
             </Form.Item>
           </Space>
 

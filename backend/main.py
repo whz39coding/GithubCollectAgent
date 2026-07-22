@@ -80,8 +80,8 @@ def run() -> list[AnalysisResult]:
                     failed_count += 1
                     continue
 
-                project_with_readme = store.mark_project_state(project_with_readme)
-                cached_result = store.get_cached_analysis(project_with_readme)
+                project_with_readme, existing_report = store.mark_project_state(project_with_readme)
+                cached_result = store.get_cached_analysis(project_with_readme, existing_report)
                 if cached_result is not None:
                     cache_hit_count += 1
                     results.append(cached_result)

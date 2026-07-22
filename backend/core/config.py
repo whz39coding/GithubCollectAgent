@@ -2,6 +2,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
+from dotenv import load_dotenv
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -9,6 +10,17 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 BACKEND_ROOT = Path(__file__).resolve().parents[1]
 ENV_FILE = BACKEND_ROOT / ".env"
+
+import os
+# 显式加载 .env 以更新 os.environ，保证 requests 等第三方库能够读取到代理变量
+load_dotenv(dotenv_path=ENV_FILE)
+
+# 【关键修复】Linux 系统下 Python 的 requests 库严格依赖小写的环境变量（http_proxy/https_proxy）。
+# 无论是在前端 UI 配置，还是 .env 文件中，通常是大写。这里强制把大写同步给小写，防止代理失效。
+if os.environ.get("HTTP_PROXY"):
+    os.environ["http_proxy"] = os.environ["HTTP_PROXY"]
+if os.environ.get("HTTPS_PROXY"):
+    os.environ["https_proxy"] = os.environ["HTTPS_PROXY"]
 
 
 class Settings(BaseSettings):
@@ -20,6 +32,9 @@ class Settings(BaseSettings):
     llm_model: str = Field(alias="LLM_MODEL")
     feishu_webhook: str | None = Field(default=None, alias="FEISHU_WEBHOOK")
     legacy_notifier_webhook: str | None = Field(default=None, alias="NOTIFIER_WEBHOOK")
+    http_proxy: str | None = Field(default=None, alias="HTTP_PROXY")
+    https_proxy: str | None = Field(default=None, alias="HTTPS_PROXY")
+    ingest_api_secret: str | None = Field(default=None, alias="INGEST_API_SECRET")
 
     trending_language: str = Field(alias="TRENDING_LANGUAGE")
     trending_since: Literal["daily", "weekly", "monthly"] = Field(alias="TRENDING_SINCE")

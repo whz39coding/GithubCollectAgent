@@ -89,18 +89,18 @@ export function InsightLibrary({
       render: (value) => <a href={value} target="_blank" rel="noreferrer">{value}</a>,
     },
     {
-      title: "简单介绍",
+      title: "分析摘要",
       dataIndex: "summary",
       ellipsis: true,
     },
     {
-      title: "语言",
+      title: "开发语言",
       dataIndex: "language",
       width: 120,
       render: (value) => <Tag color="blue">{value}</Tag>,
     },
     {
-      title: "评分",
+      title: "推荐评分",
       dataIndex: "score",
       width: 90,
       render: (value) => <Tag color="gold">{value}</Tag>,
@@ -185,34 +185,34 @@ export function InsightLibrary({
           <Form.Item label="项目地址" name="repository_url" rules={[{ required: true }]}>
             <Input placeholder="https://github.com/owner/repo" />
           </Form.Item>
-          <Form.Item label="简单介绍" name="summary" rules={[{ required: true }]}>
+          <Form.Item label="分析摘要" name="summary" rules={[{ required: true }]}>
             <Input.TextArea rows={3} />
           </Form.Item>
           <Space size={16} wrap>
-            <Form.Item label="语言" name="language">
+            <Form.Item label="开发语言" name="language">
               <Input style={{ width: 160 }} />
             </Form.Item>
-            <Form.Item label="分类" name="category">
+            <Form.Item label="项目分类" name="category">
               <Input style={{ width: 160 }} />
             </Form.Item>
-            <Form.Item label="评分" name="score">
+            <Form.Item label="推荐评分 (1-5)" name="score">
               <InputNumber min={1} max={5} style={{ width: 120 }} />
             </Form.Item>
-            <Form.Item label="Stars" name="stars">
+            <Form.Item label="星标数 (Stars)" name="stars">
               <InputNumber min={0} style={{ width: 140 }} />
             </Form.Item>
           </Space>
-          <Form.Item label="技术栈（逗号分隔）" name="tech_stack_text">
+          <Form.Item label="核心技术栈 (英文逗号分隔)" name="tech_stack_text">
             <Input placeholder="Python, FastAPI, React" />
           </Form.Item>
-          <Form.Item label="商业潜力" name="business_potential">
+          <Form.Item label="商业价值与开发潜力" name="business_potential">
             <Input.TextArea rows={2} />
           </Form.Item>
           <Space size={16} wrap>
-            <Form.Item label="活跃度" name="activity_level">
+            <Form.Item label="开发活跃度" name="activity_level">
               <Input style={{ width: 260 }} />
             </Form.Item>
-            <Form.Item label="社区健康" name="community_health">
+            <Form.Item label="社区健康度" name="community_health">
               <Input style={{ width: 260 }} />
             </Form.Item>
           </Space>

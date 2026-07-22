@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from enum import Enum
 
-from sqlalchemy import Column, JSON
+from sqlalchemy import Column, JSON, TEXT
 from sqlmodel import Field, SQLModel
 
 
@@ -15,7 +15,7 @@ class Repository(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str = Field(index=True)
     url: str = Field(unique=True, index=True)
-    description: str = ""
+    description: str = Field(default="", sa_column=Column(TEXT))
     language: str = "Unknown"
     first_seen_at: datetime = Field(default_factory=datetime.utcnow)
     last_seen_at: datetime = Field(default_factory=datetime.utcnow)
@@ -35,14 +35,14 @@ class AnalysisReport(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     repository_url: str = Field(foreign_key="repository.url", unique=True, index=True)
     project_name: str
-    summary: str
+    summary: str = Field(sa_column=Column(TEXT))
     category: str = "未分类"
     score: int = 3
     tech_stack: list[str] = Field(default_factory=list, sa_column=Column(JSON))
     highlights: list[str] = Field(default_factory=list, sa_column=Column(JSON))
-    details: str
+    details: str = Field(sa_column=Column(TEXT))
     dev_ideas: list[str] = Field(default_factory=list, sa_column=Column(JSON))
-    business_potential: str = "文档未提及"
+    business_potential: str = Field(default="文档未提及", sa_column=Column(TEXT))
     community_health: str = "未知"
     activity_level: str = "未知"
     risk_notes: list[str] = Field(default_factory=list, sa_column=Column(JSON))
@@ -60,15 +60,15 @@ class DailyInsight(SQLModel, table=True):
     repository_url: str = Field(foreign_key="repository.url", index=True)
     project_name: str = Field(index=True)
     score: int = 3
-    summary: str
+    summary: str = Field(sa_column=Column(TEXT))
     category: str = "未分类"
     language: str = "Unknown"
     stars: int = 0
     tech_stack: list[str] = Field(default_factory=list, sa_column=Column(JSON))
     highlights: list[str] = Field(default_factory=list, sa_column=Column(JSON))
-    details: str
+    details: str = Field(sa_column=Column(TEXT))
     dev_ideas: list[str] = Field(default_factory=list, sa_column=Column(JSON))
-    business_potential: str = "文档未提及"
+    business_potential: str = Field(default="文档未提及", sa_column=Column(TEXT))
     community_health: str = "未知"
     activity_level: str = "未知"
     risk_notes: list[str] = Field(default_factory=list, sa_column=Column(JSON))
@@ -91,3 +91,8 @@ class RunLog(SQLModel, table=True):
     cache_hit_count: int = 0
     failed_count: int = 0
     error_summary: str | None = None
+
+
+class IngestDelivery(SQLModel, table=True):
+    delivery_id: str = Field(primary_key=True, max_length=128)
+    received_at: datetime = Field(default_factory=datetime.utcnow)

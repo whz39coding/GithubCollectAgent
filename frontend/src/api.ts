@@ -99,3 +99,4 @@ export const updateInsight = async (id: number, payload: InsightPayload) => (awa
 export const deleteInsight = async (id: number) => (await api.delete(`/insights/${id}`)).data;
 export const fetchAgentConfig = async () => (await api.get<AgentConfig>('/settings/agent')).data;
 export const updateAgentConfig = async (payload: AgentConfig) => (await api.put<AgentConfig>('/settings/agent', payload)).data;
+export const triggerRun = async () => (await api.post<{ message: string }>('/runs/trigger')).data;

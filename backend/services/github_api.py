@@ -25,11 +25,19 @@ class GithubApiClient:
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=8))
     def _get_json(self, path: str, params: dict[str, str | int] | None = None) -> dict | list:
+        proxies = None
+        if self.settings.http_proxy:
+            proxies = {
+                "http": self.settings.http_proxy,
+                "https": self.settings.https_proxy or self.settings.http_proxy,
+            }
+
         response = requests.get(
             f"{self.base_url}{path}",
             headers=self.headers,
             params=params,
             timeout=10,
+            proxies=proxies,
         )
         if response.status_code == 404:
             return {}

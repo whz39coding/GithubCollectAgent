@@ -94,48 +94,78 @@ class RepositoryStore:
         statement = select(Repository).where(Repository.url == repository_url)
         return self.session.exec(statement).first()
 
-    def get_cached_analysis(self, project: ProjectWithReadme) -> AnalysisResult | None:
-        if not project.readme_hash:
-            return None
+    def get_existing_report(self, repository_url: str) -> AnalysisReport | None:
+        """查询数据库中已有的分析报告（仅按 URL 匹配）。"""
+        statement = select(AnalysisReport).where(AnalysisReport.repository_url == repository_url)
+        return self.session.exec(statement).first()
 
-        statement = select(AnalysisReport).where(
-            AnalysisReport.repository_url == str(project.url),
-            AnalysisReport.readme_hash == project.readme_hash,
-        )
-        report = self.session.exec(statement).first()
-        if report is None:
-            return None
-
-        logger.info("{} 命中分析缓存，跳过 LLM 调用", project.name)
-        return AnalysisResult(
-            project_name=report.project_name,
-            url=report.repository_url,
-            stars=report.stars,
-            summary=report.summary,
-            category=report.category,
-            score=report.score,
-            tech_stack=report.tech_stack,
-            highlights=report.highlights,
-            details=report.details,
-            dev_ideas=report.dev_ideas,
-            business_potential=report.business_potential,
-            community_health=report.community_health,
-            activity_level=report.activity_level,
-            risk_notes=report.risk_notes,
-            metrics=report.metrics,
-        )
-
-    def mark_project_state(self, project: ProjectWithReadme) -> ProjectWithReadme:
+    def mark_project_state(
+        self, project: ProjectWithReadme
+    ) -> tuple["ProjectWithReadme", AnalysisReport | None]:
+        """
+        计算当前 README hash，查询数据库中已有报告，
+        标记项目状态（is_new / is_updated），并返回 (project, existing_report)。
+        调用方应使用返回的 existing_report 调用 get_cached_analysis，
+        避免重复查库。
+        """
         readme_hash = self.hash_readme(project.readme_content)
-        statement = select(AnalysisReport).where(AnalysisReport.repository_url == str(project.url))
-        existing_report = self.session.exec(statement).first()
+        existing_report = self.get_existing_report(str(project.url))
 
-        return project.model_copy(
+        # 若历史报告的 readme_hash 为空（旧数据），视为需要重新分析
+        existing_hash = existing_report.readme_hash if existing_report else None
+        is_new = existing_report is None
+        is_updated = (
+            existing_report is not None
+            and bool(existing_hash)  # 旧 hash 为空也视为需更新
+            and existing_hash != readme_hash
+        )
+
+        updated_project = project.model_copy(
             update={
                 "readme_hash": readme_hash,
-                "is_new": existing_report is None,
-                "is_updated": existing_report is not None and existing_report.readme_hash != readme_hash,
+                "is_new": is_new,
+                "is_updated": is_updated,
             }
+        )
+        return updated_project, existing_report
+
+    def get_cached_analysis(
+        self,
+        project: ProjectWithReadme,
+        existing_report: AnalysisReport | None,
+    ) -> AnalysisResult | None:
+        """
+        根据 mark_project_state 返回的 existing_report 判断缓存是否命中。
+        - is_new=True  → 无缓存，需要 LLM 分析
+        - is_updated=True → README 有变化，需要重新 LLM 分析
+        - 其他情况 → 直接复用已有报告，跳过 LLM
+        """
+        # 全新项目或 README 已更新，不使用缓存
+        if project.is_new or project.is_updated:
+            return None
+
+        # existing_report 应该有值（is_new=False），防御性检查
+        if existing_report is None:
+            logger.warning("{} 状态异常：is_new=False 但 existing_report 为 None，将重新分析", project.name)
+            return None
+
+        logger.info("{} 命中分析缓存（hash 未变），跳过 LLM 调用", project.name)
+        return AnalysisResult(
+            project_name=existing_report.project_name,
+            url=existing_report.repository_url,
+            stars=existing_report.stars,
+            summary=existing_report.summary,
+            category=existing_report.category,
+            score=existing_report.score,
+            tech_stack=existing_report.tech_stack,
+            highlights=existing_report.highlights,
+            details=existing_report.details,
+            dev_ideas=existing_report.dev_ideas,
+            business_potential=existing_report.business_potential,
+            community_health=existing_report.community_health,
+            activity_level=existing_report.activity_level,
+            risk_notes=existing_report.risk_notes,
+            metrics=existing_report.metrics,
         )
 
     def save_analysis(self, result: AnalysisResult, project: ProjectWithReadme) -> None:
