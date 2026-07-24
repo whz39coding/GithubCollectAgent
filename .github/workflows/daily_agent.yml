@@ -28,13 +28,14 @@ jobs:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          SEND_MESSAGE: ${{ secrets.SEND_MESSAGE }}
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           NOTIFIER_WEBHOOK: ${{ secrets.NOTIFIER_WEBHOOK }}
-          GITHUB_TOKEN: ${{ github.token }}
-          TRENDING_LANGUAGE: python
-          TRENDING_SINCE: daily
-          ANALYSIS_NUM: "4"
-          README_MAX_LENGTH: "10000"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TRENDING_LANGUAGE: ${{ secrets.LAN }}
+          TRENDING_SINCE: ${{ secrets.SINCE }}
+          ANALYSIS_NUM: ${{ secrets.ANALYSIS_NUM }}
+          README_MAX_LENGTH: ${{ secrets.README_MAX }}
           SAVE_README: "false"
           PROMPT_TEMPLATE_PATH: Prompt.txt
           LOG_DIR: logs
