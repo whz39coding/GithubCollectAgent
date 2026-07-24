@@ -27,9 +27,10 @@ venv/
 ENV/
 env/
 .venv/
-
+.agents/
 logs/
 *.log
+tests/
 
 *.db
 *.sqlite3
