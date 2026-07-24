@@ -34,7 +34,7 @@ jobs:
           TRENDING_LANGUAGE: python
           TRENDING_SINCE: daily
           ANALYSIS_NUM: "4"
-          README_MAX_LENGTH: "20000"
+          README_MAX_LENGTH: "10000"
           SAVE_README: "false"
           PROMPT_TEMPLATE_PATH: Prompt.txt
           LOG_DIR: logs
