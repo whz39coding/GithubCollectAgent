@@ -1,10 +1,9 @@
 import json
 
 from loguru import logger
-from openai import OpenAI
+from openai import APIConnectionError, APITimeoutError, InternalServerError, OpenAI, RateLimitError
 from pydantic import ValidationError
-from tenacity import RetryError
-from tenacity import retry, stop_after_attempt, wait_exponential
+from tenacity import RetryError, retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 from backend.core.config import Settings
 from backend.schemas.project import AnalysisResult, GithubMetrics, ProjectWithReadme
@@ -16,7 +15,12 @@ class LLMAnalyzer:
             raise ValueError("未配置 LLM_API_KEY，无法执行大模型分析。")
 
         self.settings = settings
-        self.client = OpenAI(api_key=settings.llm_api_key, base_url=settings.llm_base_url)
+        self.client = OpenAI(
+            api_key=settings.llm_api_key,
+            base_url=settings.llm_base_url,
+            timeout=90.0,
+            max_retries=0,
+        )
         self.prompt_template = self._load_prompt_template()
 
     def _load_prompt_template(self) -> str:
@@ -31,10 +35,20 @@ class LLMAnalyzer:
         try:
             return self._analyze_project(project)
         except RetryError as exc:
-            logger.warning("{} 多次分析失败，生成回退报告: {}", project.name, exc)
+            cause = exc.last_attempt.exception()
+            logger.warning("{} 重试 {} 次后仍失败: {}", project.name, exc.last_attempt.attempt_number, cause)
+            return self._fallback_result(project, str(cause))
+        except Exception as exc:
+            logger.warning("{} LLM 分析失败，生成回退报告: {}", project.name, exc)
             return self._fallback_result(project, str(exc))
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=8))
+    @retry(
+        retry=retry_if_exception_type(
+            (APIConnectionError, APITimeoutError, InternalServerError, RateLimitError, json.JSONDecodeError, ValidationError)
+        ),
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=1, max=8),
+    )
     def _analyze_project(self, project: ProjectWithReadme) -> AnalysisResult:
         logger.info("正在调用 LLM 分析: {}", project.name)
         prompt = self._build_prompt(project)
@@ -46,10 +60,11 @@ class LLMAnalyzer:
                 {"role": "user", "content": prompt},
             ],
             temperature=0.4,
-            response_format={"type": "json_object"},
         )
 
         raw_content = response.choices[0].message.content or ""
+        if not raw_content.strip():
+            raise ValueError("LLM 返回了空内容")
         clean_content = raw_content.replace("```json", "").replace("```", "").strip()
 
         try:
@@ -60,7 +75,7 @@ class LLMAnalyzer:
             payload["metrics"] = project.metrics.model_dump()
             return AnalysisResult.model_validate(payload)
         except (json.JSONDecodeError, ValidationError) as exc:
-            logger.warning("LLM 返回结构不合法，将触发重试: {}", exc)
+            logger.warning("{} 的 LLM 返回不是合法结果，将触发重试: {}", project.name, exc)
             raise
 
     def _build_prompt(self, project: ProjectWithReadme) -> str:

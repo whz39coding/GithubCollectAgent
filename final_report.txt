@@ -1,43 +1,43 @@
-1. Robbyant/lingbot-map:
-   star: 13050  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7ffb40f8cf50 state=finished raised NotFoundError>]
+1. ComposioHQ/awesome-claude-skills:
+   star: 69795  语言/技术: Markdown, YAML, Claude Skills, MCP (Model Context Protocol), Composio MCP Gateway
+   项目简介: 这是一个由 Compsio 维护的超大型 Claude Skills 资源集合，汇集了 1000+ 个可直接投入生产的实用技能插件。它的核心价值在于将 Anthropic 推出的 Claude Skills 开放标准落地，让开发者能快速为 Claude Code、Codex、Cursor 等多种 AI 编码 Agent 赋予跨领域的专业能力，从文档处理到业务自动化全覆盖，堪称 AI Agent 界的‘瑞士军刀’与‘技能百宝箱’。
+   亮点: 1000+ 生产级技能库，覆盖文档处理、开发工具、数据分析、商业营销等十大领域; 基于 Anthropic 官方开放标准，支持 Claude.ai、Claude Code、OpenAI Codex、Cursor、Gemini CLI 等多平台; 通过 Composio MCP Gateway 实现一键连接 1000+ 外部应用（Slack、Jira、邮件等），让 Agent 真正具备‘动手能力’
+   详细报告: 该项目本质上是一个精心策展的‘技能市场’，它并不直接提供可执行的代码仓库，而是提供一套标准化的 SKILL.md 指令文件，让 AI Agent 学会如何按流程完成特定任务。其技术核心在于对 Anthropic 新推出的 Skills 开放标准的深度适配与扩展：每个技能都是一个独立的文件夹，包含 YAML 前置元数据（名称、描述）和 Markdown 格式的详细工作流指令。架构上，它巧妙地分层解耦——Skills 定义‘做什么’（行为），MCP（Model Context Protocol）定义‘怎么连’（连接外部系统的标准协议），而 Tools 则是具体的执行函数。这种三层架构（Skills + MCP + Tools）确保了 Agent 在不膨胀上下文窗口的前提下，能按需加载数百个技能。此外，项目还强调了与 Composio 生态的深度集成，通过 connect-apps 插件，Claude 可以直接调用 1000+ API 完成发邮件、建 Issue 等真实操作，而不仅仅是生成文本。这标志着 AI Agent 从‘聊天机器人’向‘数字员工’的演进。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/Robbyant/lingbot-map
+   衍生灵感: 灵感1：基于此项目，可以开发一个‘垂直行业合规审计 Agent’，专门针对金融或医疗领域，集成特定行业的法规库和审计工具，自动生成合规报告并提交至内部系统。; 灵感2：可以将其集成到现有 CI/CD 流水线中，构建一个‘智能代码审查与修复专员’，不仅 review 代码，还能根据技能库自动生成修复 PR 并关联 Jira 工单。; 灵感3：基于文档处理技能链，开发一个‘跨平台内容工厂’，自动将一篇长文同时拆解并优化为 Twitter 线程、LinkedIn 文章和 YouTube 视频脚本，一键分发。
+   项目链接: https://github.com/ComposioHQ/awesome-claude-skills
 
-2. apache/ossie:
-   star: 965  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb4c489ea80 state=finished raised NotFoundError>]
+2. shiyu-coder/Kronos:
+   star: 33351  语言/技术: Python, PyTorch, Transformer, Hugging Face, AAAI 2026
+   项目简介: Kronos 是全球首个开源的金融 K 线基础模型，专为量化交易和金融市场预测设计。它通过独特的双层架构（分层离散化 Tokenizer + 自回归 Transformer），将高噪声、多维度的 OHLCV 数据转化为模型可理解的"语言"，并支持多交易所、多币种的价格序列预测。
+   亮点: 首个面向金融 K 线的开源基础模型，覆盖全球 45+ 交易所数据; 创新性的两层架构：Kronos-Tokenizer 将连续 OHLCV 量化为层次化离散 Token; 提供从 mini 到 large 的多规格模型族，适配不同算力需求; 开箱即用的 KronosPredictor 类，简化预测流程; 已接受 AAAI 2026 顶会录用，论文已发布于 arXiv
+   详细报告: Kronos 的核心创新在于它把金融时间序列当成了"语言"来建模。传统量化模型往往直接处理原始价格或简单技术指标，而 Kronos 引入了一个专门的分层离散化 Tokenizer，将连续、多维的 K 线数据（开盘价、最高价、最低价、收盘价、成交量）映射为离散的 Token 序列，随后由一个大规模自回归 Transformer 进行预训练。这种设计让模型能够捕捉金融市场中复杂的非线性依赖关系和高噪声特性。模型家族包含四个版本：Kronos-mini（4.1M 参数，上下文 2048）、Kronos-small（24.7M 参数，上下文 512）、Kronos-base（102.3M 参数，上下文 512）以及暂未开源的 Kronos-large（499.2M 参数）。所有模型均托管在 Hugging Face Hub 上，并配有对应的 Tokenizer。项目提供了完整的微调脚本，允许开发者将模型适配到自己的特定任务上。官方还搭建了 BTC/USDT 实时预测可视化 Demo，方便用户直观感受模型效果。代码库包含模型定义、预测接口以及微调工具，注释中提到部分代码由 AI 助手生成，仅供参考。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/apache/ossie
+   衍生灵感: 灵感1：基于 Kronos 的多资产预测能力，开发一个"跨市场套利信号引擎"——同时监控股票、加密货币和外汇市场，当 Kronos 在不同市场检测到同步的异常波动模式时，自动触发套利或对冲交易信号。; 灵感2：构建一个"智能量化回测平台"，将 Kronos 的预测结果与交易成本、滑点、市场冲击等现实因素结合，生成带置信区间的策略收益曲线，帮助交易者在实盘前更准确地评估策略风险。; 灵感3：开发一个"K 线数据增强与合成工具"——利用 Kronos 的生成能力，为数据稀缺的小币种或新兴市场合成高质量的模拟 K 线数据，解决量化研究中"长尾资产"数据不足的痛点。
+   项目链接: https://github.com/shiyu-coder/Kronos
 
-3. PostHog/posthog:
-   star: 35902  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7fb4c48bff80 state=finished raised NotFoundError>]
+3. dottxt-ai/outlines:
+   star: 15304  语言/技术: Python, Pydantic, Transformers, OpenAI API, vLLM, Ollama, JSON Schema, FHIR, XML
+   项目简介: Outlines 是一个专为 LLM 设计的结构化输出生成库，旨在解决大模型输出不可控、难以解析的痛点。它通过在生成过程中直接约束输出格式，确保返回的数据严格符合预设的结构（如 JSON、Pydantic 模型、枚举或自定义语法），从而免去了开发者事后用正则或复杂逻辑清洗数据的烦恼，堪称 LLM 结构化输出的“救星”。
+   亮点: 生成即结构化：直接在 LLM 生成阶段锁定输出格式，彻底告别解析失败; 模型无关性：同一套代码可无缝切换 OpenAI、Ollama、vLLM 等多种后端; 类型驱动开发：借鉴 Python 类型系统，使用 Literal、int、Pydantic BaseModel 等定义输出; 企业级集成：已被 NVIDIA、Cohere、HuggingFace、vLLM 等知名厂商信任
+   详细报告: Outlines 的核心价值在于将 LLM 的输出从“自由文本”转变为“受控数据”。传统做法是先生成文本再用正则或 JSON 解析器提取信息，这往往脆弱且容易出错；Outlines 则将结构约束嵌入生成过程，让模型直接产出合法的 JSON 或符合 Pydantic 模型定义的对象。技术层面，它深度集成了 Python 的类型提示系统和 Pydantic 库，允许开发者用 `Literal`、`Enum`、`list[str]` 等原生类型声明输出结构，并自动将其转化为模型可理解的约束条件。在模型支持方面，它提供了 `outlines.from_transformers`、`outlines.from_openai` 等工厂函数，兼容 HuggingFace Transformers、vLLM、Ollama 等主流推理框架，实现了真正的提供者无关性。项目还提到了对 XML、FHIR（医疗数据标准）和自定义语法的支持，暗示了其在企业级合规场景下的潜力。文档中展示了客户支持分类、电商产品归类、事件解析、文档分类和会议调度等多个生产级示例，证明了其在真实业务场景中的可用性。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/PostHog/posthog
+   衍生灵感: 灵感1：开发一个“智能合同条款提取器”，利用 Outlines 强制 LLM 输出标准化的法律条款 JSON 结构，自动归档到风控系统。; 灵感2：构建一个“跨平台电商数据标准化中间件”，将不同平台（淘宝、京东、拼多多）的商品描述统一转换为 FHIR 或自定义 Schema 格式，便于比价分析。; 灵感3：创建一个“医疗记录结构化助手”，集成 FHIR 标准，将医生口述的非结构化病历自动转换为符合医疗合规要求的 XML 或 JSON 文档。
+   项目链接: https://github.com/dottxt-ai/outlines
 
-4. rohitg00/ai-engineering-from-scratch:
-   star: 39172  语言/技术: Python
-   项目简介: 大模型分析失败，已保留项目基础信息，建议稍后重试。
-   亮点: 
-   详细报告: 本次 LLM Pipeline 未能生成合法结构化结果。失败摘要：RetryError[<Future at 0x7ffb40de5dc0 state=finished raised NotFoundError>]
+4. paperless-ngx/paperless-ngx:
+   star: 43427  语言/技术: Docker, Python, JavaScript, PostgreSQL, Redis, Celery, Django
+   项目简介: Paperless-ngx 是一个文档管理系统，旨在将纸质文件转化为可搜索的在线档案，帮助用户实现无纸化办公。它通过扫描、索引和归档功能，让用户能够轻松管理和检索物理文档，从而减少对纸质文件的依赖。
+   亮点: 将物理文档转换为可搜索的在线档案; 支持 Docker 部署，简化安装流程; 提供演示站点，方便用户快速体验
+   详细报告: Paperless-ngx 是一个面向个人和团队的文档管理解决方案，主要解决纸质文件难以检索、存储和管理的痛点。通过扫描仪或手机拍照，用户可以将纸质文件转化为数字格式，并自动进行 OCR 识别和索引。系统支持标签、文档类型和归档日期等元数据管理，方便用户快速查找历史文件。技术层面，它采用 Django 框架构建后端，利用 PostgreSQL 存储数据，Redis 处理缓存和任务队列，Celery 负责异步任务（如 OCR 处理）。前端使用现代 JavaScript 技术，确保界面响应迅速。Docker 部署方式大大降低了使用门槛，用户只需一条命令即可完成安装。尽管 README 内容被截断，但其核心理念是打造一个轻量级、高效且易于维护的无纸化系统。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
-   项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
+   衍生灵感: 灵感1：基于 Paperless-ngx 的 OCR 和索引能力，开发一个“合同智能审查助手”，自动提取合同中的关键条款、金额和日期，并生成摘要或风险提示。; 灵感2：将其集成到企业的 ERP 或 CRM 系统中，优化发票和收据的自动归档与报销流程，减少人工录入错误。; 灵感3：结合移动扫描应用，打造一个“个人数字档案柜”，专门用于管理身份证、护照、房产证等重要证件的电子版，并设置过期提醒。
+   项目链接: https://github.com/paperless-ngx/paperless-ngx
