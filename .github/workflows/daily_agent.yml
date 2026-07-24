@@ -31,11 +31,11 @@ jobs:
           SEND_MESSAGE: ${{ secrets.SEND_MESSAGE }}
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           NOTIFIER_WEBHOOK: ${{ secrets.NOTIFIER_WEBHOOK }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           TRENDING_LANGUAGE: ${{ secrets.LAN }}
           TRENDING_SINCE: ${{ secrets.SINCE }}
-          ANALYSIS_NUM: ${{ secrets.ANALYSIS_NUM }}
-          README_MAX_LENGTH: ${{ secrets.README_MAX }}
+          ANALYSIS_NUM: 4
+          README_MAX_LENGTH: 10000
           SAVE_README: "false"
           PROMPT_TEMPLATE_PATH: Prompt.txt
           LOG_DIR: logs
