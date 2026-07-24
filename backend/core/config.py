@@ -34,7 +34,6 @@ class Settings(BaseSettings):
     legacy_notifier_webhook: str | None = Field(default=None, alias="NOTIFIER_WEBHOOK")
     http_proxy: str | None = Field(default=None, alias="HTTP_PROXY")
     https_proxy: str | None = Field(default=None, alias="HTTPS_PROXY")
-    ingest_api_secret: str | None = Field(default=None, alias="INGEST_API_SECRET")
 
     trending_language: str = Field(alias="TRENDING_LANGUAGE")
     trending_since: Literal["daily", "weekly", "monthly"] = Field(alias="TRENDING_SINCE")

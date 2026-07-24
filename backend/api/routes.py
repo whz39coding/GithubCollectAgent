@@ -1,16 +1,12 @@
-import re
 from datetime import date, timedelta
 
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request
-from pydantic import ValidationError
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from sqlalchemy import func, or_
 from sqlmodel import Session, select
 
 from backend.api.schemas import (
     AgentConfigOut,
     AgentConfigUpdate,
-    ActionIngestPayload,
-    ActionIngestResult,
     DashboardOverview,
     DashboardTrends,
     HealthOut,
@@ -23,54 +19,13 @@ from backend.api.schemas import (
     InsightUpdate,
     TrendPoint,
 )
-from backend.core.config import BACKEND_ROOT, PROJECT_ROOT, get_settings
+from backend.core.config import BACKEND_ROOT, PROJECT_ROOT
 from backend.database.engine import get_session
 from backend.database.models import DailyInsight, Repository, RunLog, RunStatus
 from backend.main import run as run_agent
-from backend.services.action_ingest import ingest_action_payload, verify_ingest_signature
 
 
 router = APIRouter(prefix="/api")
-
-
-@router.post("/actions/ingest", response_model=ActionIngestResult)
-async def ingest_action_results(
-    request: Request,
-    session: Session = Depends(get_session),
-) -> ActionIngestResult:
-    secret = get_settings().ingest_api_secret
-    if not secret:
-        raise HTTPException(status_code=503, detail="Actions ingest is not configured")
-
-    timestamp = request.headers.get("X-Ingest-Timestamp", "")
-    delivery_id = request.headers.get("X-Ingest-Delivery", "")
-    signature = request.headers.get("X-Ingest-Signature", "")
-    if not re.fullmatch(r"[A-Za-z0-9._:-]{1,128}", delivery_id):
-        raise HTTPException(status_code=401, detail="Invalid ingest delivery")
-
-    body = await request.body()
-    if len(body) > 2_000_000:
-        raise HTTPException(status_code=413, detail="Ingest payload is too large")
-    if not verify_ingest_signature(
-        secret,
-        timestamp,
-        delivery_id,
-        body,
-        signature,
-    ):
-        raise HTTPException(status_code=401, detail="Invalid ingest signature")
-
-    try:
-        payload = ActionIngestPayload.model_validate_json(body)
-    except ValidationError as exc:
-        raise HTTPException(status_code=422, detail=exc.errors()) from exc
-
-    outcome = ingest_action_payload(session, delivery_id, payload)
-    return ActionIngestResult(
-        accepted=True,
-        duplicate=outcome.duplicate,
-        imported_count=outcome.imported_count,
-    )
 
 
 def run_to_out(run: RunLog | None) -> RunLogOut | None:

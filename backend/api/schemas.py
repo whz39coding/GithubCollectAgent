@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class RunLogOut(BaseModel):
@@ -114,47 +114,3 @@ class InsightUpdate(BaseModel):
     business_potential: str = "文档未提及"
     activity_level: str = "未知"
     community_health: str = "未知"
-
-
-class ActionRunImport(BaseModel):
-    started_at: datetime
-    ended_at: datetime
-    fetched_count: int = 0
-    processed_count: int = 0
-    llm_call_count: int = 0
-    cache_hit_count: int = 0
-    failed_count: int = 0
-
-
-class ActionInsightImport(BaseModel):
-    insight_date: date
-    repository_url: str
-    project_name: str
-    description: str = ""
-    language: str = "Unknown"
-    stars: int = 0
-    summary: str
-    category: str = "未分类"
-    score: int = 3
-    tech_stack: list[str] = Field(default_factory=list)
-    highlights: list[str] = Field(default_factory=list)
-    details: str
-    dev_ideas: list[str] = Field(default_factory=list)
-    business_potential: str = "文档未提及"
-    community_health: str = "未知"
-    activity_level: str = "未知"
-    risk_notes: list[str] = Field(default_factory=list)
-    metrics: dict[str, Any] = Field(default_factory=dict)
-    readme_hash: str
-    created_at: datetime
-
-
-class ActionIngestPayload(BaseModel):
-    run: ActionRunImport
-    insights: list[ActionInsightImport]
-
-
-class ActionIngestResult(BaseModel):
-    accepted: bool
-    duplicate: bool
-    imported_count: int

@@ -91,8 +91,3 @@ class RunLog(SQLModel, table=True):
     cache_hit_count: int = 0
     failed_count: int = 0
     error_summary: str | None = None
-
-
-class IngestDelivery(SQLModel, table=True):
-    delivery_id: str = Field(primary_key=True, max_length=128)
-    received_at: datetime = Field(default_factory=datetime.utcnow)

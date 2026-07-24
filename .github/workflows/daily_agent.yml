@@ -42,9 +42,12 @@ jobs:
           FINAL_REPORT_PATH: final_report.txt
         run: python main.py
 
-      - name: Sync results to server
-        env:
-          ACTION_SYNC_URL: ${{ secrets.ACTION_SYNC_URL }}
-          ACTION_SYNC_SECRET: ${{ secrets.ACTION_SYNC_SECRET }}
-          ACTION_DELIVERY_ID: github-${{ github.run_id }}-${{ github.run_attempt }}
-        run: python sync_results.py
+      - name: Upload database artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-agent-data-${{ github.run_id }}
+          path: |
+            backend/database/agent.db
+            final_report.txt
+          if-no-files-found: error
+          retention-days: 30
